@@ -1,13 +1,21 @@
-# 3D assets (integration drop)
+# 3D assets
 
-This folder is a **receive** box. We do not author Blender files in this repo.
+One folder per species. Slugs match `docs/11-species.md`.
 
-When a teammate exports a model, put it here **and** copy the same file into
-`app/assets/models-3d/` so Flutter can bundle it (`<slug>.glb` or
-`<slug>_growth.mp4`; slugs in `docs/11-species.md`).
+Each folder has a `RECORD.md`. That file names the current Blender file, the current lesson video, and the current phone model. Older tries go in that species' `earlier/` folder and are not what the app shows.
 
-The app plays a growth `.mp4` if present, notes a `.glb` if present (rotate/zoom
-is not wired yet), otherwise shows `app/assets/images/species/<slug>.*` as a
-photo preview. Missing everything still shows the placeholder.
+The app does not read these folders. Copy the current `.glb` and the current lesson `.mp4` into `app/assets/models-3d/` using the flat names `<slug>.glb` and `<slug>_lesson.mp4`.
 
-See `docs/08-modules-and-business-logic.md` (M3).
+| Folder | State |
+|--------|--------|
+| `cymodocea_rotundata/` | Built. This is the reference. |
+| `cymodocea_serrulata/` | Built. |
+| `enhalus_acoroides/` | Built. |
+| `halodule_pinifolia/` | Built. |
+| `halodule_uninervis/` | Built. |
+| `halophila_minor/` | Built. |
+| `halophila_ovalis/` | Built. |
+| `syringodium_isoetifolium/` | Built. |
+| `thalassia_hemprichii/` | Built. |
+
+Shared build code for the reference species stays in `rotundata_build/`.

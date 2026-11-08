@@ -11,11 +11,13 @@ class SpeciesClipPlayer extends StatefulWidget {
     required this.assetPath,
     this.onFailed,
     this.autoPlay = true,
+    this.muted = true,
   });
 
   final String assetPath;
   final VoidCallback? onFailed;
   final bool autoPlay;
+  final bool muted;
 
   @override
   State<SpeciesClipPlayer> createState() => _SpeciesClipPlayerState();
@@ -36,7 +38,7 @@ class _SpeciesClipPlayerState extends State<SpeciesClipPlayer> {
     try {
       await controller.initialize();
       await controller.setLooping(true);
-      await controller.setVolume(0);
+      await controller.setVolume(widget.muted ? 0 : 1);
       if (widget.autoPlay) {
         await controller.play();
       }

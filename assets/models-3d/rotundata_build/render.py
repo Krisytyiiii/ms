@@ -5,10 +5,10 @@ import shutil
 
 import bpy
 
-RENDER_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata_growth_render.mp4"
-ASSETS_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata_growth.mp4"
+RENDER_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\earlier\cymodocea_rotundata_growth_render.mp4"
+ASSETS_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\earlier\cymodocea_rotundata_growth.mp4"
 APP_MP4 = r"d:\pepot\marinesee\app\assets\models-3d\cymodocea_rotundata_growth.mp4"
-TIMELAPSE_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata_timelapse.mp4"
+TIMELAPSE_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\earlier\cymodocea_rotundata_timelapse.mp4"
 
 
 def _frame(scene, width, height, samples):
@@ -71,7 +71,8 @@ def render_clip(out_path=RENDER_MP4, also_copy=True, frame_end=None, width=1280,
     return out_path
 
 
-LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata_lesson.mp4"
+LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\cymodocea_rotundata_lesson.mp4"
+SILENT_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\cymodocea_rotundata_lesson_silent.mp4"
 
 
 def _eevee(scene):
@@ -83,17 +84,17 @@ def _eevee(scene):
     return scene.render.engine
 
 
-def render_lesson(frame_end=900):
-    """Thirty seconds, 1920x1080, about 48 samples. Does not replace the other films."""
+def render_lesson(frame_end=900, samples=16):
+    """Thirty seconds, 1920x1080, silent. Voice and subtitles are added after."""
     scene = bpy.context.scene
     _eevee(scene)
     return render_clip(
-        out_path=LESSON_MP4,
+        out_path=SILENT_MP4,
         also_copy=False,
         frame_end=frame_end,
         width=1920,
         height=1080,
-        samples=48,
+        samples=samples,
     )
 
 

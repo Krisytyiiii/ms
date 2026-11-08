@@ -6,7 +6,7 @@ Read with: `11-species.md` (slugs), `app/assets/data/species.json` (cited facts)
 
 ## 0. Conflict to settle first
 
-**CONFLICT.** `AGENTS.md`, `08-modules-and-business-logic.md` (M3), and `14-open-questions.md` #7 say this repo only integrates 3D and does not author Blender files. The owner asked for the *Cymodocea rotundata* build on purpose (`assets/models-3d/cymodocea_rotundata.md`), and asked for this spec so the other species are built the same way.
+**CONFLICT.** `AGENTS.md`, `08-modules-and-business-logic.md` (M3), and `14-open-questions.md` #7 say this repo only integrates 3D and does not author Blender files. The owner asked for the *Cymodocea rotundata* build on purpose (`assets/models-3d/cymodocea_rotundata/cymodocea_rotundata.md`), and asked for this spec so the other species are built the same way.
 
 Default until the owner decides: a species is built in this repo only when the owner asks for that species. Each request is a brief like `cymodocea_rotundata.md`. When the owner confirms this is the standing rule, update `AGENTS.md`, M3 in `08-modules-and-business-logic.md`, and answer #7 in `14-open-questions.md` in the same change.
 
@@ -203,7 +203,7 @@ A species may change what happens inside a window only when its `growthProcess` 
 
 ## 8. Phone file
 
-Facts about the viewer (`app/lib/widgets/glb_viewer.dart`): backdrop `#1E8C98`, height 320 px, first animation clip, Play starts at time 0 and loops, `autoPlay: false`, default orbit `0deg 75deg 105%`, drag, Rotate, Zoom in, Zoom out.
+Facts about the viewer (`app/lib/widgets/glb_viewer.dart`): backdrop `#1E8C98`, height 320 px, first animation clip, Play starts at time 0 and loops, `autoPlay: false`, default orbit `0deg 75deg 105%`, drag, Rotate, Zoom in, Zoom out. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. Under the *C. rotundata* lesson, a transcript lists the five spoken lines.
 
 - Export `Meadow` and `<CODE>_Armature` only. No curves, controls, camera, lights, or reef.
 - One animation clip, named `Grow`.
@@ -380,9 +380,9 @@ Suggested, so each step reuses the last:
 
 | Item | State |
 |------|-------|
-| Blend | Lesson meadow: `assets/models-3d/cymodocea_rotundata_lesson.blend`. Aquarium cutaway stays at `cymodocea_rotundata.blend`. Studio-only copy: `cymodocea_rotundata_studio.blend`. October 10 backup: `cymodocea_rotundata_2026-10-10.blend1`. |
-| Phone file | `app/assets/models-3d/cymodocea_rotundata.glb`, copy in `assets/models-3d/`. 39,122 triangles, 49 leaves, clip `Grow` (30 s). One rhizome crosses the bed, with 4 mm straps, a pale sheath, closed rings, and roots spreading from each node. No captions and no camera. |
-| Lesson clip | `assets/models-3d/cymodocea_rotundata_lesson.mp4`. Thirty seconds, 1920×1080, five beats. Does not replace the aquarium film or `cymodocea_rotundata_timelapse.mp4`. |
-| Pitch clip | `assets/models-3d/cymodocea_rotundata_growth_render.mp4`, copied to `assets/models-3d/cymodocea_rotundata_growth.mp4` and `app/assets/models-3d/cymodocea_rotundata_growth.mp4` via `rotundata_build/render.py`. |
+| Blend | Lesson meadow: `assets/models-3d/cymodocea_rotundata/cymodocea_rotundata_lesson.blend`. Phone blend: `cymodocea_rotundata.blend` in that same folder. Older blends are in `earlier/`. |
+| Phone file | `app/assets/models-3d/cymodocea_rotundata.glb`, copy in `assets/models-3d/cymodocea_rotundata/`. 39,122 triangles, 49 leaves, clip `Grow` (30 s). One rhizome crosses the bed, with 4 mm straps, a pale sheath, closed rings, and roots spreading from each node. No captions and no camera. |
+| Lesson clip | `assets/models-3d/cymodocea_rotundata/cymodocea_rotundata_lesson.mp4`, copied to `app/assets/models-3d/`. Thirty seconds, 1920×1080, five beats. The soundtrack speaks those five subtitle lines. Older films are in `earlier/`. |
+| Record | `assets/models-3d/cymodocea_rotundata/RECORD.md` names the current Blender file, video, and model. The other eight species have the same record and are not built. |
 | Phone pass | Not done. FS-7 and PE-4 stay `unmeasured`. |
 | To fix in the split | Object prefix is hard-coded `CR_`. (`publish()` and `render.py` now live in `rotundata_build/` and write both copies.) |

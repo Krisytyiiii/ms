@@ -1,0 +1,11 @@
+{
+  "version": "v3",
+  "input": "plant crop, then 256px RGB",
+  "color": "hsv_hist_16x3 frame + hsv_hist_16x3 plant pixels + hsv mean/std plant pixels",
+  "texture": "glcm_128px_32lv_d1_d2_d4_6props_angle_mean_and_range",
+  "shape": "v2 plant-mask blobs and blade width, plus max width, base width, tip width, taper, endpoint count, circularity, and axis lengths",
+  "glcm_size": 128,
+  "length": 156,
+  "blade_width_index": 144,
+  "tip_index": 148
+}

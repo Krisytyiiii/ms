@@ -34,7 +34,7 @@ Security and maintainability appear in the NFRs. They can appear on a developer/
 5. A low-confidence case shows a retake message (once the threshold is set).
 6. Identify finishes within five seconds on a qualifying device and network.
 7. An administrator can edit a species paragraph and the visitor sees the new text (if remote content is used).
-8. Held-out SVM test accuracy is documented at ≥ 85%.
+8. Documented held-out SVM test accuracy is **49.4%** on the curated leaf-visible local set (validation macro F1 0.474). The **≥ 85%** line is unmet. Record: `ml/artifacts/runs/20261106T172238348Z-svm/record.md`.
 
 ## What evaluation is not
 

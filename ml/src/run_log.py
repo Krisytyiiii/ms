@@ -74,6 +74,14 @@ def append_run(repo: Path, record: dict) -> Path:
     return run_dir
 
 
+def _slug_count_table(kept: dict, dropped: dict) -> str:
+    slugs = list(dict.fromkeys([*kept.keys(), *dropped.keys()]))
+    rows = ["| slug | kept | dropped |", "|---|---:|---:|"]
+    for slug in slugs:
+        rows.append(f"| {slug} | {kept.get(slug, 0)} | {dropped.get(slug, 0)} |")
+    return "\n".join(rows)
+
+
 def to_markdown(record: dict) -> str:
     lines = [f"# {record.get('kind', 'run')} {record.get('run_id', '')}", ""]
     for key in (
@@ -93,12 +101,29 @@ def to_markdown(record: dict) -> str:
         "train_accuracy",
         "val_accuracy",
         "test_accuracy",
+        "v2_val_macro_f1",
+        "v3_val_macro_f1",
+        "feature_version",
+        "retake_threshold",
+        "val_accepted_accuracy",
+        "val_accepted_coverage",
+        "test_accepted_accuracy",
+        "test_accepted_coverage",
+        "study_line_met",
+        "retake_study_line_met",
+        "retake_rule",
+        "duplicates_dropped",
+        "habitat_waived",
         "listed",
         "kept",
         "skipped",
     ):
         if key in record and record[key] is not None:
             lines.append(f"- {key}: {record[key]}")
+    kept_counts = record.get("by_slug_kept")
+    dropped_counts = record.get("by_slug_dropped")
+    if isinstance(kept_counts, dict):
+        lines.extend(["", "## selection", "", _slug_count_table(kept_counts, dropped_counts or {})])
     note = record.get("loss_note") or record.get("note")
     if note:
         lines.extend(["", str(note)])

@@ -1,0 +1,79 @@
+﻿{
+    "voice":  "Microsoft David Desktop",
+    "pace":  0,
+    "duration":  43.753,
+    "cues":  [
+                 {
+                     "id":  "name",
+                     "text":  "This is serrated ribbon seagrass, Cymodocea serrulata.",
+                     "start":  0.1,
+                     "end":  4.649
+                 },
+                 {
+                     "id":  "display",
+                     "text":  "It is a display, not a scan of a meadow in Mati.",
+                     "start":  5.009,
+                     "end":  8.838
+                 },
+                 {
+                     "id":  "strap",
+                     "text":  "The leaf is a flat strap, wider than smooth ribbon seagrass.",
+                     "start":  9.388,
+                     "end":  13.996
+                 },
+                 {
+                     "id":  "eye",
+                     "text":  "Run your eye to the tip.",
+                     "start":  14.316,
+                     "end":  16.321
+                 },
+                 {
+                     "id":  "serrated",
+                     "text":  "The edge is serrated.",
+                     "start":  16.601,
+                     "end":  18.495
+                 },
+                 {
+                     "id":  "sheath",
+                     "text":  "The sheath is broadly triangular.",
+                     "start":  19.045,
+                     "end":  21.674
+                 },
+                 {
+                     "id":  "stem",
+                     "text":  "Then look at the stem.",
+                     "start":  22.014,
+                     "end":  23.958
+                 },
+                 {
+                     "id":  "scars",
+                     "text":  "The leaf scars do not form a closed ring.",
+                     "start":  24.258,
+                     "end":  27.427
+                 },
+                 {
+                     "id":  "separate",
+                     "text":  "That open scar line is how you separate this plant from smooth ribbon seagrass.",
+                     "start":  27.847,
+                     "end":  32.955
+                 },
+                 {
+                     "id":  "patch",
+                     "text":  "The patch spreads as the buried stem grows through the sand.",
+                     "start":  33.505,
+                     "end":  37.434
+                 },
+                 {
+                     "id":  "roots",
+                     "text":  "Roots grow down at each node.",
+                     "start":  37.754,
+                     "end":  40.183
+                 },
+                 {
+                     "id":  "seed",
+                     "text":  "It can also flower and set seed.",
+                     "start":  40.483,
+                     "end":  43.353
+                 }
+             ]
+}

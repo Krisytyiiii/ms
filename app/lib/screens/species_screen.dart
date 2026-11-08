@@ -141,6 +141,18 @@ class _SpeciesScreenState extends State<SpeciesScreen> {
                   title: 'Growth process',
                   value: species.growthProcess,
                 ),
+                const SizedBox(height: 12),
+                SpeciesFactCard(
+                  icon: Icons.menu_book_outlined,
+                  title: 'Sources',
+                  value: species.sources.join('\n\n'),
+                ),
+                const SizedBox(height: 12),
+                SpeciesFactCard(
+                  icon: Icons.record_voice_over_outlined,
+                  title: 'What the lesson says',
+                  value: species.transcript ?? '',
+                ),
               ],
             ),
           ),

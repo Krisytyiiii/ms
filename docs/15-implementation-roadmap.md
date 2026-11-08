@@ -20,7 +20,7 @@ Suggested order. Waterfall in the paper is the **documentation story**. Build in
 - [x] `ml/src` preprocess, features, split, train
 - [x] Colab notebook `02_svm_v1_eight_class.ipynb`
 - [x] Dedicated preprocess export (`03_preprocess_v1.ipynb` / `export_processed.py`)
-- [ ] Run 02 in Colab; paste test accuracy here
+- [x] Curated local SVM, 6 Nov 2026: held-out test accuracy **49.4%** on the leaf-visible set (validation macro F1 0.474). The study target stays **≥ 85%** and is unmet. This laptop count is not the Drive total, and *Thalassia* is still held out. Record: `ml/artifacts/runs/20261106T172238348Z-svm/record.md`
 - [ ] Export artifacts into `ml/artifacts/` (and Drive `Seagrass-ml-artifacts/v1`)
 
 ## 3. Content

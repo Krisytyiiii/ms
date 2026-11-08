@@ -7,17 +7,20 @@ class SpeciesMedia {
     this.modelAsset,
     this.stillAsset,
     this.lessonAsset,
+    this.pitchAsset,
   });
 
   final String? videoAsset;
   final String? modelAsset;
   final String? stillAsset;
   final String? lessonAsset;
+  final String? pitchAsset;
 
   bool get hasVideo => videoAsset != null;
   bool get hasModel => modelAsset != null;
   bool get hasStill => stillAsset != null;
   bool get hasLesson => lessonAsset != null;
+  bool get hasPitch => pitchAsset != null;
 }
 
 /// Resolves dropped 3D files from the Flutter asset bundle.
@@ -25,6 +28,8 @@ class SpeciesMedia {
 /// Convention (see `docs/11-species.md` slugs):
 /// - `assets/models-3d/<slug>_growth.mp4`
 /// - `assets/models-3d/<slug>.glb`
+/// - `assets/models-3d/<slug>_lesson.mp4`
+/// - `assets/models-3d/<slug>_pitch.mp3`
 /// - `assets/images/species/<slug>.{png,jpg,jpeg}`
 class Model3dLibrary {
   static const videoFolder = 'assets/models-3d/';
@@ -67,6 +72,7 @@ class Model3dLibrary {
     final listed = assets.toSet();
     final video = '$videoFolder${slug}_growth.mp4';
     final model = '$videoFolder$slug.glb';
+    final pitch = '$videoFolder${slug}_pitch.mp3';
     String? still;
     for (final suffix in const ['.png', '.jpg', '.jpeg']) {
       final candidate = '$stillFolder$slug$suffix';
@@ -80,6 +86,7 @@ class Model3dLibrary {
       modelAsset: listed.contains(model) ? model : null,
       stillAsset: still,
       lessonAsset: lessonFromAssets(slug, listed),
+      pitchAsset: listed.contains(pitch) ? pitch : null,
     );
   }
 

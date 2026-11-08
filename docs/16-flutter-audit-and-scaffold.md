@@ -158,7 +158,7 @@ Wiring the Colab `.joblib` is a **later** task (`06-architecture.md` inference s
 | They may ask | Answer |
 |--------------|--------|
 | Why not Android Studio? | Flutter uses the Android SDK; we test on a physical Android 8+ phone. AS is optional. |
-| Where is 85%? | Training is in `ml/`; v1 smoke was 22%. App scaffold does not claim 85%. |
+| Where is 85%? | Curated held-out test accuracy is **49.4%** (validation macro F1 0.474). Record: `ml/artifacts/runs/20261106T172238348Z-svm/record.md`. The **≥ 85%** target is unmet. The app does not claim 85%. |
 | Where is Blender? | Integration slot. Another person supplies `.glb`. |
 | Why eight classes in the model? | Drive has no *Thalassia* images yet. Library still lists nine. |
 

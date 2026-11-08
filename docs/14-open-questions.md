@@ -28,7 +28,7 @@ Do not silently answer these in code. When the team (or adviser) decides, write 
 11. Fixed **resize** (width × height)?
 12. Exact **feature vector** (histogram bins, GLCM distances/angles, which shape metrics)?
 13. SVM **kernel**, `C`, gamma, class weights?
-14. **Confidence threshold** for “please retake”? **IMPLEMENTATION default 0.20** (`LOW_CONFIDENCE` in `identify.py`). Not a paper number.
+14. **Confidence threshold** for “please retake”? Frozen at **0.44** on the curated validation pass (`retake_threshold` in `ml/artifacts/v2/metrics.json`). Accepted validation accuracy at 0.44 is 65.5%, with 58% of validation photos kept. The study line for that claim is 85%. `identify.py` reads the value from the exported metrics. The 0.20 fallback remains only when that file has no threshold.
 15. Split **random seed** and stratification by class?
 
 ### Evaluation
@@ -58,4 +58,6 @@ Do not silently answer these in code. When the team (or adviser) decides, write 
 | Client toolkit | Flutter; phone only | `16-flutter-audit-and-scaffold.md` |
 | v1 inference | Laptop SVM API; phone POSTs the photo | `ml/src/serve_identify.py` |
 | Colab v1 (full `all`) | Test acc **35.0%** (not 85%) | `ml/artifacts/v1/metrics.json` |
+| Locked local v1 | Test acc **42.1%**, validation macro F1 **0.468**, RBF `C=3`, `gamma=0.01` on feature v2 | `ml/artifacts/v1/metrics.json` |
+| Curated local SVM (6 Nov 2026) | Test acc **49.4%** on the leaf-visible set. The study line is 85%. Validation macro F1 **0.474**. RBF `C=100`, `gamma=0.01`, feature v3. Retake threshold **0.44** | `ml/artifacts/runs/20261106T172238348Z-svm/record.md` |
 | SVM-vs-limitation sentence | Identification is in scope | `00-study-review.md` |

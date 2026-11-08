@@ -1,6 +1,5 @@
-# Bundled 3D / growth clips
+# Bundled 3D files
 
-Copy drops from the repo-root receive box (`../../assets/models-3d/`) into this
-folder so Flutter can ship them.
+This folder is what Flutter ships. Names stay flat: `<slug>.glb`, `<slug>_lesson.mp4`, `<slug>_growth.mp4`.
 
-Name files `<slug>_growth.mp4` or `<slug>.glb` using slugs in `docs/11-species.md`.
+The record of which Blender file, video, and model are current lives in `assets/models-3d/<slug>/RECORD.md`. Copy the current files here when that record changes.

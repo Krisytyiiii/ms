@@ -16,6 +16,8 @@ void main() {
     expect(media.stillAsset, 'assets/images/species/$slug.png');
     expect(Model3dLibrary.statusLabel(media), 'Growth clip ready');
     expect(media.lessonAsset, isNull);
+    expect(media.pitchAsset, isNull);
+    expect(media.hasPitch, isFalse);
     expect(
       Model3dLibrary.lessonFromAssets(slug, [
         'assets/models-3d/${slug}_lesson.mp4',
@@ -31,6 +33,23 @@ void main() {
     expect(media.hasVideo, isFalse);
     expect(media.hasModel, isFalse);
     expect(media.hasStill, isFalse);
+    expect(media.hasPitch, isFalse);
     expect(Model3dLibrary.statusLabel(media), 'Clip coming');
+  });
+
+  test('fromAssets finds a listed pitch mp3 and skips a missing one', () {
+    const slug = 'cymodocea_rotundata';
+    final listed = Model3dLibrary.fromAssets(slug, [
+      'assets/models-3d/${slug}_pitch.mp3',
+      'assets/models-3d/$slug.glb',
+    ]);
+    expect(listed.pitchAsset, 'assets/models-3d/${slug}_pitch.mp3');
+    expect(listed.hasPitch, isTrue);
+
+    final missing = Model3dLibrary.fromAssets('halophila_ovalis', [
+      'assets/models-3d/halophila_ovalis.glb',
+    ]);
+    expect(missing.pitchAsset, isNull);
+    expect(missing.hasPitch, isFalse);
   });
 }

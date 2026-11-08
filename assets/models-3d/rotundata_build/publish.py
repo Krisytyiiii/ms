@@ -7,12 +7,18 @@ import bpy
 
 from .config import GLB_PATH
 
-ASSETS_GLB_PATH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata.glb"
+ASSETS_GLB_PATH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\cymodocea_rotundata.glb"
 
 
 def publish(path=GLB_PATH):
     arm = bpy.data.objects["CR_Armature"]
     meadow = bpy.data.collections["Meadow"]
+    arm.hide_viewport = False
+    arm.hide_render = False
+    try:
+        arm.hide_set(False)
+    except RuntimeError:
+        pass
     for obj in bpy.context.view_layer.objects:
         obj.select_set(False)
     arm.select_set(True)
@@ -33,8 +39,18 @@ def publish(path=GLB_PATH):
         "export_texcoords": True,
         "export_normals": True,
     }
+    if "export_animation_mode" in names:
+        wanted["export_animation_mode"] = "ACTIVE_ACTIONS"
+    if "export_nla_strips_merged_animation_name" in names:
+        wanted["export_nla_strips_merged_animation_name"] = "Grow"
     kwargs = {k: v for k, v in wanted.items() if k in names}
     op(filepath=path, **kwargs)
+    tris = 0
+    for obj in meadow.objects:
+        if obj.type == "MESH":
+            obj.data.calc_loop_triangles()
+            tris += len(obj.data.loop_triangles)
+    print("TRIANGLE_COUNT", tris)
     # The phone export is mirrored into assets/. A named variant (realistic, aquarium)
     # keeps its own file and does not replace that mirror.
     if os.path.abspath(path) == os.path.abspath(GLB_PATH):

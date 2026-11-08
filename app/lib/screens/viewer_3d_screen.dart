@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../data/model_3d_library.dart';
+import '../data/species_catalog.dart';
 import '../theme/tokens.dart';
 import '../widgets/app_states.dart';
 import '../widgets/glb_viewer.dart';
@@ -20,14 +21,24 @@ class Viewer3dScreen extends StatefulWidget {
 }
 
 class _Viewer3dScreenState extends State<Viewer3dScreen> {
-  late Future<SpeciesMedia> _future = Model3dLibrary.resolve(widget.slug);
+  late Future<_OpenedViewer> _future = _open(widget.slug);
   var _videoFailed = false;
+
+  Future<_OpenedViewer> _open(String slug) async {
+    final media = await Model3dLibrary.resolve(slug);
+    final species = await speciesCatalog.bySlug(slug);
+    final transcript = species?.transcript;
+    return _OpenedViewer(
+      media: media,
+      transcript: transcript == null || transcript.isEmpty ? null : transcript,
+    );
+  }
 
   @override
   void didUpdateWidget(covariant Viewer3dScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.slug != widget.slug) {
-      _future = Model3dLibrary.resolve(widget.slug);
+      _future = _open(widget.slug);
       _videoFailed = false;
     }
   }
@@ -35,7 +46,7 @@ class _Viewer3dScreenState extends State<Viewer3dScreen> {
   void _reload() {
     setState(() {
       Model3dLibrary.resetCache();
-      _future = Model3dLibrary.resolve(widget.slug);
+      _future = _open(widget.slug);
       _videoFailed = false;
     });
   }
@@ -58,7 +69,7 @@ class _Viewer3dScreenState extends State<Viewer3dScreen> {
         centerTitle: true,
         title: const Text('3D Viewer'),
       ),
-      body: FutureBuilder<SpeciesMedia>(
+      body: FutureBuilder<_OpenedViewer>(
         future: _future,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -67,10 +78,11 @@ class _Viewer3dScreenState extends State<Viewer3dScreen> {
               onRetry: _reload,
             );
           }
-          final media = snapshot.data;
-          if (media == null) {
+          final opened = snapshot.data;
+          if (opened == null) {
             return const OceanLoading(label: 'Opening 3D…');
           }
+          final media = opened.media;
           if (media.hasModel) {
             return ListView(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 28),
@@ -88,7 +100,12 @@ class _Viewer3dScreenState extends State<Viewer3dScreen> {
                   SpeciesClipPlayer(
                     assetPath: media.lessonAsset!,
                     autoPlay: false,
+                    muted: false,
                   ),
+                  if (opened.transcript != null) ...[
+                    const SizedBox(height: 12),
+                    _Transcript(text: opened.transcript!),
+                  ],
                 ],
                 const SizedBox(height: 12),
                 _ModelNote(slug: widget.slug),
@@ -125,6 +142,52 @@ class _Viewer3dScreenState extends State<Viewer3dScreen> {
           );
         },
       ),
+      ),
+    );
+  }
+}
+
+class _OpenedViewer {
+  const _OpenedViewer({required this.media, this.transcript});
+
+  final SpeciesMedia media;
+  final String? transcript;
+}
+
+class _Transcript extends StatelessWidget {
+  const _Transcript({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = Theme.of(context).textTheme;
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: SkyPalette.scanner.withValues(alpha: 0.55),
+        borderRadius: AppRadius.card,
+        border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Transcript',
+              style: style.titleMedium?.copyWith(color: Colors.white),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              text,
+              style: style.bodyMedium?.copyWith(
+                color: Colors.white70,
+                height: 1.45,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

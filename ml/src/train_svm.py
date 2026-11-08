@@ -58,10 +58,14 @@ def export_artifacts(
     model: Pipeline,
     metrics: dict,
     dest: Path,
+    *,
+    filename: str = "svm_seagrass_v1.joblib",
+    feature_spec: dict | None = None,
 ) -> None:
     dest.mkdir(parents=True, exist_ok=True)
-    joblib.dump(model, dest / "svm_seagrass_v1.joblib")
+    spec = FEATURE_SPEC if feature_spec is None else feature_spec
+    joblib.dump(model, dest / filename)
     label_map = {str(i): slug for i, slug in enumerate(TRAINABLE_SPECIES)}
     (dest / "label_map.json").write_text(json.dumps(label_map, indent=2), encoding="utf-8")
-    (dest / "feature_spec.json").write_text(json.dumps(FEATURE_SPEC, indent=2), encoding="utf-8")
+    (dest / "feature_spec.json").write_text(json.dumps(spec, indent=2), encoding="utf-8")
     (dest / "metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")

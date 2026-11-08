@@ -38,9 +38,13 @@ def front_cut_y(x, path):
     from .config import CONFIG
 
     if CONFIG.get("variant") == "lesson":
-        # Fixed lip. The path depth behind it is a display choice, not a Mati measurement.
+        # Cut through the front of the smooth rhizome. The lip falls back at the sides.
+        edge_taper = max(0.0, (abs(x) - 0.11) / 0.07)
+        return -0.0158 + 0.014 * (edge_taper ** 2)
+    if CONFIG.get("variant") != "realistic":
+        # Phone patch. The lip cuts the front of the clump so those roots show.
         edge_taper = max(0.0, (abs(x) - 0.155) / 0.040)
-        return -0.020 + 0.004 * (edge_taper ** 2)
+        return -0.029 + 0.006 * (edge_taper ** 2)
     py = path_y_at(x, path)
     edge_taper = max(0.0, (abs(x) - 0.155) / 0.040)
     # Through the front of the rhizome, not in front of it. A face ahead of the
@@ -62,20 +66,36 @@ def sand_height(x, y, path):
     depth_u = max(0.0, min(1.0, (y - fy) / max(0.02, by - fy)))
     slope = 0.0045 + 0.0085 * math.sin(depth_u * math.pi * 0.65)
     edge_fall = 1.0 - 0.35 * ((x / 0.195) ** 4)
+    from .config import CONFIG
+
+    lesson = CONFIG.get("variant") == "lesson"
+    ripple_amp = 0.35 if lesson else 1.0
     ripple = (
         0.0018 * math.sin(x * 48.0 + y * 14.0)
         + 0.0011 * math.sin(-x * 18.0 + y * 54.0 + 0.7)
-    ) * (0.35 + 0.65 * calm)
+    ) * (0.35 + 0.65 * calm) * ripple_amp
     lump = 0.0015 * math.sin(x * 13.0 + 0.4) * math.cos(y * 17.0)
     h = (slope + ripple + lump) * edge_fall
-    from .config import CONFIG
-
+    if lesson:
+        # Mounds, dips, and small ridges. The trench below still opens the rhizome.
+        for cx, cy, amp, rad in (
+            (-0.145, 0.018, 0.0085, 0.030),
+            (0.000, 0.048, 0.0070, 0.024),
+            (0.138, 0.012, 0.0065, 0.022),
+        ):
+            h += amp * math.exp(-((x - cx) ** 2 + (y - cy) ** 2) / (2 * rad * rad))
+        for cx, cy, amp, rad in (
+            (-0.028, 0.034, 0.0055, 0.020),
+            (0.072, 0.022, 0.0045, 0.016),
+        ):
+            h -= amp * math.exp(-((x - cx) ** 2 + (y - cy) ** 2) / (2 * rad * rad))
+        h += 0.0028 * math.sin(x * 62.0 + y * 18.0)
+        h += 0.0021 * math.sin(-x * 22.0 + y * 48.0 + 0.8)
     if CONFIG.get("variant") == "realistic":
         for cx, cy in ((-0.10, 0.012), (-0.01, -0.028), (0.09, 0.018)):
             h += 0.010 * math.exp(-((x - cx) ** 2 + (y - cy) ** 2) / (2 * 0.018 ** 2))
-    if CONFIG.get("variant") == "lesson" and d < 0.014:
-        # Shallow trench so the creeping cord can be seen. Display choice.
-        h -= 0.0035 * 0.5 * (1.0 + math.cos(math.pi * d / 0.014))
+    if lesson and d < 0.016:
+        h -= 0.0065 * 0.5 * (1.0 + math.cos(math.pi * d / 0.016))
     elif d < 0.012:
         h -= 0.0022 * 0.5 * (1.0 + math.cos(math.pi * d / 0.012))
     return h
@@ -124,6 +144,11 @@ def _add_pebble(bm, uv, center, rx, ry, rz, yaw):
 
 
 def build_sand(name, path, bottom, cols=46, rows=26, wall_steps=4):
+    from .config import CONFIG
+
+    lesson = CONFIG.get("variant") == "lesson"
+    if lesson:
+        cols, rows, wall_steps = 40, 26, 5
     path = path[::6] + [path[-1]] if len(path) > 12 else path
     bm = bmesh.new()
     uv = bm.loops.layers.uv.new("UVMap")
@@ -137,10 +162,20 @@ def build_sand(name, path, bottom, cols=46, rows=26, wall_steps=4):
             x = -x_half + 2.0 * x_half * u_frac
             fy = front_cut_y(x, path)
             by = back_wall_y(x)
-            # Round off the outer corners smoothly
-            corner = math.sqrt(max(0.08, 1.0 - 0.55 * ((u_frac * 2.0 - 1.0) ** 6)))
-            ymid = 0.5 * (fy + by)
-            y = ymid + (fy + (by - fy) * v_frac - ymid) * corner
+            if lesson:
+                # Irregular shore. The front row stays the cut. Not an oval cookie.
+                if v_frac > 0.08:
+                    x += 0.012 * math.sin(v_frac * 10.0 + 0.5) * math.sin(u_frac * math.pi)
+                y = fy + (by - fy) * v_frac
+                if v_frac > 0.15:
+                    y += (0.016 * math.sin(u_frac * 7.5 + 0.4) + 0.009 * math.sin(u_frac * 16.0 + 1.2)) * (v_frac ** 0.65)
+                edge = abs(u_frac * 2.0 - 1.0)
+                if edge > 0.75 and v_frac > 0.25:
+                    y -= ((edge - 0.75) / 0.25) * 0.022 * v_frac
+            else:
+                corner = math.sqrt(max(0.08, 1.0 - 0.55 * ((u_frac * 2.0 - 1.0) ** 6)))
+                ymid = 0.5 * (fy + by)
+                y = ymid + (fy + (by - fy) * v_frac - ymid) * corner
             row.append(bm.verts.new((x, y, sand_height(x, y, path))))
         grid.append(row)
 
@@ -201,14 +236,7 @@ def build_sand(name, path, bottom, cols=46, rows=26, wall_steps=4):
     from .config import CONFIG
 
     if CONFIG.get("variant") == "lesson":
-        # Off the snake, so a pebble does not sit on a shoot.
-        pebble_specs = (
-            (-0.155, 0.072, 0.010, 0.008, 0.0036, 0.4),
-            (-0.168, 0.030, 0.008, 0.006, 0.0030, 1.2),
-            (0.158, 0.070, 0.012, 0.009, 0.0042, 0.8),
-            (0.150, 0.078, 0.009, 0.007, 0.0032, 2.1),
-            (0.000, 0.086, 0.011, 0.008, 0.0038, 1.6),
-        )
+        pebble_specs = ()
     else:
         pebble_specs = (
             (-0.135, 0.025, 0.011, 0.008, 0.0040, 0.4),

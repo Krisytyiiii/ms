@@ -1,0 +1,23 @@
+﻿[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,Arial,46,&H00FFFFFF,&H000000FF,&H00101010,&H96000000,-1,0,0,0,100,100,0,0,3,0,0,2,80,80,56,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.25,0:00:04.63,Sub,,0,0,0,,This is smooth ribbon seagrass, Cymodocea\Nrotundata.
+Dialogue: 0,0:00:05.05,0:00:09.60,Sub,,0,0,0,,What you are seeing is a display, not a\Nscan of a meadow in Mati.
+Dialogue: 0,0:00:10.32,0:00:11.96,Sub,,0,0,0,,Look at the tip.
+Dialogue: 0,0:00:12.34,0:00:14.57,Sub,,0,0,0,,It is rounded and smooth.
+Dialogue: 0,0:00:14.99,0:00:17.50,Sub,,0,0,0,,There are no teeth along the edge.
+Dialogue: 0,0:00:18.27,0:00:22.76,Sub,,0,0,0,,On the short stem, the sheath scars join\Ninto a closed ring.
+Dialogue: 0,0:00:23.24,0:00:29.76,Sub,,0,0,0,,That ring is how you tell this plant from\Nserrated ribbon seagrass, which does not\Nclose its scars.
+Dialogue: 0,0:00:30.54,0:00:35.71,Sub,,0,0,0,,The patch spreads when the buried stem\Ngrows through the sand and sends up new\Nshoots.
+Dialogue: 0,0:00:36.13,0:00:38.56,Sub,,0,0,0,,Roots grow down at each node.
+Dialogue: 0,0:00:38.96,0:00:42.14,Sub,,0,0,0,,The plant can also flower and set seed.

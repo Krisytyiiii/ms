@@ -8,6 +8,8 @@
     "conservationStatus": "Least Concern on the IUCN Red List. Short et al. (2011) report the global population trend as stable. That category is worldwide, not a count from Mati City.",
     "habitat": "Shallow reef flats (Seagrass-Watch). Listed among the nine seagrass species in coastal assessments of Mati City (Lawigan, Taitaidaga, Manguihay, and Pujada Bay; Angsinco-Jimenez et al., 2003; Fortes, 2013; Sanchez-Delute et al., 2025).",
     "growthProcess": "The patch spreads mainly when the buried rhizome grows and sends up new shoots. The plant can also flower and set seed. Rhizome growth is the usual way tropical seagrasses occupy more ground (Seagrass-Watch).",
+    "pitch": "This is one species, not a scan of a Mati meadow. It starts as one bud; the buried rhizome extends, a root grows down once that node is there, and new shoots rise until it is a patch. Turn it to see the thin edge and the flat veined face with a rounded tip. The strap is 4 mm wide, the top of the Seagrass-Watch range. How far the patch sits back from the cut is a display choice.",
+    "transcript": "This is smooth ribbon seagrass, Cymodocea rotundata. What you are seeing is a display, not a scan of a meadow in Mati.\n\nLook at the tip. It is rounded and smooth. There are no teeth along the edge.\n\nOn the short stem, the sheath scars join into a closed ring. That ring is how you tell this plant from serrated ribbon seagrass, which does not close its scars.\n\nThe patch spreads when the buried stem grows through the sand and sends up new shoots. Roots grow down at each node. The plant can also flower and set seed.",
     "sources": [
       "Seagrass-Watch. How to identify seagrass. https://www.seagrasswatch.org/idseagrass/",
       "Wild Singapore. Seagrasses on Singapore shores (common name). http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm",
@@ -19,7 +21,7 @@
     "slug": "cymodocea_serrulata",
     "scientificName": "Cymodocea serrulata",
     "commonName": "Serrated ribbon seagrass",
-    "botanicalCharacteristics": "Strap-like leaves about 5–9 mm wide with a serrated tip. The leaf sheath is broadly triangular, and the leaf scars do not form a continuous ring around the stem (Seagrass-Watch). A 2018 revision has also used the name Oceana serrulata for this plant.",
+    "botanicalCharacteristics": "Strap-like leaves about 5–9 mm wide with a serrated tip. The leaf sheath is broadly triangular, and the leaf scars do not form a continuous ring around the stem (Seagrass-Watch).",
     "ecologicalRole": "In a meadow it helps hold the sand and gives small coastal animals cover and feeding space. A seagrass meadow supports many more animals than bare sand (Seagrass-Watch).",
     "conservationStatus": "Least Concern on the IUCN Red List (assessed 2008). It is widespread, and the global population is thought to be stable, with local losses from coastal development, pollution, dredging, and silt. It can recolonize after disturbance (IUCN; Short et al., 2011). That category is worldwide, not a count from Mati City.",
     "habitat": "Shallow subtidal reef flats and sand banks (Seagrass-Watch). Listed among the nine seagrass species in coastal assessments of Mati City (Lawigan, Taitaidaga, Manguihay, and Pujada Bay; Angsinco-Jimenez et al., 2003; Fortes, 2013; Sanchez-Delute et al., 2025).",
@@ -28,8 +30,10 @@
       "Seagrass-Watch. How to identify seagrass. https://www.seagrasswatch.org/idseagrass/",
       "IUCN Red List. Cymodocea serrulata. https://www.iucnredlist.org/species/173358/6998619",
       "Short, F. T., et al. (2011). Biological Conservation, 144, 1961–1971.",
-      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm"
-    ]
+      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm",
+      "Angsinco-Jimenez et al., 2003; Fortes, 2013; Sanchez-Delute et al., 2025, as cited in docs/11-species.md."
+    ],
+    "transcript": "This is serrated ribbon seagrass, Cymodocea serrulata. It is a display, not a scan of a meadow in Mati.\n\nThe leaf is a flat strap, wider than smooth ribbon seagrass. Run your eye to the tip. The edge is serrated.\n\nThe sheath is broadly triangular. Then look at the stem. The leaf scars do not form a closed ring. That open scar line is how you separate this plant from smooth ribbon seagrass.\n\nThe patch spreads as the buried stem grows through the sand. Roots grow down at each node. It can also flower and set seed."
   },
   {
     "slug": "enhalus_acoroides",
@@ -44,8 +48,10 @@
       "Seagrass-Watch. How to identify seagrass. https://www.seagrasswatch.org/idseagrass/",
       "IUCN Red List. Enhalus acoroides. https://www.iucnredlist.org/species/173331/6992567",
       "Short, F. T., et al. (2011). Biological Conservation, 144, 1961–1971.",
-      "Wild Singapore. Tape seagrass. https://www.wildsingapore.com/wildfacts/plants/seagrass/enhalus.htm"
-    ]
+      "Wild Singapore. Tape seagrass. https://www.wildsingapore.com/wildfacts/plants/seagrass/enhalus.htm",
+      "Angsinco-Jimenez et al., 2003; Fortes, 2013; Sanchez-Delute et al., 2025, as cited in docs/11-species.md."
+    ],
+    "transcript": "This is tape seagrass, Enhalus acoroides. A display, not a scan of a meadow in Mati.\n\nThe leaves are very long ribbons. Their edges roll inward. They are not the short flat straps of the ribbon seagrasses.\n\nThe rhizome is thick, with long black bristles, and the roots are cord-like. The meadow spreads by that thick buried stem. Male and female flowers grow on separate plants. This model does not show the flowers."
   },
   {
     "slug": "halodule_pinifolia",
@@ -60,8 +66,10 @@
       "Seagrass-Watch. How to identify seagrass. https://www.seagrasswatch.org/idseagrass/",
       "Short, F. T., et al. (2011). Biological Conservation, 144, 1961–1971.",
       "Plants of the World Online. Halodule pinifolia. http://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:602955-1",
-      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm"
-    ]
+      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm",
+      "Angsinco-Jimenez et al., 2003; Fortes, 2013; Sanchez-Delute et al., 2025, as cited in docs/11-species.md."
+    ],
+    "transcript": "This is needle seagrass, Halodule pinifolia. A display, not a scan of a meadow in Mati.\n\nEach leaf is fine, with one dark vein down the centre. Watch the tip. That vein splits in two, and the tip stays rounded.\n\nThat rounded tip is how you tell it from the other needle seagrass, Halodule uninervis, whose tip is a trident.\n\nThe rhizome is usually pale, with clean black leaf scars. The patch spreads when the buried stem grows through the sand. Roots grow down at each node. It can also flower and set seed."
   },
   {
     "slug": "halodule_uninervis",
@@ -75,8 +83,10 @@
     "sources": [
       "Seagrass-Watch. How to identify seagrass. https://www.seagrasswatch.org/idseagrass/",
       "IUCN Red List. Halodule uninervis. https://www.iucnredlist.org/species/173328/6991773",
-      "Short, F. T., et al. (2011). Biological Conservation, 144, 1961–1971."
-    ]
+      "Short, F. T., et al. (2011). Biological Conservation, 144, 1961–1971.",
+      "Angsinco-Jimenez et al., 2003; Fortes, 2013; Sanchez-Delute et al., 2025, as cited in docs/11-species.md."
+    ],
+    "transcript": "This is Halodule uninervis. People also call it needle seagrass, the same common name used for Halodule pinifolia. This model is a display, not a scan of a meadow in Mati.\n\nIt is usually the larger of the two. One vein runs up the leaf. The tip is a trident, three points, not a rounded tip.\n\nThe rhizome is usually pale ivory, with clean black leaf scars. The patch spreads when the buried stem grows through the sand. Roots grow down at each node. It can also flower and set seed."
   },
   {
     "slug": "halophila_minor",
@@ -90,8 +100,10 @@
     "sources": [
       "Seagrass-Watch. How to identify seagrass. https://www.seagrasswatch.org/idseagrass/",
       "Short, F. T., et al. (2011). Biological Conservation, 144, 1961–1971.",
-      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm"
-    ]
+      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm",
+      "Angsinco-Jimenez et al., 2003; Fortes, 2013; Sanchez-Delute et al., 2025, as cited in docs/11-species.md."
+    ],
+    "transcript": "This is small spoon seagrass, Halophila minor. A display, not a scan of a meadow in Mati.\n\nThe leaves come up in pairs. Each one is a small oval, straight from the buried stem. There is no upright fan. The margin is smooth, and the sheath is wedge-shaped.\n\nThe cross veins are fewer than eight pairs. That smaller leaf, and those fewer veins, are how you separate it from spoon seagrass, Halophila ovalis.\n\nThe patch spreads as the buried stem grows. Roots grow down at the nodes. It can also flower and set seed."
   },
   {
     "slug": "halophila_ovalis",
@@ -105,8 +117,10 @@
     "sources": [
       "Seagrass-Watch. How to identify seagrass. https://www.seagrasswatch.org/idseagrass/",
       "Short, F. T., et al. (2011). Biological Conservation, 144, 1961–1971.",
-      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm"
-    ]
+      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm",
+      "Angsinco-Jimenez et al., 2003; Fortes, 2013; Sanchez-Delute et al., 2025, as cited in docs/11-species.md."
+    ],
+    "transcript": "This is spoon seagrass, Halophila ovalis. A display, not a scan of a meadow in Mati.\n\nThe leaves arise in pairs. Each leaf is an oval, larger than the small spoon seagrass beside it. There are no hairs on the surface.\n\nCount across the leaf. There are eight or more cross veins. Halophila minor has fewer than eight. That is the difference to remember.\n\nIt is a common early coloniser, so a new patch can appear on open ground. After that, the buried stem spreads the patch. Roots grow down at the nodes. It can also flower and set seed."
   },
   {
     "slug": "syringodium_isoetifolium",
@@ -120,8 +134,10 @@
     "sources": [
       "Seagrass-Watch. How to identify seagrass. https://www.seagrasswatch.org/idseagrass/",
       "Short, F. T., et al. (2011). Biological Conservation, 144, 1961–1971.",
-      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm"
-    ]
+      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm",
+      "Angsinco-Jimenez et al., 2003; Fortes, 2013; Sanchez-Delute et al., 2025, as cited in docs/11-species.md."
+    ],
+    "transcript": "This is noodle seagrass, Syringodium isoetifolium. A display, not a scan of a meadow in Mati.\n\nTurn the plant. The leaf stays round. It is not a flat strap. The tip tapers to a point, the way a piece of spaghetti does.\n\nThe leaves are about 7 to 30 centimetres long. The patch spreads when the buried stem grows through the sand and sends up new shoots. Roots grow down at each node. It can also flower and set seed."
   },
   {
     "slug": "thalassia_hemprichii",
@@ -135,7 +151,9 @@
     "sources": [
       "Seagrass-Watch. How to identify seagrass. https://www.seagrasswatch.org/idseagrass/",
       "Short, F. T., et al. (2011). Biological Conservation, 144, 1961–1971.",
-      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm"
-    ]
+      "Wild Singapore. Seagrasses on Singapore shores. http://wildsingapore.com/wildfacts/plants/seagrass/seagrassfi.htm",
+      "Angsinco-Jimenez et al., 2003; Fortes, 2013; Sanchez-Delute et al., 2025, as cited in docs/11-species.md."
+    ],
+    "transcript": "This is sickle seagrass, Thalassia hemprichii. A display, not a scan of a meadow in Mati.\n\nThe leaves are curved ribbons, not straight straps. In the blade you can see short black bars. Those are tannin cells.\n\nThe rhizome is thick, with scars between the shoots. The patch spreads when that buried stem grows and sends up new shoots. Roots grow down at the nodes. It can also flower and set seed."
   }
 ]

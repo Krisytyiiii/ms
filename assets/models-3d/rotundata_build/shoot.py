@@ -29,7 +29,8 @@ def shoot_mesh(name, origin, stem_dir, side_hint, cfg, sides=10, arc=12):
     for g, frac in enumerate(cfg["scar_fracs"]):
         z = frac * height
         levels += [(z - half, 0.0, g), (z, proud, g), (z + half, 0.0, g)]
-    levels.append((0.56 * height, 0.0, None))
+    top = 0.70 * height if cfg.get("variant") == "lesson" else 0.56 * height
+    levels.append((top, 0.0, None))
     rings = []
     for z, extra, _g in levels:
         rings.append([vert(z, 2 * math.pi * k / sides, rx + extra, ry + extra) for k in range(sides)])
@@ -50,14 +51,15 @@ def shoot_mesh(name, origin, stem_dir, side_hint, cfg, sides=10, arc=12):
     # Lesson sheath is about 3.4 cm on a stem under 6 cm (published range 1.5–5.5 cm).
     wall = cfg["sheath_wall_m"]
     if cfg.get("variant") == "lesson":
-        fracs = (0.30, 0.52, 0.76, 1.0)
+        # Sheath sits above the scar rings so the closed rings stay on the bare stem.
+        fracs = (0.64, 0.78, 0.90, 1.0)
         outer = (
-            (rx + 0.00030, ry + 0.00025),
-            (rx + 0.00090, ry + 0.00055),
-            (0.0022, 0.00135),
-            (0.0027, 0.00155),
+            (rx + 0.00035, ry + 0.00028),
+            (rx + 0.00080, ry + 0.00050),
+            (0.0024, 0.00140),
+            (0.0028, 0.00155),
         )
-        slit = (0.06, 0.10, 0.20, 0.36)
+        slit = (0.08, 0.14, 0.24, 0.40)
     else:
         fracs = (0.40, 0.55, 0.78, 1.0)
         outer = (

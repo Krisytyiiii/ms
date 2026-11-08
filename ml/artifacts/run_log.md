@@ -10,3 +10,4 @@ Newest last. Full tables live in each `runs/<id>/record.md`.
 | 2026-10-13T15:18:20Z | inventory | local | D:\pepot\marinesee\assets\species\Seagrass |
 | 2026-10-13T15:41:58Z | svm | local | test acc 0.437  fit 1.0s  rbf C=10.0 gamma=0.03  cap 400 |
 | 2026-10-14T12:06:04Z | svm | local | test acc 0.421  fit 2.8s  rbf C=3.0 gamma=0.01  cap 400 |
+| 2026-11-06T17:22:38Z | svm | local | test acc 0.494  fit 1.5s  rbf C=100.0 gamma=0.01  cap 400 |

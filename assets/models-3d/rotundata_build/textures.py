@@ -55,7 +55,12 @@ def leaf_image(name, pal, vein_count, w=256, h=512, seed=3):
     tt = np.clip((v - 0.78) / 0.22, 0.0, 1.0)[..., None] * tip_mix
     col = col * (1 - tt) + tip * tt
     col = np.broadcast_to(col, (h, w, 3)).copy()
-    k = stripe[..., None] * vein_mix
+    if lesson:
+        # Soft length-wise shade on a smooth strap. Not a counted set of ribs.
+        flow = 0.5 + 0.5 * np.sin(u * 6.5 * np.pi)
+        k = (flow[..., None] ** 2) * 0.07
+    else:
+        k = stripe[..., None] * vein_mix
     col = col * (1 - k) + vein * k
     edge = np.clip((np.abs(u - 0.5) * 2 - 0.9) / 0.1, 0.0, 1.0)
     col *= (1 - 0.06 * edge)[..., None]
@@ -106,31 +111,21 @@ def sand_image(name="CrSandGrain", n=512, seed=5):
     grain = _soft_grain(rng, n, n // 24)
     broad = _soft_grain(rng, n, n // 48)
 
-    base = np.array((0.82, 0.73, 0.55))
-    top_col = base * (0.93 + 0.07 * waves[..., None])
-    top_col = top_col * (0.97 + 0.045 * grain[..., None])
-    top_col = top_col + broad[..., None] * np.array((0.02, 0.015, 0.008))
-
-    peb_base = np.array((0.48, 0.46, 0.42))
-    peb_mottle = 0.90 + 0.16 * (0.5 + 0.5 * np.sin(tau * (9 * u + 11 * v)))
-    peb_col = peb_base * peb_mottle[..., None] * (0.96 + 0.06 * grain[..., None])
-
-    depth = np.clip(v / 0.45, 0.0, 1.0)
-    strata = 0.5 + 0.5 * np.sin(tau * (4.0 * depth + 0.04 * np.sin(tau * 2 * u)))
-    crust = np.clip((depth - 0.86) / 0.14, 0.0, 1.0)[..., None]
-    upper_sed = np.array((0.36, 0.29, 0.20))
-    deep_sed = np.array((0.20, 0.15, 0.11))
-    rim_sand = np.array((0.68, 0.58, 0.42))
-    sed_col = deep_sed * (1.0 - depth[..., None]) + upper_sed * depth[..., None]
-    sed_col = sed_col * (0.92 + 0.12 * strata[..., None])
-    sed_col = sed_col * (0.98 + 0.03 * broad[..., None])
-    sed_col = sed_col * (1.0 - crust) + rim_sand * crust
-
-    col = np.where((v >= 0.55)[..., None], top_col, np.where((v >= 0.46)[..., None], peb_col, sed_col))
+    # One warm pale sand. The cut face is the same sand, a little damper.
+    dry = np.array((0.86, 0.76, 0.58))
+    damp = np.array((0.74, 0.62, 0.44))
+    top_col = dry * (0.94 + 0.08 * waves[..., None])
+    top_col = top_col * (0.97 + 0.05 * grain[..., None])
+    top_col = top_col + broad[..., None] * np.array((0.025, 0.018, 0.008))
+    depth = np.clip((0.48 - v) / 0.48, 0.0, 1.0)
+    face = dry * (1.0 - depth[..., None]) + damp * depth[..., None]
+    face = face * (0.96 + 0.06 * grain[..., None])
+    face = face + broad[..., None] * np.array((0.015, 0.010, 0.004))
+    col = np.where((v >= 0.50)[..., None], top_col, face)
     img = _image(name, n, n)
     _fill(img, col)
     img["cr_cutaway"] = 1
-    img["cr_grain"] = 2
+    img["cr_grain"] = 3
     return img
 
 
@@ -201,14 +196,14 @@ def ensure_materials(vein_count):
         return img
 
     sand = bpy.data.images.get("CrSandGrain")
-    if sand is None or sand.get("cr_grain") != 2:
+    if sand is None or sand.get("cr_grain") != 3:
         sand = sand_image()
     return {
         "leaf": _attach(_principled("CrLeaf", LEAF["base"], 0.48, 0.22), leaf_img("CrLeafVeins", LEAF)),
         "young": _attach(_principled("CrLeafYoung", YOUNG["base"], 0.50, 0.20), leaf_img("CrYoungVeins", YOUNG)),
         "rhizome": _principled(
             "CrRhizome",
-            (0.93, 0.88, 0.68) if CONFIG.get("variant") == "lesson" else (0.84, 0.76, 0.58),
+            (0.72, 0.64, 0.42) if CONFIG.get("variant") == "lesson" else (0.84, 0.76, 0.58),
             0.42,
             0.16,
         ),
@@ -227,9 +222,9 @@ def ensure_materials(vein_count):
         ),
         "scar": _principled(
             "CrScar",
-            (0.28, 0.20, 0.12) if CONFIG.get("variant") == "lesson" else (0.42, 0.32, 0.20),
+            (0.16, 0.10, 0.06) if CONFIG.get("variant") == "lesson" else (0.42, 0.32, 0.20),
             0.48,
             0.16,
         ),
-        "sand": _attach(_principled("CrSand", (0.82, 0.73, 0.55), 0.90, 0.08), sand),
+        "sand": _attach(_principled("CrSand", (0.86, 0.76, 0.58), 0.92, 0.06), sand),
     }

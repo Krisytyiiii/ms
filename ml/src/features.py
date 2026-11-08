@@ -5,12 +5,14 @@ Input is the prepared image from preprocess.prepare_rgb (plant crop, then
 
 v2 is the locked description: the validation search on 13 Oct 2026 picked
 RBF C=3, gamma=0.01 on this vector (run 20261013T144233395Z).
+v3 appends blade-width and leaf-tip numbers and is used only when a curated
+validation macro F1 stays under 0.55. `extract_vector` defaults to v2.
 """
 
 from __future__ import annotations
 
 import numpy as np
-from scipy.ndimage import distance_transform_edt
+from scipy.ndimage import convolve, distance_transform_edt
 from skimage.color import rgb2gray, rgb2hsv
 from skimage.feature import graycomatrix, graycoprops
 from skimage.filters import threshold_otsu
@@ -35,6 +37,8 @@ _SHAPE_LEN = 10
 _COLOR_LEN = 3 * _BINS * 2 + 6
 _GLCM_LEN = len(_GLCM_PROPS) * len(_DISTANCES) * 2
 _BLADE_WIDTH_AT = 6
+_TIP_LEN = 8
+_NEIGHBORS = np.array([[1, 1, 1], [1, 0, 1], [1, 1, 1]], dtype=np.uint8)
 
 FEATURE_SPEC = {
     "version": "v2",
@@ -47,6 +51,29 @@ FEATURE_SPEC = {
     "blade_width_index": _COLOR_LEN + _GLCM_LEN + _BLADE_WIDTH_AT,
     "locked_svm": {"kernel": "rbf", "C": 3.0, "gamma": 0.01},
 }
+
+FEATURE_SPEC_V3 = {
+    "version": "v3",
+    "input": FEATURE_SPEC["input"],
+    "color": FEATURE_SPEC["color"],
+    "texture": FEATURE_SPEC["texture"],
+    "shape": (
+        "v2 plant-mask blobs and blade width, plus max width, base width, "
+        "tip width, taper, endpoint count, circularity, and axis lengths"
+    ),
+    "glcm_size": _GLCM_SIZE,
+    "length": FEATURE_SPEC["length"] + _TIP_LEN,
+    "blade_width_index": FEATURE_SPEC["blade_width_index"],
+    "tip_index": FEATURE_SPEC["length"],
+}
+
+
+def feature_spec(version: str = "v2") -> dict:
+    if version == "v2":
+        return FEATURE_SPEC
+    if version == "v3":
+        return FEATURE_SPEC_V3
+    raise ValueError(version)
 
 
 def _hsv_histogram(hsv_pixels: np.ndarray) -> np.ndarray:
@@ -144,19 +171,63 @@ def _shape_features(mask: np.ndarray, used_fallback: bool) -> np.ndarray:
     return out
 
 
-def extract_vector(rgb: np.ndarray) -> np.ndarray:
+def _blade_tip_features(mask: np.ndarray) -> np.ndarray:
+    """Extra blade-width and leaf-tip numbers. Zeros when no blob is large enough."""
+    out = np.zeros(_TIP_LEN, dtype=np.float64)
+    regions = [r for r in regionprops(label(mask)) if r.area >= _MIN_BLOB_PX]
+    if not regions:
+        return out
+    largest = max(regions, key=lambda region: region.area)
+    side = float(max(mask.shape)) or 1.0
+    major = float(largest.axis_major_length)
+    minor = float(largest.axis_minor_length)
+    perimeter = float(largest.perimeter) if largest.perimeter else 0.0
+    if perimeter > 0.0:
+        out[5] = float(np.clip(4.0 * np.pi * largest.area / (perimeter * perimeter), 0.0, 2.0))
+    out[6] = major / side
+    out[7] = minor / major if major > 0.0 else 0.0
+
+    blade = np.zeros(mask.shape, dtype=bool)
+    blade[tuple(largest.coords.T)] = True
+    skeleton = skeletonize(blade)
+    if not skeleton.any():
+        return np.nan_to_num(out)
+    width_map = 2.0 * distance_transform_edt(blade)
+    widths = width_map[skeleton]
+    median_width = float(np.median(widths))
+    out[0] = float(np.max(widths)) / side
+    neighbor_count = convolve(skeleton.astype(np.uint8), _NEIGHBORS, mode="constant", cval=0)
+    endpoints = skeleton & (neighbor_count == 1)
+    out[1] = float(np.log1p(int(endpoints.sum())))
+    if endpoints.any() and median_width > 0.0:
+        tip_width = float(np.median(width_map[endpoints]))
+        out[2] = tip_width / side
+        out[3] = tip_width / median_width
+    points = np.argwhere(skeleton)
+    centroid = np.array(largest.centroid)
+    nearest = points[int(np.argmin(np.sum((points - centroid) ** 2, axis=1)))]
+    out[4] = float(width_map[int(nearest[0]), int(nearest[1])]) / side
+    return np.nan_to_num(out)
+
+
+def extract_vector(rgb: np.ndarray, version: str = "v2") -> np.ndarray:
     gray = (rgb2gray(rgb) * 255.0).astype(np.uint8)
     mask, used_fallback = _shape_mask(rgb, gray)
-    return np.concatenate(
+    vector = np.concatenate(
         [
             _color_features(rgb, plant_mask(rgb)),
             _glcm_features(gray),
             _shape_features(mask, used_fallback),
         ]
     )
+    if version == "v2":
+        return vector
+    if version == "v3":
+        return np.concatenate([vector, _blade_tip_features(mask)])
+    raise ValueError(version)
 
 
-def extract_batch(images: list[np.ndarray]) -> np.ndarray:
+def extract_batch(images: list[np.ndarray], version: str = "v2") -> np.ndarray:
     if not images:
-        return np.zeros((0, FEATURE_SPEC["length"]), dtype=np.float64)
-    return np.stack([extract_vector(img) for img in images], axis=0)
+        return np.zeros((0, feature_spec(version)["length"]), dtype=np.float64)
+    return np.stack([extract_vector(img, version=version) for img in images], axis=0)

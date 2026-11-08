@@ -2,7 +2,9 @@
 
 Paper step 1 is “select images that actually show leaf shape, blade width, color.”
 A hard green-pixel cut drops real blades (brown *Halophila*, pale wrack, lab cards).
-So the mask is a diagnostic + optional zoom, not a reject rule.
+The mask stays a diagnostic plus an optional zoom. Habitat rejection is separate:
+`preprocess.qc_reason` drops a frame when the top is sky-like and the green mask
+covers under 2% of the frame.
 
 Masks run on a 512px preview so iNaturalist originals do not grind the laptop.
 """
@@ -10,8 +12,8 @@ Masks run on a 512px preview so iNaturalist originals do not grind the laptop.
 from __future__ import annotations
 
 import numpy as np
+from PIL import Image
 from skimage.color import rgb2hsv
-from skimage.transform import resize
 
 ANALYZE_MAX_SIDE = 512
 
@@ -37,12 +39,10 @@ def for_analysis(rgb: np.ndarray) -> tuple[np.ndarray, float, float]:
     scale = ANALYZE_MAX_SIDE / float(longest)
     new_h = max(1, int(round(height * scale)))
     new_w = max(1, int(round(width * scale)))
-    small = resize(
-        rgb,
-        (new_h, new_w),
-        preserve_range=True,
-        anti_aliasing=True,
-    ).astype(np.uint8)
+    # Pillow stays in uint8. skimage's anti-aliased resize promotes the whole
+    # original to float64, which exhausts RAM on iNaturalist frames.
+    preview = Image.fromarray(rgb).resize((new_w, new_h), Image.Resampling.BILINEAR)
+    small = np.asarray(preview, dtype=np.uint8)
     return small, width / float(new_w), height / float(new_h)
 
 
@@ -72,7 +72,10 @@ def plant_fraction(rgb: np.ndarray) -> float:
 
 
 def sky_fraction(rgb: np.ndarray) -> float:
-    """Share of the top third that looks like open sky. Diagnostic only."""
+    """Share of the top third that looks like open sky.
+
+    Used with `plant_fraction` by `preprocess.qc_reason` for the habitat reject.
+    """
     small, _, _ = for_analysis(rgb)
     top = small[: max(1, small.shape[0] // 3)]
     hsv = rgb2hsv(top.astype(np.float64) / 255.0)

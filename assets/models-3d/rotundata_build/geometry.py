@@ -7,29 +7,23 @@ import bmesh
 import bpy
 from mathutils import Vector
 
-from .textures import vein_xs
 from .util import arc_table, frame_at, point_at, smoothstep, tangent_at
 
 
-def bm_to_mesh(bm, name):
+def bm_to_mesh(bm, name, smooth=True):
     bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
     mesh = bpy.data.meshes.new(name)
     bm.to_mesh(mesh)
     bm.free()
     for poly in mesh.polygons:
-        poly.use_smooth = True
+        poly.use_smooth = smooth
     return mesh
 
 
-def strap_profile(vein_count):
-    """Closed cross-section: (x across width, face side, is_vein). Upper face carries the vein lanes."""
-    xs = vein_xs(vein_count)
-    upper = []
-    for k, x in enumerate(xs):
-        upper.append((x, 1.0, True))
-        if k < len(xs) - 1:
-            upper.append((0.5 * (x + xs[k + 1]), 1.0, False))
-    lower = [(x, -1.0, False) for x in (0.9, 0.3, -0.3, -0.9)]
+def strap_profile(_vein_count):
+    """Smooth flat strap. Width is the long axis; thickness is the short one. No teeth."""
+    upper = [(x, 1.0, False) for x in (-0.78, -0.48, -0.18, 0.12, 0.42, 0.72)]
+    lower = [(x, -1.0, False) for x in (0.62, 0.22, -0.22, -0.62)]
     return [(-1.0, 0.0, False)] + upper + [(1.0, 0.0, False)] + lower
 
 
@@ -42,11 +36,16 @@ def leaf_mesh(name, dense, width, thickness, vein_count, side_hint, twist, groov
     stations = []
     for k in range(body_rings):
         d = tip_start * k / (body_rings - 1)
-        hw = r * (0.80 + 0.20 * smoothstep(d / (0.10 * length)))
+        shoulder = smoothstep(d / max(1e-4, 0.05 * length))
+        hw = r * (0.94 + 0.06 * shoulder)
         stations.append((d, hw, 1.0))
-    for deg in (22, 42, 58, 71, 81):
+    for deg in (8, 18, 28, 38, 48, 58, 66, 74, 82):
         phi = math.radians(deg)
-        stations.append((tip_start + (length - tip_start) * math.sin(phi), r * math.cos(phi), 0.55 + 0.45 * math.cos(phi)))
+        stations.append((
+            tip_start + (length - tip_start) * math.sin(phi),
+            r * math.cos(phi),
+            0.32 + 0.68 * math.cos(phi),
+        ))
 
     profile = strap_profile(vein_count)
     bm = bmesh.new()
@@ -83,7 +82,8 @@ def leaf_mesh(name, dense, width, thickness, vein_count, side_hint, twist, groov
         face = bm.faces.new((last[j], last[j2], apex))
         for loop, c in zip(face.loops, (ring_uv[-1][j], ring_uv[-1][j2], (0.5, 1.0))):
             loop[uv].uv = c
-    return bm_to_mesh(bm, name)
+    # Flat faces stay flat. Smooth shading would turn the strap into a tube.
+    return bm_to_mesh(bm, name, smooth=False)
 
 
 def tube_mesh(name, dense, ds, radii, sides, oval, side_hint):
@@ -129,7 +129,7 @@ def rhizome_mesh(name, dense, node_ds, radius, oval, step=0.006, sides=8):
     for d in ds:
         rr = radius
         for nd in node_ds:
-            rr *= 1.0 + 0.14 * math.exp(-((d - nd) ** 2) / (2 * 0.0025 ** 2))
+            rr *= 1.0 + 0.05 * math.exp(-((d - nd) ** 2) / (2 * 0.0035 ** 2))
         rr *= 0.7 + 0.3 * smoothstep(d / 0.004)
         rr *= 0.4 + 0.6 * smoothstep((end - d) / 0.012)
         radii.append(rr)

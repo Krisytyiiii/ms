@@ -21,7 +21,7 @@ for _name in [n for n in sys.modules if n == "rotundata_build" or n.startswith("
 
 import _build_rotundata as builder  # noqa: E402
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata_lesson.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\cymodocea_rotundata_lesson.blend"
 STILLS = r"C:\Users\reaga\AppData\Local\Temp\cr_lesson_checks"
 PHASE = os.environ.get("CR_LESSON_PHASE", "stills")
 
@@ -74,9 +74,21 @@ def _look(cam, eye, aim):
     cam.rotation_euler = (aim - eye).to_track_quat("-Z", "Y").to_euler()
 
 
-def render_checks():
-    import math
+def _speech_frames():
+    path = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\lesson_speech.json"
+    data = {"intro_end": 6.5, "tip_end": 13.5, "ring_end": 21.5}
+    if os.path.isfile(path):
+        import json
+        with open(path, encoding="utf-8-sig") as handle:
+            data.update(json.load(handle))
 
+    def frame_at(sec):
+        return max(24, min(870, int(round(float(sec) * 30)) + 1))
+
+    return frame_at(data["intro_end"]), frame_at(data["tip_end"]), frame_at(data["ring_end"])
+
+
+def render_checks():
     os.makedirs(STILLS, exist_ok=True)
     scene = bpy.context.scene
     _eevee()
@@ -84,35 +96,43 @@ def render_checks():
     scene.render.resolution_y = 1080
     scene.render.resolution_percentage = 100
     try:
-        scene.eevee.taa_render_samples = 24
+        scene.eevee.taa_render_samples = 16
     except AttributeError:
         pass
     scene.render.image_settings.media_type = "IMAGE"
     scene.render.image_settings.file_format = "JPEG"
     scene.render.image_settings.quality = 92
+    intro, tip, ring = _speech_frames()
     beats = (
-        (60, "beat_bud.jpg"),
-        (225, "beat_creep.jpg"),
-        (420, "beat_root.jpg"),
-        (630, "beat_shoots.jpg"),
-        (860, "beat_patch.jpg"),
+        (40, "beat_open.jpg"),
+        (intro + 8, "beat_tip.jpg"),
+        (tip + 8, "beat_ring.jpg"),
+        (ring + 20, "beat_spread.jpg"),
+        (880, "beat_patch.jpg"),
     )
     saved = [_shot(os.path.join(STILLS, name), frame) for frame, name in beats]
     cam = bpy.data.objects["Camera"]
     parked, action, hidden = _park(cam)
-    scene.frame_set(860)
-    origin = bpy.data.objects["CR_Shoot_00"].matrix_world.translation.copy()
-    _look(cam, origin + Vector((-0.07, -0.18, 0.16)), origin + Vector((0.01, 0.0, 0.09)))
+    data_action = None
+    if cam.data.animation_data:
+        data_action = cam.data.animation_data.action
+        cam.data.animation_data.action = None
+    scene.frame_set(880)
+    center = Vector((0.01, 0.008, 0.06))
+    _look(cam, center + Vector((0.62, 0.0, 0.05)), center)
     cam.data.lens = 50
-    saved.append(_shot(os.path.join(STILLS, "close_shoot.jpg"), 860))
-    center = Vector((0.01, 0.015, 0.06))
-    elev = math.radians(15.0)
-    dist = 0.78
-    eye = Vector((center.x, center.y - dist * math.cos(elev), center.z + dist * math.sin(elev)))
-    _look(cam, eye, center)
-    saved.append(_shot(os.path.join(STILLS, "front_orbit.jpg"), 860))
+    saved.append(_shot(os.path.join(STILLS, "side.jpg"), 880))
+    origin = bpy.data.objects["CR_Shoot_00"].matrix_world.translation.copy()
+    _look(cam, origin + Vector((0.09, 0.0, 0.07)), origin + Vector((0.0, 0.0, 0.08)))
+    cam.data.lens = 65
+    saved.append(_shot(os.path.join(STILLS, "edge.jpg"), 880))
+    _look(cam, center + Vector((0.0, -0.01, 0.62)), center)
+    cam.data.lens = 50
+    saved.append(_shot(os.path.join(STILLS, "top.jpg"), 880))
+    if cam.data.animation_data is not None:
+        cam.data.animation_data.action = data_action
     _unpark(cam, parked, action, hidden)
-    bpy.context.scene.frame_set(860)
+    bpy.context.scene.frame_set(880)
     return saved
 
 
@@ -178,6 +198,9 @@ def build():
         bpy.ops.object.mode_set(mode="OBJECT")
     report = builder.build(reset=True, overwrite_anim=True, do_publish=False, blend_path=BLEND)
     print("LESSON_REPORT", report)
+    if PHASE == "build":
+        print("BUILD_ONLY")
+        return report
     if PHASE == "final":
         if report["problems"]:
             print("LESSON_SKIP publish and render; checks failed")

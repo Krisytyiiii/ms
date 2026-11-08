@@ -204,11 +204,12 @@ def frame_camera():
         eye = Vector((0.012, -0.60, 0.068))
         cam.location = eye
         cam.rotation_euler = (CENTER - eye).to_track_quat("-Z", "Y").to_euler()
-    cam.data.lens = 50
+    if not lesson:
+        cam.data.lens = 50
     fits = [item.identifier for item in cam.data.bl_rna.properties["sensor_fit"].enum_items]
     if "HORIZONTAL" in fits:
         cam.data.sensor_fit = "HORIZONTAL"
-    cam.data.clip_start = 0.01
+    cam.data.clip_start = 0.004
     cam.data.clip_end = 40
     cam["cr_framed"] = 5 if lesson else (4 if realistic else 3)
     bpy.context.scene.camera = cam
@@ -245,6 +246,8 @@ def _light():
 
 
 def build_presentation():
+    from .config import CONFIG
+
     col = collection("Reef")
     _drop(col)
     tray_mat = textures._principled("CrTray", (0.06, 0.09, 0.11), 0.75, 0.12)
@@ -252,7 +255,10 @@ def build_presentation():
         textures._principled("CrWater", (0.04, 0.16, 0.22), 0.95, 0.02),
         textures.water_image(),
     )
-    _put("ReefTray", _tray(), tray_mat, col)
+    tray = _put("ReefTray", _tray(), tray_mat, col)
+    if CONFIG.get("variant") == "lesson":
+        tray.hide_render = True
+        tray.hide_viewport = True
     _put("ReefWater", _wall(), water, col)
     _light()
     frame_camera()

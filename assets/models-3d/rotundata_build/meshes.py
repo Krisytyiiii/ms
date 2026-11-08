@@ -82,7 +82,7 @@ def rebuild_meshes(cfg=CONFIG):
         i = emp.name[len("CR_Shoot_"):]
         origin, stem, side, _fwd = rig.shoot_axes(emp)
         sides[i] = side
-        stem_sides, arc = (8, 8) if cfg.get("variant") == "lesson" else (10, 12)
+        stem_sides, arc = (16, 12) if cfg.get("variant") == "lesson" else (10, 12)
         _o, ok = _put("Shoot_" + i, emp, lambda s=stem_sides, a=arc: shoot.shoot_mesh("ShootMesh_" + i, origin, stem, side, cfg, s, a),
                       [mats["stem"], mats["sheath"], mats["scar"]], _whole("shoot_" + i), meadow, arm)
         built += ok
@@ -94,7 +94,7 @@ def rebuild_meshes(cfg=CONFIG):
         t = float(curve.get("cr_thickness_m", thickness))
         pts = dense_points(curve)
         mat = mats["young"] if curve.get("cr_young") else mats["leaf"]
-        rings = 4 if cfg.get("variant") == "lesson" else 8
+        rings = 8
         _o, ok = _put("Leaf_" + key, curve,
                       lambda n=rings: geometry.leaf_mesh("LeafMesh_" + key, pts, w, t, veins, side, float(curve.get("cr_twist", 0.0)),
                                                  cfg["vein_groove_m"], cfg["leaf_crown_m"], body_rings=n),

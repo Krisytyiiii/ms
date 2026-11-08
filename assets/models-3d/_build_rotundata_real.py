@@ -17,8 +17,8 @@ for _name in [n for n in sys.modules if n == "rotundata_build" or n.startswith("
 
 import _build_rotundata as builder  # noqa: E402
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata_realistic.blend"
-GLB = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata_realistic.glb"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\earlier\cymodocea_rotundata_realistic.blend"
+GLB = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\earlier\cymodocea_rotundata_realistic.glb"
 
 
 def build():

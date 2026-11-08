@@ -1,0 +1,70 @@
+{
+  "voice": "Microsoft David Desktop",
+  "tail": 26.2,
+  "lines": [
+    {
+      "text": "This is sickle seagrass, Thalassia hemprichii.",
+      "start": 0.22,
+      "end": 2.597,
+      "wav": "C:\\Users\\reaga\\AppData\\Local\\Temp\\th_hemprichii_speech\\line_0.wav",
+      "show_end": 3.093
+    },
+    {
+      "text": "A display, not a scan of a meadow in Mati.",
+      "start": 3.093,
+      "end": 5.322,
+      "wav": "C:\\Users\\reaga\\AppData\\Local\\Temp\\th_hemprichii_speech\\line_1.wav",
+      "show_end": 5.858
+    },
+    {
+      "text": "The leaves are curved ribbons, not straight straps.",
+      "start": 5.858,
+      "end": 9.077,
+      "wav": "C:\\Users\\reaga\\AppData\\Local\\Temp\\th_hemprichii_speech\\line_2.wav",
+      "show_end": 10.65
+    },
+    {
+      "text": "In the blade you can see short black bars.",
+      "start": 10.65,
+      "end": 13.97,
+      "wav": "C:\\Users\\reaga\\AppData\\Local\\Temp\\th_hemprichii_speech\\line_3.wav",
+      "show_end": 14.407
+    },
+    {
+      "text": "Those are tannin cells.",
+      "start": 14.407,
+      "end": 15.799,
+      "wav": "C:\\Users\\reaga\\AppData\\Local\\Temp\\th_hemprichii_speech\\line_4.wav",
+      "show_end": 16.295
+    },
+    {
+      "text": "The rhizome is thick, with scars between the shoots.",
+      "start": 16.295,
+      "end": 18.826,
+      "wav": "C:\\Users\\reaga\\AppData\\Local\\Temp\\th_hemprichii_speech\\line_5.wav",
+      "show_end": 19.282
+    },
+    {
+      "text": "The patch spreads when that buried stem grows and sends up new shoots.",
+      "start": 19.282,
+      "end": 22.098,
+      "wav": "C:\\Users\\reaga\\AppData\\Local\\Temp\\th_hemprichii_speech\\line_6.wav",
+      "show_end": 22.514
+    },
+    {
+      "text": "Roots grow down at the nodes.",
+      "start": 22.514,
+      "end": 24.02,
+      "wav": "C:\\Users\\reaga\\AppData\\Local\\Temp\\th_hemprichii_speech\\line_7.wav",
+      "show_end": 24.416
+    },
+    {
+      "text": "It can also flower and set seed.",
+      "start": 24.416,
+      "end": 26.2,
+      "wav": "C:\\Users\\reaga\\AppData\\Local\\Temp\\th_hemprichii_speech\\line_8.wav",
+      "show_end": 26.65
+    }
+  ],
+  "srt": "C:\\Users\\reaga\\AppData\\Local\\Temp\\th_hemprichii_speech\\captions.srt"
+}

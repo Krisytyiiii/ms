@@ -34,7 +34,7 @@ CONFIG = {
     "seed": 11,
 }
 
-BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata.blend"
+BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\cymodocea_rotundata.blend"
 GLB_PATH = r"d:\pepot\marinesee\app\assets\models-3d\cymodocea_rotundata.glb"
 
 HOW_TO = """Cymodocea rotundata - how to edit
@@ -78,27 +78,27 @@ def leaf_count(i):
 # not a Mati measurement.
 LESSON = {
     "variant": "lesson",
-    "shoot_count": 9,
-    "leaf_counts": (3, 2, 2, 2, 2, 2, 2, 2),
-    "root_counts": (3, 2, 3, 2, 2, 3),
+    "shoot_count": 8,
+    "leaf_counts": (4, 3, 5, 2, 4, 3, 2, 3),
+    "root_counts": (3, 2, 3, 2, 3, 2, 2, 3),
     "leaf_width_m": 0.004,
-    "leaf_thickness_m": 0.00022,
+    "leaf_thickness_m": 0.00020,
     "leaf_length_m": (0.07, 0.15),
-    "vein_count": 11,
-    "vein_groove_m": 0.000012,
-    "leaf_crown_m": 0.00008,
-    "stem_height_m": 0.048,
-    "stem_radius_m": (0.0015, 0.0013),
-    "scar_fracs": (0.08, 0.16, 0.24),
-    "scar_proud_m": 0.00040,
-    "scar_half_m": 0.00015,
+    "vein_count": 1,
+    "vein_groove_m": 0.0,
+    "leaf_crown_m": 0.00006,
+    "stem_height_m": 0.046,
+    "stem_radius_m": (0.00155, 0.00135),
+    "scar_fracs": (0.18, 0.34, 0.50),
+    "scar_proud_m": 0.00022,
+    "scar_half_m": 0.00022,
     "sheath_wall_m": 0.00022,
-    "leaf_base_frac": 0.82,
-    "rhizome_radius_m": 0.0024,
-    "rhizome_oval": 0.82,
-    "rhizome_span_m": 0.26,
-    "rhizome_sink_m": 0.0008,
-    "root_radius_m": 0.0009,
+    "leaf_base_frac": 0.70,
+    "rhizome_radius_m": 0.00205,
+    "rhizome_oval": 0.78,
+    "rhizome_span_m": 0.24,
+    "rhizome_sink_m": -0.0010,
+    "root_radius_m": 0.00042,
     "sand_bottom_z": -0.032,
     "min_bone_scale": 0.02,
     "fps": 30,

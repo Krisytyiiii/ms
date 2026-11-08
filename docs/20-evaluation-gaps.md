@@ -33,10 +33,10 @@ These four statements fail in the current app. A visual redesign does not close 
 
 | ID | What is still missing |
 |----|------------------------|
-| FS-3 | After a successful identify, the tester must open that species’ profile **and** an interactive 3D view. Profile and 3D buttons exist only after the laptop API returns a slug. *Cymodocea rotundata* has a `.glb`. The other eight species still open a clip or a placeholder. |
+| FS-3 | After a successful identify, the tester must open that species’ profile **and** an interactive 3D view. Profile and 3D buttons exist only after the laptop API returns a slug. All nine species have a bundled patch `.glb` and a lesson `.mp4`. A tester still cannot finish identify while the laptop API is down. |
 | FS-4 | A finished identify must show the scientific name and a percent. `ApiClassifier` can do that only while `serve_identify.py` is up. Server down shows an error and no score. |
-| FS-5 | A low-confidence result must tell the tester to take the photo again. The sentence is a notice in `result_screen.dart` and appears only on the low-confidence API path. |
-| US-4 | Same blocker as FS-5. The retake sentence has not been shown to a tester as a clear instruction. |
+| FS-5 | A low-confidence result must tell the tester to take the photo again. The sentence is a notice in `result_screen.dart` and appears when the API sets `low_confidence`. The curated export uses threshold 0.44. A phone tester has not been shown that sentence. |
+| US-4 | Same blocker as FS-5. The retake sentence has not been shown to a tester on a phone. |
 
 Files: `app/lib/screens/result_screen.dart`, `app/lib/classify/api_classifier.dart`, `app/lib/screens/viewer_3d_screen.dart`, `app/lib/widgets/glb_viewer.dart`.
 
@@ -47,9 +47,9 @@ These paths may already exist. They stay `unmeasured` until a tester does the pa
 | ID | What a phone pass still has to show |
 |----|--------------------------------------|
 | FS-6 | Each profile field shows cited text for common name, botanical characteristics, ecological role, conservation status, and habitat. The text is in `species.json`. A tester has not opened a profile on a phone. |
-| FS-7 | Rotate and zoom *Cymodocea rotundata*. The patch `.glb` (a bed of shoots, spreading roots, clip `Grow`) and the viewer controls are in the app. Play loops the growth from the bud. A tester has not done that on a phone. |
-| US-3 | Camera, gallery, library, and the *Cymodocea* patch rotate/zoom controls are in the app. A tester has not scored them on a phone. |
-| PE-4 | Time rotate and zoom on a physical phone. The *Cymodocea* patch model is bundled. Lag has not been timed. |
+| FS-7 | Rotate and zoom a bundled patch. All nine species have a `.glb` (clip `Grow`) and a lesson `.mp4`. The viewer controls are in the app, including See roots, which fades the sand. Play loops the growth from the bud. A tester has not done that on a phone. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. |
+| US-3 | Camera, gallery, library, rotate/zoom, and See roots on all nine patch viewers are in the app. A tester has not scored them on a phone. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. |
+| PE-4 | Time rotate and zoom on a physical phone. All nine patch models are bundled. Lag has not been timed. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. |
 | US-1 | A first-time user can tell MarineSee identifies and teaches Mati seagrass. |
 | US-2 | After one short brief, the tester identifies a photo and opens the library with no step-by-step guide. |
 | US-5 | The tester agrees the text, colors, and layout are comfortable on a phone. |

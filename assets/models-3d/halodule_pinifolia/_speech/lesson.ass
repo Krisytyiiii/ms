@@ -1,0 +1,22 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Bottom,Arial,26,&H00FFFFFF,&H000000FF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,2,0,2,80,80,56,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:02.79,Bottom,,0,0,0,,This is needle seagrass, Halodule pinifolia.
+Dialogue: 0,0:00:03.01,0:00:05.42,Bottom,,0,0,0,,A display, not a scan of a meadow in Mati.
+Dialogue: 0,0:00:05.80,0:00:08.65,Bottom,,0,0,0,,Each leaf is fine, with one dark vein down the centre.
+Dialogue: 0,0:00:09.20,0:00:10.47,Bottom,,0,0,0,,Watch the tip.
+Dialogue: 0,0:00:10.75,0:00:14.14,Bottom,,0,0,0,,That vein splits in two, and the tip stays rounded.
+Dialogue: 0,0:00:14.46,0:00:19.69,Bottom,,0,0,0,,That rounded tip is how you tell it from the other needle seagrass,\NHalodule uninervis, whose tip is a trident.
+Dialogue: 0,0:00:20.07,0:00:23.24,Bottom,,0,0,0,,The rhizome is usually pale, with clean black leaf scars.
+Dialogue: 0,0:00:23.42,0:00:26.00,Bottom,,0,0,0,,The patch spreads when the buried stem grows through the sand.
+Dialogue: 0,0:00:26.16,0:00:27.82,Bottom,,0,0,0,,Roots grow down at each node.
+Dialogue: 0,0:00:27.98,0:00:29.90,Bottom,,0,0,0,,It can also flower and set seed.

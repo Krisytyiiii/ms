@@ -202,9 +202,16 @@ def build(frame_end=1800):
     from .config import CONFIG
 
     if CONFIG.get("variant") == "lesson":
-        from .lesson_cards import build as build_lesson
-
-        return build_lesson(frame_end)
+        # The lesson burns subtitles along the bottom. No floating 3D text.
+        _clear()
+        for obj in list(bpy.data.objects):
+            if obj.name.startswith("CR_Card"):
+                data = obj.data
+                bpy.data.objects.remove(obj, do_unlink=True)
+                if data is not None and getattr(data, "users", 1) == 0 and isinstance(data, bpy.types.Mesh):
+                    bpy.data.meshes.remove(data)
+        print("lesson has no floating text")
+        return None
     _clear()
     col = collection("Reef")
     mat = _material()

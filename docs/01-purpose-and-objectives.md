@@ -47,6 +47,8 @@ Develop MarineSee as a mobile educational platform that uses interactive 3D visu
 | 4 | Train an SVM on color, texture, and shape features to **≥ 85%** accuracy | Documented train/val/test scores on the held-out set meet 85% |
 | 5 | Evaluate quality and acceptability with ISO/IEC 25010 | Students, tourists, researchers, and coastal community members complete the evaluation |
 
+**IMPLEMENTATION** — objective 4. The curated held-out test accuracy is **49.4%** on the leaf-visible local set (validation macro F1 0.474). The **≥ 85%** target is unmet. Record: `ml/artifacts/runs/20261106T172238348Z-svm/record.md`.
+
 ## User evaluation objective
 
 **STUDY** — after 1.3.

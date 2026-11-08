@@ -11,9 +11,9 @@ import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 try:
-    from .identify import identify_bytes, load_model
+    from .identify import default_model_path, identify_bytes, load_model
 except ImportError:
-    from identify import identify_bytes, load_model
+    from identify import default_model_path, identify_bytes, load_model
 
 MAX_BYTES = 8 * 1024 * 1024
 DEFAULT_HOST = "0.0.0.0"
@@ -27,6 +27,14 @@ def get_model():
     if _MODEL is None:
         _MODEL = load_model()
     return _MODEL
+
+
+def model_label() -> str:
+    try:
+        path = default_model_path()
+    except FileNotFoundError:
+        return "missing"
+    return "svm_v2" if path.parent.name == "v2" else "svm_v1"
 
 
 def identify_payload(body: bytes) -> tuple[int, dict]:
@@ -71,7 +79,7 @@ class IdentifyHandler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:  # noqa: N802
         if self.path.rstrip("/") == "/api/v1/health":
-            self._send(200, {"success": True, "data": {"ok": True, "model": "svm_v1"}})
+            self._send(200, {"success": True, "data": {"ok": True, "model": model_label()}})
             return
         self._send(404, {"success": False, "error": {"message": "Not found."}})
 
