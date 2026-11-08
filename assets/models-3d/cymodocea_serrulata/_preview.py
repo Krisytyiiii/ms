@@ -5,7 +5,7 @@ import os
 import bpy
 from mathutils import Vector
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\cymodocea_serrulata.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\blender\cymodocea_serrulata.blend"
 OUT = r"C:\Users\reaga\AppData\Local\Temp\cs_serrulata_preview"
 
 

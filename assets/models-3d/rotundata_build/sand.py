@@ -43,7 +43,7 @@ def front_cut_y(x, path):
         return -0.0158 + 0.014 * (edge_taper ** 2)
     if CONFIG.get("variant") != "realistic":
         # Phone patch. The lip cuts the front of the clump so those roots show.
-        edge_taper = max(0.0, (abs(x) - 0.155) / 0.040)
+        edge_taper = max(0.0, (abs(x) - 0.24) / 0.06)
         return -0.029 + 0.006 * (edge_taper ** 2)
     py = path_y_at(x, path)
     edge_taper = max(0.0, (abs(x) - 0.155) / 0.040)
@@ -53,8 +53,8 @@ def front_cut_y(x, path):
 
 
 def back_wall_y(x):
-    u = x / 0.195
-    return 0.096 + 0.010 * math.cos(x * 9.0 + 0.4) - 0.022 * (u ** 4)
+    u = x / 0.30
+    return 0.16 + 0.012 * math.cos(x * 7.0 + 0.4) - 0.02 * (u ** 4)
 
 
 def sand_height(x, y, path):
@@ -152,7 +152,7 @@ def build_sand(name, path, bottom, cols=46, rows=26, wall_steps=4):
     path = path[::6] + [path[-1]] if len(path) > 12 else path
     bm = bmesh.new()
     uv = bm.loops.layers.uv.new("UVMap")
-    x_half = 0.192
+    x_half = 0.18
     grid = []
     for j in range(rows + 1):
         v_frac = j / rows

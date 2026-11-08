@@ -25,7 +25,7 @@ sys.modules.pop("_build_rotundata", None)
 
 import _build_rotundata as builder  # noqa: E402
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\halodule_pinifolia\halodule_pinifolia_lesson.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\halodule_pinifolia\blender\halodule_pinifolia_lesson.blend"
 STILLS = r"C:\Users\reaga\AppData\Local\Temp\hp_lesson_checks"
 PHASE = os.environ.get("HP_LESSON_PHASE", "stills")
 

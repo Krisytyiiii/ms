@@ -1,7 +1,7 @@
 """Grow on SI_Armature, frames 1-330.
 
-The clip opens on the stand. Leaves lengthen a little, then settle.
-Frame 330 matches frame 1 so the phone loop has no jump.
+The clip opens on a bud and the stand grows up. It holds the full
+meadow at the end so the viewer can leave it there.
 Scale is Y only, so a leaf stays round while it grows.
 """
 
@@ -44,20 +44,18 @@ def fcurves(action):
     return out
 
 
-def _envelope(frame):
-    """0.80 at the loop ends, full length through the middle."""
-    if frame <= 1 or frame >= 330:
-        return 0.80
-    if frame < 120:
-        u = (frame - 1) / 119.0
-        u = u * u * (3.0 - 2.0 * u)
-        return 0.80 + 0.20 * u
-    if frame <= 240:
-        return 1.0
-    u = (frame - 240) / 90.0
+def _smooth(u):
     u = max(0.0, min(1.0, u))
-    u = u * u * (3.0 - 2.0 * u)
-    return 1.0 - 0.20 * u
+    return u * u * (3.0 - 2.0 * u)
+
+
+def _rise(frame, start, full, tiny=0.02):
+    """Bud until start, full size from full onward."""
+    if frame <= start:
+        return tiny
+    if frame >= full:
+        return 1.0
+    return tiny + (1.0 - tiny) * _smooth((frame - start) / float(full - start))
 
 
 def _sway(frame, phase):
@@ -111,17 +109,20 @@ def animate(arm, cfg=CONFIG):
             off += chords[k] * (scale - 1.0)
         return off
 
+    nshoot = max(1, len(shoots))
     for frame in frames:
-        scale = _envelope(frame)
+        rhizome_scale = _rise(frame, 1, 140)
         for i, name in enumerate(rh):
             pb = arm.pose.bones[name]
-            _key(pb, frame, scale, _local(bones[name], node_offset(i, scale)))
+            _key(pb, frame, rhizome_scale, _local(bones[name], node_offset(i, rhizome_scale)))
         for name in shoots:
             i = int(name.split("_")[1])
+            start = 24 + int(120 * i / nshoot)
+            scale = _rise(frame, start, start + 110)
             sb = bones[name]
             stem = (sb.tail_local - sb.head_local)
             stem = stem.normalized() if stem.length else Vector((0.0, 0.0, 1.0))
-            off = node_offset(i, scale)
+            off = node_offset(i, rhizome_scale)
             _key(arm.pose.bones[name], frame, scale, _local(sb, off))
             leaf_off = off + stem * (lift * (scale - 1.0))
             for j, leaf in enumerate(_names(arm, "leaf_%02d_" % i)):

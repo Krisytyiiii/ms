@@ -7,7 +7,7 @@ import bpy
 
 from .config import GLB_PATH
 
-ASSETS_GLB_PATH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\cymodocea_rotundata.glb"
+ASSETS_GLB_PATH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\models\cymodocea_rotundata.glb"
 
 
 def publish(path=GLB_PATH):

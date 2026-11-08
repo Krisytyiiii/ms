@@ -36,7 +36,7 @@ CONFIG = {
     "scar_rgb": (0.34, 0.22, 0.12),
     "rhizome_rgb": (0.90, 0.82, 0.66),
     "root_rgb": (0.93, 0.88, 0.74),
-    "sand_bottom_z": -0.032,
+    "sand_bottom_z": -0.016,
     "min_bone_scale": 0.02,
     "fps": 30,
     "frame_hold": 316,
@@ -44,7 +44,7 @@ CONFIG = {
     "seed": 11,
 }
 
-BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\cymodocea_serrulata.blend"
+BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\blender\cymodocea_serrulata.blend"
 GLB_PATH = r"d:\pepot\marinesee\app\assets\models-3d\cymodocea_serrulata.glb"
 
 HOW_TO = """Cymodocea serrulata - how to edit

@@ -161,12 +161,7 @@ def validate(cfg=CONFIG):
             if frame in (1, cfg["frame_end"]):
                 poses.setdefault(pb.name, []).append(pb.matrix_basis.copy())
     if not lesson:
-        for name, pair in poses.items():
-            if len(pair) < 2:
-                continue
-            a, b = pair[0], pair[1]
-            if any(abs(a[r][c] - b[r][c]) > 1e-4 for r in range(4) for c in range(4)):
-                problems.append("loop mismatch %s" % name)
+        # The phone clip grows from a bud and holds the full stand.
         if "Grow" not in bpy.data.actions:
             problems.append("missing Grow")
     else:

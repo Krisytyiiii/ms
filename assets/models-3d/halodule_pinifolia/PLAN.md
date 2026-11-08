@@ -29,7 +29,7 @@ This is the rounded needle, not the trident.
 
 Same meadow as the lesson video. One `Grow` clip, no camera, under 40,000 triangles.
 
-- `assets/models-3d/halodule_pinifolia/halodule_pinifolia.glb`
+- `assets/models-3d/halodule_pinifolia/models/halodule_pinifolia.glb`
 - `app/assets/models-3d/halodule_pinifolia.glb`
 
 The opened view is a fine patch, close enough to see the split vein and the rounded tip. Not one distant line.

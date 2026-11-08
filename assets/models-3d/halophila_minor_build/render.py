@@ -7,8 +7,8 @@ import bpy
 
 SPECIES_DIR = r"d:\pepot\marinesee\assets\models-3d\halophila_minor"
 APP_DIR = r"d:\pepot\marinesee\app\assets\models-3d"
-SILENT_MP4 = SPECIES_DIR + r"\halophila_minor_lesson_silent.mp4"
-LESSON_MP4 = SPECIES_DIR + r"\halophila_minor_lesson.mp4"
+SILENT_MP4 = SPECIES_DIR + r"\video\halophila_minor_lesson_silent.mp4"
+LESSON_MP4 = SPECIES_DIR + r"\video\halophila_minor_lesson.mp4"
 APP_LESSON_MP4 = APP_DIR + r"\halophila_minor_lesson.mp4"
 
 

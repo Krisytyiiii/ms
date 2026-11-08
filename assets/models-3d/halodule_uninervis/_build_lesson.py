@@ -17,7 +17,7 @@ from halodule_uninervis_build import captions, checks, config, grow, layout, mes
 from halodule_uninervis_build.lesson import RHIZOME_AT, TIP_AT, VEIN_AT
 from halodule_uninervis_build.render import _eevee, render_lesson
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\halodule_uninervis\halodule_uninervis_lesson.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\halodule_uninervis\blender\halodule_uninervis_lesson.blend"
 STILLS = r"C:\Users\reaga\AppData\Local\Temp\hu_uninervis_stills"
 PHASE = os.environ.get("HU_PHASE", "build")
 

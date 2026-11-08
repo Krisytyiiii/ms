@@ -40,10 +40,10 @@ def front_cut_y(x, path):
 
 def back_wall_y(x):
     return (
-        0.078
-        + 0.016 * math.sin(x * 11.0 + 0.4)
-        + 0.009 * math.sin(x * 23.0 + 1.2)
-        + 0.005 * math.cos(x * 37.0)
+        0.12
+        + 0.010 * math.sin(x * 11.0 + 0.4)
+        + 0.006 * math.sin(x * 17.0 + 1.2)
+        + 0.004 * math.cos(x * 29.0)
     )
 
 
@@ -93,7 +93,7 @@ def build_sand(name, path, bottom, cols=40, rows=24, wall_steps=4):
     path = path[::6] + [path[-1]] if len(path) > 12 else path
     bm = bmesh.new()
     uv = bm.loops.layers.uv.new("UVMap")
-    x_half = 0.145
+    x_half = 0.13
     grid = []
     for j in range(rows + 1):
         v_frac = j / rows

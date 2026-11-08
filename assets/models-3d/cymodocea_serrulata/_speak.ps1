@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.Speech
 
 $root = "d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata"
-$work = Join-Path $root "voice_work"
+$work = Join-Path $root "speech\voice_work"
 New-Item -ItemType Directory -Force -Path $work | Out-Null
 
 function Get-WavInfo([string]$Path) {
@@ -168,7 +168,7 @@ $cursor = $endAt
 $ms = New-Object System.IO.MemoryStream
 foreach ($chunk in $chunks) { $ms.Write($chunk, 0, $chunk.Length) }
 $data = $ms.ToArray()
-$wavPath = Join-Path $root "lesson_voice.wav"
+$wavPath = Join-Path $root "speech\lesson_voice.wav"
 $fs = [System.IO.File]::Create($wavPath)
 $bw = New-Object System.IO.BinaryWriter($fs)
 function Write-Ascii([System.IO.BinaryWriter]$w, [string]$s) {
@@ -191,7 +191,7 @@ $bw.Write($data)
 $bw.Close()
 $fs.Close()
 
-$jsonPath = Join-Path $root "lesson_timing.json"
+$jsonPath = Join-Path $root "speech\lesson_timing.json"
 $payload = [ordered]@{
     voice = $voiceName
     pace = $chosen
@@ -200,7 +200,7 @@ $payload = [ordered]@{
 }
 $payload | ConvertTo-Json -Depth 5 | Set-Content -Path $jsonPath -Encoding utf8
 
-$assPath = Join-Path $root "lesson_voice.ass"
+$assPath = Join-Path $root "speech\lesson_voice.ass"
 $ass = @"
 [Script Info]
 ScriptType: v4.00+
@@ -230,7 +230,7 @@ foreach ($cue in $timeline) {
 $ffmpeg = "C:\Users\reaga\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-9.0.1-full_build\bin\ffmpeg.exe"
 $ffprobe = Join-Path (Split-Path $ffmpeg) "ffprobe.exe"
 $picture = "C:\Users\reaga\AppData\Local\Temp\cs_serrulata_steady.mp4"
-$speciesOut = Join-Path $root "cymodocea_serrulata_lesson.mp4"
+$speciesOut = Join-Path $root "video\cymodocea_serrulata_lesson.mp4"
 $appOut = "d:\pepot\marinesee\app\assets\models-3d\cymodocea_serrulata_lesson.mp4"
 $staged = Join-Path $root "cymodocea_serrulata_lesson.muxing.mp4"
 if (-not (Test-Path $picture)) { throw "missing steady picture $picture" }

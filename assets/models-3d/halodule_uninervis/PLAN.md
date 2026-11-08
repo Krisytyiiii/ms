@@ -27,7 +27,7 @@ Seabed: the shared uneven bed only.
 
 Same meadow as the lesson video. One `Grow` clip, no camera, under 40,000 triangles.
 
-- `assets/models-3d/halodule_uninervis/halodule_uninervis.glb`
+- `assets/models-3d/halodule_uninervis/models/halodule_uninervis.glb`
 - `app/assets/models-3d/halodule_uninervis.glb`
 
 The opened view is close enough to see the trident. Not one distant line.

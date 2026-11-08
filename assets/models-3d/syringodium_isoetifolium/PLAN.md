@@ -28,7 +28,7 @@ This is the only species whose leaf is round from every side.
 
 Same meadow as the lesson video. One `Grow` clip, no camera, under 40,000 triangles.
 
-- `assets/models-3d/syringodium_isoetifolium/syringodium_isoetifolium.glb`
+- `assets/models-3d/syringodium_isoetifolium/models/syringodium_isoetifolium.glb`
 - `app/assets/models-3d/syringodium_isoetifolium.glb`
 
 The opened view is a stand of round leaves, close enough to see they are not straps. Not one distant line.

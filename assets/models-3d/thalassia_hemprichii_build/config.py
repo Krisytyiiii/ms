@@ -33,7 +33,7 @@ PLANT = {
     "rhizome_sink_m": 0.0022,
     "rhizome_scar_half_m": 0.0023,
     "root_radius_m": 0.00135,
-    "sand_bottom_z": -0.036,
+    "sand_bottom_z": -0.016,
     "min_bone_scale": 0.02,
     "fps": 30,
     "seed": 17,
@@ -42,7 +42,7 @@ PLANT = {
 CONFIG = dict(PLANT)
 CONFIG.update({"frame_hold": 316, "frame_end": 330})
 
-BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\thalassia_hemprichii\thalassia_hemprichii.blend"
+BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\thalassia_hemprichii\blender\thalassia_hemprichii.blend"
 GLB_PATH = r"d:\pepot\marinesee\app\assets\models-3d\thalassia_hemprichii.glb"
 
 HOW_TO = """Thalassia hemprichii - how to edit

@@ -1,21 +1,35 @@
 # 3D assets
 
-One folder per species. Slugs match `docs/11-species.md`.
+One folder per species. The name of the folder is the species slug.
 
-Each folder has a `RECORD.md`. That file names the current Blender file, the current lesson video, and the current phone model. Older tries go in that species' `earlier/` folder and are not what the app shows.
+## Which Blender file to open
 
-The app does not read these folders. Copy the current `.glb` and the current lesson `.mp4` into `app/assets/models-3d/` using the flat names `<slug>.glb` and `<slug>_lesson.mp4`.
+Open the phone file. That is the meadow in the 3D viewer. The lesson file is the film only. Do not open a file in `earlier/`. Do not open a file whose name ends in `.blend1`. Those are Blender backups.
 
-| Folder | State |
-|--------|--------|
-| `cymodocea_rotundata/` | Built. This is the reference. |
-| `cymodocea_serrulata/` | Built. |
-| `enhalus_acoroides/` | Built. |
-| `halodule_pinifolia/` | Built. |
-| `halodule_uninervis/` | Built. |
-| `halophila_minor/` | Built. |
-| `halophila_ovalis/` | Built. |
-| `syringodium_isoetifolium/` | Built. |
-| `thalassia_hemprichii/` | Built. |
+| Species | Open this | Lesson film only |
+|---|---|---|
+| Cymodocea rotundata | `cymodocea_rotundata/blender/cymodocea_rotundata.blend` | `cymodocea_rotundata/blender/cymodocea_rotundata_lesson.blend` |
+| Cymodocea serrulata | `cymodocea_serrulata/blender/cymodocea_serrulata.blend` | `cymodocea_serrulata/blender/cymodocea_serrulata_lesson.blend` |
+| Halodule uninervis | `halodule_uninervis/blender/halodule_uninervis.blend` | `halodule_uninervis/blender/halodule_uninervis_lesson.blend` |
+| Halodule pinifolia | `halodule_pinifolia/blender/halodule_pinifolia.blend` | `halodule_pinifolia/blender/halodule_pinifolia_lesson.blend` |
+| Enhalus acoroides | `enhalus_acoroides/blender/enhalus_acoroides.blend` | `enhalus_acoroides/blender/enhalus_acoroides_lesson.blend` |
+| Halophila ovalis | `halophila_ovalis/blender/halophila_ovalis.blend` | `halophila_ovalis/blender/halophila_ovalis_lesson.blend` |
+| Halophila minor | `halophila_minor/blender/halophila_minor.blend` | `halophila_minor/blender/halophila_minor_lesson.blend` |
+| Syringodium isoetifolium | `syringodium_isoetifolium/blender/syringodium_isoetifolium.blend` | `syringodium_isoetifolium/blender/syringodium_isoetifolium_lesson.blend` |
+| Thalassia hemprichii | `thalassia_hemprichii/blender/thalassia_hemprichii.blend` | `thalassia_hemprichii/blender/thalassia_hemprichii_lesson.blend` |
 
-Shared build code for the reference species stays in `rotundata_build/`.
+The newest file in a folder is not always the right one. Use the phone name in the table.
+
+## Folders inside each species
+
+| Folder | What is in it |
+|---|---|
+| `blender/` | The Blender files. `<slug>.blend` is the phone model. `<slug>_lesson.blend` is the lesson film. |
+| `models/` | The exported `<slug>.glb`. |
+| `video/` | The lesson `<slug>_lesson.mp4`. |
+| `speech/` | The spoken track, subtitles, and timing. |
+| `earlier/` | Old tries. Not current. Only rotundata has this. |
+
+`PLAN.md` and `RECORD.md` stay in the species folder. The Python that builds the meadow stays in `<slug>_build/` next to the species folder.
+
+The app does not read these folders. It plays the flat copies in `app/assets/models-3d/`: `<slug>.glb` and `<slug>_lesson.mp4`.

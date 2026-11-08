@@ -47,14 +47,14 @@ def _x_span(v_frac):
     pinch_front = max(0.0, (0.07 - v_frac) / 0.07)
     wobble_l = 0.015 * math.sin(v_frac * 8.0 + 0.4) + 0.008 * math.sin(v_frac * 17.0)
     wobble_r = 0.013 * math.sin(v_frac * 6.2 + 1.1) + 0.009 * math.sin(v_frac * 13.5 + 0.2)
-    left = -0.202 + 0.050 * pinch_back + 0.012 * pinch_front + wobble_l
-    right = 0.178 - 0.068 * pinch_back + 0.006 * pinch_front + wobble_r
+    left = -0.18 + 0.015 * pinch_back + 0.008 * pinch_front + wobble_l
+    right = 0.17 - 0.015 * pinch_back + 0.006 * pinch_front + wobble_r
     return left, right
 
 
 def back_wall_y(x):
-    u = x / 0.19
-    return 0.074 + 0.016 * math.sin(x * 7.2 + 0.5) + 0.007 * math.sin(x * 15.0) - 0.018 * (u * u)
+    u = x / 0.30
+    return 0.16 + 0.012 * math.sin(x * 7.2 + 0.5) + 0.008 * math.sin(x * 15.0) - 0.02 * (u * u)
 
 
 def sand_height(x, y, path):

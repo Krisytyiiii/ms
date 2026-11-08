@@ -19,7 +19,7 @@ CREEP_END = 330
 ROOT_END = 510
 SHOOT_END = 750
 
-TIMING = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\lesson_timing.json"
+TIMING = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\speech\lesson_timing.json"
 
 
 def _load_cues():

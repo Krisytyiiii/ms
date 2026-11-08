@@ -35,7 +35,7 @@ _MEADOW = {
     "rhizome_span_m": 0.22,
     "rhizome_sink_m": 0.0008,
     "root_radius_m": 0.00042,
-    "sand_bottom_z": -0.032,
+    "sand_bottom_z": -0.016,
     "min_bone_scale": 0.02,
     "fps": 30,
     "seed": 31,
@@ -48,7 +48,7 @@ CONFIG = {
 }
 CONFIG.update(_MEADOW)
 
-BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\halodule_pinifolia\halodule_pinifolia.blend"
+BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\halodule_pinifolia\blender\halodule_pinifolia.blend"
 GLB_PATH = r"d:\pepot\marinesee\app\assets\models-3d\halodule_pinifolia.glb"
 
 HOW_TO = """Halodule pinifolia - how to edit

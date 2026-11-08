@@ -9,7 +9,7 @@ ROOT = r"d:\pepot\marinesee\assets\models-3d"
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\enhalus_acoroides\enhalus_acoroides_lesson.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\enhalus_acoroides\blender\enhalus_acoroides_lesson.blend"
 bpy.ops.wm.open_mainfile(filepath=BLEND)
 
 for mat in bpy.data.materials:

@@ -9,11 +9,13 @@ class GlbControlTile extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onPressed,
+    this.selected = false,
   });
 
   final IconData icon;
   final String label;
   final VoidCallback? onPressed;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class GlbControlTile extends StatelessWidget {
 
     return Expanded(
       child: Material(
-        color: Colors.white.withValues(alpha: 0.08),
+        color: Colors.white.withValues(alpha: selected ? 0.22 : 0.08),
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           onTap: onPressed,
@@ -48,6 +50,47 @@ class GlbControlTile extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Playback speed for the growth clip: half, normal, and two faster steps.
+class GlbSpeedRow extends StatelessWidget {
+  const GlbSpeedRow({
+    super.key,
+    required this.speed,
+    required this.onSelected,
+  });
+
+  final double speed;
+  final ValueChanged<double>? onSelected;
+
+  static const speeds = [0.5, 1.0, 1.5, 2.0];
+
+  static String labelFor(double value) {
+    if (value == 0.5) {
+      return '0.5×';
+    }
+    if (value == 1.5) {
+      return '1.5×';
+    }
+    return '${value.round()}×';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        for (final value in speeds) ...[
+          if (value != speeds.first) const SizedBox(width: 8),
+          GlbControlTile(
+            icon: Icons.speed,
+            label: labelFor(value),
+            selected: speed == value,
+            onPressed: onSelected == null ? null : () => onSelected!(value),
+          ),
+        ],
+      ],
     );
   }
 }

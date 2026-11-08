@@ -31,7 +31,7 @@ The current phone model reads as one line because the leaves are tiny and the ca
 
 Same meadow as the lesson video. One `Grow` clip, no camera, under 40,000 triangles.
 
-- `assets/models-3d/halophila_minor/halophila_minor.glb`
+- `assets/models-3d/halophila_minor/models/halophila_minor.glb`
 - `app/assets/models-3d/halophila_minor.glb`
 
 ## Lesson

@@ -26,7 +26,7 @@ CONFIG = {
     "rhizome_span_m": 0.32,
     "rhizome_sink_m": 0.006,
     "root_radius_m": 0.00070,
-    "sand_bottom_z": -0.032,
+    "sand_bottom_z": -0.016,
     "min_bone_scale": 0.02,
     "fps": 30,
     "frame_hold": 316,
@@ -34,7 +34,7 @@ CONFIG = {
     "seed": 11,
 }
 
-BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\cymodocea_rotundata.blend"
+BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\blender\cymodocea_rotundata.blend"
 GLB_PATH = r"d:\pepot\marinesee\app\assets\models-3d\cymodocea_rotundata.glb"
 
 HOW_TO = """Cymodocea rotundata - how to edit
@@ -99,7 +99,7 @@ LESSON = {
     "rhizome_span_m": 0.24,
     "rhizome_sink_m": -0.0010,
     "root_radius_m": 0.00042,
-    "sand_bottom_z": -0.032,
+    "sand_bottom_z": -0.016,
     "min_bone_scale": 0.02,
     "fps": 30,
     "frame_hold": 900,

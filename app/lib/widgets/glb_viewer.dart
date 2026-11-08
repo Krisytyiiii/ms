@@ -31,6 +31,7 @@ class _GlbViewerState extends State<GlbViewer> {
   Future<void> Function(String source)? _run;
   var _playing = true;
   var _sandClear = false;
+  var _speed = 0.5;
   var _choseMotion = false;
   late final GlbWebOrbit _web = GlbWebOrbit(isActive: () => mounted);
 
@@ -111,8 +112,9 @@ class _GlbViewerState extends State<GlbViewer> {
             }
             const clips = mv.availableAnimations || [];
             if (clips.length) mv.animationName = clips[0];
+            mv.timeScale = $_speed;
             try { mv.currentTime = 0; } catch (e) {}
-            mv.play({repetitions: Infinity});
+            mv.play({repetitions: 1});
           '''
         : 'mv.pause();';
     try {
@@ -128,6 +130,21 @@ class _GlbViewerState extends State<GlbViewer> {
             $call
           };
           start();
+        })();
+      ''');
+    } on Object {
+      // The viewer may still be loading the model.
+    }
+  }
+
+  Future<void> _setSpeed(double speed) async {
+    setState(() => _speed = speed);
+    try {
+      await _runJs('''
+        (() => {
+          const mv = document.getElementById('marinesee-model');
+          if (!mv) return;
+          mv.timeScale = $speed;
         })();
       ''');
     } on Object {
@@ -271,6 +288,11 @@ class _GlbViewerState extends State<GlbViewer> {
                       onPressed: ready ? () => _nudge(radiusScale: 1.22) : null,
                     ),
                   ],
+                ),
+                const SizedBox(height: 8),
+                GlbSpeedRow(
+                  speed: _speed,
+                  onSelected: ready ? _setSpeed : null,
                 ),
                 const SizedBox(height: 8),
                 Row(

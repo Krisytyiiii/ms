@@ -29,7 +29,7 @@ The look-alike is *C. serrulata* (wider strap, serrated tip, scars that do not c
 
 Export the meadow you see in the lesson, not a thinner stand-in. One `Grow` clip, no camera, under 40,000 triangles.
 
-- `assets/models-3d/cymodocea_rotundata/cymodocea_rotundata.glb`
+- `assets/models-3d/cymodocea_rotundata/models/cymodocea_rotundata.glb`
 - `app/assets/models-3d/cymodocea_rotundata.glb`
 
 Frame the viewer close enough that the patch fills the window. The opened view is a patch of smooth ribbons, not one distant line.

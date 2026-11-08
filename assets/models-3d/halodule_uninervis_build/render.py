@@ -4,7 +4,7 @@ import os
 
 import bpy
 
-LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\halodule_uninervis\halodule_uninervis_lesson.mp4"
+LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\halodule_uninervis\video\halodule_uninervis_lesson.mp4"
 APP_LESSON_MP4 = r"d:\pepot\marinesee\app\assets\models-3d\halodule_uninervis_lesson.mp4"
 SILENT_MP4 = r"C:\Users\reaga\AppData\Local\Temp\hu_uninervis_silent.mp4"
 

@@ -16,7 +16,7 @@ if ROOT not in sys.path:
 from cymodocea_serrulata_build import checks, config, grow, layout, meshes, realism, reef, scene
 from cymodocea_serrulata_build.render import _eevee, render_lesson
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\cymodocea_serrulata_lesson.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\blender\cymodocea_serrulata_lesson.blend"
 STILLS = r"C:\Users\reaga\AppData\Local\Temp\cs_serrulata_stills"
 PHASE = os.environ.get("CS_PHASE", "build")
 
@@ -36,7 +36,7 @@ def _shot(path, frame):
 
 
 def _teach_frames():
-    timing = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\lesson_timing.json"
+    timing = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\speech\lesson_timing.json"
     fallback = (("tip", 290), ("sheath", 370), ("scar", 500), ("patch", 690))
     if not os.path.isfile(timing):
         return fallback

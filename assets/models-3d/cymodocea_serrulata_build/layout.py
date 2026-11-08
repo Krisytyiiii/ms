@@ -7,7 +7,7 @@ import bpy
 from mathutils import Matrix, Vector
 
 from .config import CONFIG, HOW_TO, leaf_count
-from .sand import sand_height
+from .sand import back_wall_y, sand_height
 from .util import collection, layer_collection, link, set_bezier, tag
 
 UP = Vector((0.0, 0.0, 1.0))
@@ -32,9 +32,33 @@ PATCH_XY = (
     (0.072, 0.066),
 )
 
+# Phone clump. The front meets the cut. The rest fills this bed.
+_PHONE_PATCH = (
+    (-0.10, -0.012),
+    (-0.01, -0.006),
+    (0.08, -0.014),
+    (-0.08, 0.025),
+    (0.02, 0.04),
+    (0.10, 0.02),
+    (-0.11, 0.07),
+    (-0.03, 0.08),
+    (0.06, 0.065),
+    (0.11, 0.09),
+    (-0.07, 0.11),
+    (0.03, 0.105),
+    (-0.01, 0.05),
+)
+
+
 def node_xy(count, span, rng):
-    """The phone model and the lesson use this same patch."""
-    return list(PATCH_XY)
+    from .config import CONFIG
+
+    if CONFIG.get("variant") == "lesson":
+        return list(PATCH_XY)
+    out = []
+    for x, y in _PHONE_PATCH:
+        out.append((x, min(y, back_wall_y(x) - 0.012)))
+    return out
 
 
 def new_curve(name, points, col):
@@ -49,14 +73,19 @@ def new_curve(name, points, col):
 
 
 def shoot_frame(i, count):
-    # Front rank faces the lesson camera. Middle rank turns sideways.
-    # Back rank faces the far side of the bed.
-    if i < 5:
-        yaw = 0.18 * math.sin(i * 1.35 + 0.25)
-    elif i < 9:
-        yaw = 1.35 if i % 2 == 0 else -1.35
+    from .config import CONFIG
+
+    if CONFIG.get("variant") == "lesson":
+        # Front rank faces the lesson camera. Middle rank turns sideways.
+        # Back rank faces the far side of the bed.
+        if i < 5:
+            yaw = 0.18 * math.sin(i * 1.35 + 0.25)
+        elif i < 9:
+            yaw = 1.35 if i % 2 == 0 else -1.35
+        else:
+            yaw = math.pi + 0.16 * math.sin(i * 0.8)
     else:
-        yaw = math.pi + 0.16 * math.sin(i * 0.8)
+        yaw = 1.05 * math.sin(i * 1.7 + 0.3) + 0.7 * math.cos(i * 0.9)
     lean_x = 0.035 * math.sin(i * 0.9)
     lean_y = 0.012 + 0.008 * math.cos(i * 1.1)
     right = Vector((math.cos(yaw), math.sin(yaw), 0.0))

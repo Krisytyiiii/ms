@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.Speech
 
 $root = "d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata"
-$work = Join-Path $root "voice_work"
+$work = Join-Path $root "speech\voice_work"
 New-Item -ItemType Directory -Force -Path $work | Out-Null
 
 function Get-WavInfo([string]$Path) {
@@ -182,7 +182,7 @@ if ($tailBytes.Length -gt 0) { $chunks.Add($tailBytes) }
 $ms = New-Object System.IO.MemoryStream
 foreach ($chunk in $chunks) { $ms.Write($chunk, 0, $chunk.Length) }
 $data = $ms.ToArray()
-$wavPath = Join-Path $root "lesson_speech.wav"
+$wavPath = Join-Path $root "speech\lesson_speech.wav"
 $fs = [System.IO.File]::Create($wavPath)
 $bw = New-Object System.IO.BinaryWriter($fs)
 function Write-Ascii([System.IO.BinaryWriter]$w, [string]$s) {
@@ -205,7 +205,7 @@ $bw.Write($data)
 $bw.Close()
 $fs.Close()
 
-$jsonPath = Join-Path $root "lesson_speech.json"
+$jsonPath = Join-Path $root "speech\lesson_speech.json"
 $cueJson = ($timeline | ForEach-Object {
     '    {"start": ' + $_.start + ', "end": ' + $_.end + ', "text": ' + ($_.text | ConvertTo-Json) + '}'
 }) -join ",`r`n"
@@ -224,7 +224,7 @@ $cueJson
 "@
 Set-Content -Path $jsonPath -Value $json -Encoding utf8
 
-$assPath = Join-Path $root "lesson.ass"
+$assPath = Join-Path $root "speech\lesson.ass"
 $ass = @"
 [Script Info]
 ScriptType: v4.00+

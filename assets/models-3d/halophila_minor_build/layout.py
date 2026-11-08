@@ -43,18 +43,25 @@ def node_xy(count, span, rng):
                 out.append((cx + 0.016 * math.cos(ang), cy + 0.013 * math.sin(ang)))
                 n += 1
         return out
-    xs, x = [], 0.0
-    for _i in range(count):
-        xs.append(x)
-        x += 0.78 + 0.44 * rng.random()
-    scale = span / (xs[-1] - xs[0])
-    mid = 0.5 * (xs[0] + xs[-1])
-    out = []
-    for i, x in enumerate(xs):
-        t = i / (count - 1)
-        y = -0.034 + 0.011 * math.sin(t * math.pi * 1.65 + 0.35) + 0.0045 * math.sin(i * 1.25)
-        out.append(((x - mid) * scale, y))
-    return out
+    del count, span, rng
+    return [
+        (-0.06, -0.036),
+        (-0.01, -0.028),
+        (0.05, -0.038),
+        (-0.07, -0.008),
+        (0.01, 0.00),
+        (0.07, -0.012),
+        (-0.04, 0.02),
+        (0.03, 0.03),
+        (-0.07, 0.045),
+        (0.00, 0.05),
+        (0.06, 0.055),
+        (-0.03, 0.07),
+        (0.04, 0.075),
+        (-0.06, 0.03),
+        (0.07, 0.03),
+        (0.00, 0.025),
+    ]
 
 
 def new_curve(name, points, col):

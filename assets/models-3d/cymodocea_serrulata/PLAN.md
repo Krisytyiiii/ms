@@ -30,7 +30,7 @@ This must not look like smooth ribbon seagrass.
 
 The interactive `.glb` is the same meadow as the lesson video. One `Grow` clip, no camera, under 40,000 triangles.
 
-- `assets/models-3d/cymodocea_serrulata/cymodocea_serrulata.glb`
+- `assets/models-3d/cymodocea_serrulata/models/cymodocea_serrulata.glb`
 - `app/assets/models-3d/cymodocea_serrulata.glb`
 
 The opened view is a patch of wide serrated straps, not one distant line.

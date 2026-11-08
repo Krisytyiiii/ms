@@ -29,7 +29,7 @@ This is not a straight strap and not a noodle.
 
 Same meadow as the lesson video. One `Grow` clip, no camera, under 40,000 triangles.
 
-- `assets/models-3d/thalassia_hemprichii/thalassia_hemprichii.glb`
+- `assets/models-3d/thalassia_hemprichii/models/thalassia_hemprichii.glb`
 - `app/assets/models-3d/thalassia_hemprichii.glb`
 
 The opened view shows curved ribbons and the dark bars, not one straight line.

@@ -5,7 +5,7 @@ import shutil
 
 import bpy
 
-LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\thalassia_hemprichii\thalassia_hemprichii_lesson.mp4"
+LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\thalassia_hemprichii\video\thalassia_hemprichii_lesson.mp4"
 RENDER_MP4 = LESSON_MP4
 ASSETS_MP4 = LESSON_MP4
 APP_MP4 = r"d:\pepot\marinesee\app\assets\models-3d\thalassia_hemprichii_lesson.mp4"

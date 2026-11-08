@@ -17,7 +17,7 @@ if ROOT not in sys.path:
 from halophila_ovalis_build import checks, config, grow, layout, meshes, realism, reef, scene
 from halophila_ovalis_build.render import LESSON_MP4, _eevee, render_lesson
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\halophila_ovalis\halophila_ovalis_lesson.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\halophila_ovalis\blender\halophila_ovalis_lesson.blend"
 STILLS = r"C:\Users\reaga\AppData\Local\Temp\ho_ovalis_stills"
 PHASE = os.environ.get("HO_PHASE", "build")
 SILENT = os.environ.get("HO_SILENT", LESSON_MP4)

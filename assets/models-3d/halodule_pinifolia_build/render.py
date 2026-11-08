@@ -5,8 +5,8 @@ import shutil
 
 import bpy
 
-SILENT_MP4 = r"d:\pepot\marinesee\assets\models-3d\halodule_pinifolia\_lesson_silent.mp4"
-LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\halodule_pinifolia\halodule_pinifolia_lesson.mp4"
+SILENT_MP4 = r"d:\pepot\marinesee\assets\models-3d\halodule_pinifolia\video\_lesson_silent.mp4"
+LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\halodule_pinifolia\video\halodule_pinifolia_lesson.mp4"
 
 
 def _frame(scene, width, height, samples):

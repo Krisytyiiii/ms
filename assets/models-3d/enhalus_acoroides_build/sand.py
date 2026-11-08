@@ -35,9 +35,9 @@ def front_cut_y(x, path=None):
 def _bed_xy(u, v):
     """Irregular plan. Left and right do not mirror, so the bed is not an oval."""
     front = -0.034 + 0.009 * math.sin(u * math.pi * 3.0) + 0.004 * math.sin(u * math.pi * 7.0 + 0.5)
-    back = 0.128 + 0.016 * math.sin(u * math.pi * 2.1 + 0.7) - 0.012 * math.sin(u * math.pi * 5.2)
-    left = -0.210 + 0.026 * math.sin(v * math.pi * 1.55 + 0.3) + 0.010 * v
-    right = 0.196 + 0.030 * math.sin(v * math.pi * 2.35 + 1.0) - 0.014 * v
+    back = 0.28 + 0.016 * math.sin(u * math.pi * 2.1 + 0.7) - 0.012 * math.sin(u * math.pi * 5.2)
+    left = -0.26 + 0.020 * math.sin(v * math.pi * 1.55 + 0.3) + 0.008 * v
+    right = 0.24 + 0.022 * math.sin(v * math.pi * 2.35 + 1.0) - 0.010 * v
     # A bite out of the left side, and a bulge on the right, so the rim is lumpy.
     if 0.28 < v < 0.70:
         left += 0.022 * math.sin((v - 0.28) / 0.42 * math.pi)

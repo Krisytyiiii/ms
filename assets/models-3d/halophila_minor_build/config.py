@@ -31,7 +31,7 @@ CONFIG = {
     "rhizome_span_m": 0.16,
     "rhizome_sink_m": 0.0009,
     "root_radius_m": 0.00072,
-    "sand_bottom_z": -0.032,
+    "sand_bottom_z": -0.016,
     "min_bone_scale": 0.02,
     "fps": 30,
     "frame_hold": 900,
@@ -39,7 +39,7 @@ CONFIG = {
     "seed": 21,
 }
 
-BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\halophila_minor\halophila_minor.blend"
+BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\halophila_minor\blender\halophila_minor.blend"
 GLB_PATH = r"d:\pepot\marinesee\app\assets\models-3d\halophila_minor.glb"
 
 HOW_TO = """Halophila minor - how to edit
@@ -93,7 +93,7 @@ LESSON = {
     "rhizome_span_m": 0.16,
     "rhizome_sink_m": 0.0009,
     "root_radius_m": 0.00072,
-    "sand_bottom_z": -0.032,
+    "sand_bottom_z": -0.016,
     "min_bone_scale": 0.02,
     "fps": 30,
     "frame_hold": 900,

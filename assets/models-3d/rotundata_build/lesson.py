@@ -16,7 +16,7 @@ from .util import collection, link, smoothstep, tag
 END = 900
 # Kept so an older card module can still import. The lesson does not draw those cards.
 BUD_END, CREEP_END, ROOT_END, SHOOT_END = 180, 420, 560, 780
-SPEECH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\lesson_speech.json"
+SPEECH = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\speech\lesson_speech.json"
 TUCK = Vector((0.0, 0.0, -0.014))
 
 

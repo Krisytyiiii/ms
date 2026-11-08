@@ -7,7 +7,7 @@ import sys
 
 ROOT = r"D:\pepot\marinesee"
 SPEECH = os.path.join(ROOT, r"assets\models-3d\enhalus_acoroides_build\speech")
-VIDEO = os.path.join(ROOT, r"assets\models-3d\enhalus_acoroides\enhalus_acoroides_lesson.mp4")
+VIDEO = os.path.join(ROOT, r"assets\models-3d\enhalus_acoroides\video\enhalus_acoroides_lesson.mp4")
 APP = os.path.join(ROOT, r"app\assets\models-3d\enhalus_acoroides_lesson.mp4")
 WAV = os.path.join(SPEECH, "lesson.wav")
 SRT = os.path.join(SPEECH, "lesson.srt")

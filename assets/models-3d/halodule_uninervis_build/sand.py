@@ -49,12 +49,12 @@ def front_cut_y(x, path):
 
 
 def back_wall_y(x):
-    u = x / 0.16
+    u = x / 0.28
     return (
-        0.070
-        + 0.011 * math.sin(x * 22.0 + 0.5)
-        + 0.006 * math.sin(x * 9.0 + 1.4)
-        - 0.010 * (u * u)
+        0.16
+        + 0.012 * math.sin(x * 14.0 + 0.5)
+        + 0.008 * math.sin(x * 7.0 + 1.4)
+        - 0.02 * (u * u)
     )
 
 
@@ -106,8 +106,8 @@ def build_sand(name, path, bottom, cols=40, rows=22, wall_steps=3):
             x_guess = -0.150 + 0.300 * u
             y_guess = front_cut_y(x_guess, path)
             y_guess = y_guess + (back_wall_y(x_guess) - y_guess) * v
-            left = -0.148 + 0.011 * math.sin(y_guess * 31.0) + 0.006 * math.sin(y_guess * 12.0 + 0.4)
-            right = 0.142 + 0.013 * math.sin(y_guess * 27.0 + 1.2) + 0.005 * math.sin(y_guess * 14.0)
+            left = -0.17 + 0.012 * math.sin(y_guess * 18.0) + 0.006 * math.sin(y_guess * 8.0 + 0.4)
+            right = 0.16 + 0.012 * math.sin(y_guess * 15.0 + 1.2) + 0.006 * math.sin(y_guess * 9.0)
             x = left + (right - left) * u
             x += 0.0045 * math.sin(math.pi * v) * math.sin(u * 7.0 + v * 2.0)
             fy = front_cut_y(x, path)

@@ -2,7 +2,7 @@
 
 import bpy
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\syringodium_isoetifolium\syringodium_isoetifolium_lesson.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\syringodium_isoetifolium\blender\syringodium_isoetifolium_lesson.blend"
 bpy.ops.wm.open_mainfile(filepath=BLEND)
 cam = bpy.data.objects["Camera"]
 hero = next(obj for obj in bpy.data.objects if obj.get("cr_hero"))

@@ -42,8 +42,8 @@ LESSON_XY = (
 )
 
 
-def node_xy(count, span, rng):
-    """Four shoots just behind the cut, with a little depth so the row is not flat."""
+def _front_row(count, span):
+    """Shoots just behind the cut. The lesson keeps this row."""
     from .sand import front_cut_y
 
     out = []
@@ -51,10 +51,26 @@ def node_xy(count, span, rng):
     for i in range(count):
         t = 0.0 if count == 1 else i / (count - 1)
         x = (t - 0.5) * span
-        # Proud of the wavy cut. The cut's own curve supplies the depth.
         y = front_cut_y(x) - 0.014
         out.append((x, y))
     return out
+
+
+def node_xy(count, span, rng):
+    from .config import CONFIG
+
+    if CONFIG.get("variant") == "lesson":
+        return _front_row(count, span)
+    # A stand across this wide bed, not one line on the lip.
+    return [
+        (-0.12, -0.01),
+        (0.02, -0.016),
+        (0.14, -0.008),
+        (-0.08, 0.08),
+        (0.10, 0.10),
+        (-0.14, 0.16),
+        (0.04, 0.18),
+    ]
 
 
 def new_curve(name, points, col):
@@ -69,8 +85,12 @@ def new_curve(name, points, col):
 
 
 def shoot_frame(i, count):
-    # Same pose in the phone file and the lesson, so the meadow matches.
-    yaw = 0.22 * math.sin(i * 1.4 + 0.4) + 0.04 * (i - 0.5 * (count - 1))
+    from .config import CONFIG
+
+    if CONFIG.get("variant") == "lesson":
+        yaw = 0.22 * math.sin(i * 1.4 + 0.4) + 0.04 * (i - 0.5 * (count - 1))
+    else:
+        yaw = 0.9 * math.sin(i * 1.6 + 0.3) + 0.55 * math.cos(i * 0.8)
     lean_x = 0.04 * math.sin(i * 0.9)
     lean_y = 0.015
     right = Vector((math.cos(yaw), math.sin(yaw), 0.0))

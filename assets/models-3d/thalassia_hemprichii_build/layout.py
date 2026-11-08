@@ -7,7 +7,7 @@ import bpy
 from mathutils import Matrix, Vector
 
 from .config import CONFIG, HOW_TO, leaf_count
-from .sand import sand_height
+from .sand import back_wall_y, sand_height
 from .util import collection, layer_collection, link, set_bezier, tag
 
 UP = Vector((0.0, 0.0, 1.0))
@@ -45,17 +45,26 @@ def node_xy(count, span, rng):
                 out.append((cx + 0.016 * math.cos(ang), cy + 0.013 * math.sin(ang)))
                 n += 1
         return out
-    xs, x = [], 0.0
-    for _i in range(count):
-        xs.append(x)
-        x += 0.78 + 0.44 * rng.random()
-    scale = span / (xs[-1] - xs[0])
-    mid = 0.5 * (xs[0] + xs[-1])
+    if CONFIG.get("variant") == "lesson":
+        return _lesson_xy(count)
+    del count, span, rng
     out = []
-    for i, x in enumerate(xs):
-        t = i / (count - 1)
-        y = -0.034 + 0.011 * math.sin(t * math.pi * 1.65 + 0.35) + 0.0045 * math.sin(i * 1.25)
-        out.append(((x - mid) * scale, y))
+    for x, y in (
+        (-0.09, -0.010),
+        (0.00, -0.016),
+        (0.09, -0.006),
+        (-0.10, 0.03),
+        (-0.02, 0.05),
+        (0.07, 0.03),
+        (0.11, 0.07),
+        (-0.07, 0.08),
+        (0.02, 0.09),
+        (0.10, 0.10),
+        (-0.10, 0.11),
+        (-0.01, 0.12),
+        (0.06, 0.105),
+    ):
+        out.append((x, min(y, back_wall_y(x) - 0.010)))
     return out
 
 
@@ -71,8 +80,12 @@ def new_curve(name, points, col):
 
 
 def shoot_frame(i, count):
-    # Face the front of the bed so the sickle is seen from the side of the row.
-    yaw = 0.18 * math.sin(i * 1.15 + 0.35)
+    from .config import CONFIG
+
+    if CONFIG.get("variant") == "lesson":
+        yaw = 0.18 * math.sin(i * 1.15 + 0.35)
+    else:
+        yaw = 1.0 * math.sin(i * 1.6 + 0.25) + 0.6 * math.cos(i * 0.85)
     lean_x = 0.045 * math.sin(i * 0.9)
     lean_y = 0.028
     right = Vector((math.cos(yaw), math.sin(yaw), 0.0))

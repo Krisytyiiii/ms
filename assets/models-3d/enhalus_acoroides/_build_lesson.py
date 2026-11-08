@@ -22,8 +22,8 @@ from enhalus_acoroides_build import checks, config, grow, layout, meshes, reef, 
 from enhalus_acoroides_build.render import _eevee, render_lesson
 
 ROOT = r"d:\pepot\marinesee"
-BLEND = ROOT + r"\assets\models-3d\enhalus_acoroides\enhalus_acoroides_lesson.blend"
-LESSON_MP4 = ROOT + r"\assets\models-3d\enhalus_acoroides\enhalus_acoroides_lesson.mp4"
+BLEND = ROOT + r"\assets\models-3d\enhalus_acoroides\blender\enhalus_acoroides_lesson.blend"
+LESSON_MP4 = ROOT + r"\assets\models-3d\enhalus_acoroides\video\enhalus_acoroides_lesson.mp4"
 STILLS = r"C:\Users\reaga\AppData\Local\Temp\ea_lesson_stills"
 PHASE = os.environ.get("EA_PHASE", "stills")
 

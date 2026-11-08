@@ -22,7 +22,7 @@ from halophila_minor_build.publish import GLB_PATH
 from halophila_minor_build.render import APP_LESSON_MP4, LESSON_MP4, SILENT_MP4, _eevee, render_lesson
 from halophila_minor_build.speech import ASS_PATH, MIX_WAV, build as build_speech
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\halophila_minor\halophila_minor_lesson.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\halophila_minor\blender\halophila_minor_lesson.blend"
 STILLS = r"C:\Users\reaga\AppData\Local\Temp\hm_minor_stills"
 SPEECH = r"C:\Users\reaga\AppData\Local\Temp\hm_minor_speech"
 PHASE = os.environ.get("HM_PHASE", "build")
@@ -33,7 +33,7 @@ FFMPEG = (
 )
 FFPROBE = FFMPEG.replace("ffmpeg.exe", "ffprobe.exe")
 
-PHONE_BLEND = r"d:\pepot\marinesee\assets\models-3d\halophila_minor\halophila_minor.blend"
+PHONE_BLEND = r"d:\pepot\marinesee\assets\models-3d\halophila_minor\blender\halophila_minor.blend"
 
 
 def _refuse(path):

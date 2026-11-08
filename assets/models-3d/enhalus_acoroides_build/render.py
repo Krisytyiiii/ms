@@ -71,7 +71,7 @@ def render_clip(out_path=RENDER_MP4, also_copy=True, frame_end=None, width=1280,
     return out_path
 
 
-LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\enhalus_acoroides\enhalus_acoroides_lesson.mp4"
+LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\enhalus_acoroides\video\enhalus_acoroides_lesson.mp4"
 APP_LESSON_MP4 = r"d:\pepot\marinesee\app\assets\models-3d\enhalus_acoroides_lesson.mp4"
 
 

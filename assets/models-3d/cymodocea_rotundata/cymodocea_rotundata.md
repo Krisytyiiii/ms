@@ -91,7 +91,7 @@ The app shows `app/assets/models-3d/cymodocea_rotundata.glb` in `app/lib/widgets
 - Playback uses the first animation clip. Name it `Grow`.
 - Export keeps meshes, UVs, base color, roughness, normal, skin, and bone location, rotation, and scale. It drops Geometry Nodes values, curve bevel, drivers, constraints, subsurface, and transmission. The veins and the sand grain have to be in images. The shape has to be in the mesh.
 - Stay under 40,000 triangles.
-- Save the editable blend to `assets/models-3d/cymodocea_rotundata/cymodocea_rotundata.blend`. Do not put the blend in `app/`.
+- Save the editable blend to `assets/models-3d/cymodocea_rotundata/blender/cymodocea_rotundata.blend`. Do not put the blend in `app/`.
 - Export `Meadow` and `CR_Armature` only.
 
 ## Done when

@@ -27,10 +27,10 @@ A serrulata run passes `CS` and these paths in, and does not leave the module-le
 
 | Role | Path |
 |------|------|
-| Phone blend | `assets/models-3d/cymodocea_serrulata/cymodocea_serrulata.blend` |
-| Lesson blend | `assets/models-3d/cymodocea_serrulata/cymodocea_serrulata_lesson.blend` |
+| Phone blend | `assets/models-3d/cymodocea_serrulata/blender/cymodocea_serrulata.blend` |
+| Lesson blend | `assets/models-3d/cymodocea_serrulata/blender/cymodocea_serrulata_lesson.blend` |
 | Phone model | `app/assets/models-3d/cymodocea_serrulata.glb` and the same name under `assets/models-3d/cymodocea_serrulata/` |
-| Lesson video | `assets/models-3d/cymodocea_serrulata/cymodocea_serrulata_lesson.mp4` and the same flat name under `app/assets/models-3d/` |
+| Lesson video | `assets/models-3d/cymodocea_serrulata/video/cymodocea_serrulata_lesson.mp4` and the same flat name under `app/assets/models-3d/` |
 
 Hard-coded `CR_` names to parameterize (default `CR`):
 

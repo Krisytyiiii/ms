@@ -46,7 +46,7 @@ CONFIG = {
     "rhizome_span_m": 0.16,
     "rhizome_sink_m": 0.0012,
     "root_radius_m": 0.00042,
-    "sand_bottom_z": -0.032,
+    "sand_bottom_z": -0.016,
     "min_bone_scale": 0.02,
     "fps": 30,
     "frame_hold": 316,
@@ -54,9 +54,9 @@ CONFIG = {
     "seed": 11,
 }
 
-BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\halophila_ovalis\halophila_ovalis.blend"
+BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\halophila_ovalis\blender\halophila_ovalis.blend"
 GLB_PATH = r"d:\pepot\marinesee\app\assets\models-3d\halophila_ovalis.glb"
-SPECIES_GLB_PATH = r"d:\pepot\marinesee\assets\models-3d\halophila_ovalis\halophila_ovalis.glb"
+SPECIES_GLB_PATH = r"d:\pepot\marinesee\assets\models-3d\halophila_ovalis\models\halophila_ovalis.glb"
 
 HOW_TO = """Halophila ovalis - how to edit
 
@@ -126,7 +126,7 @@ LESSON = {
     "rhizome_span_m": 0.16,
     "rhizome_sink_m": 0.0012,
     "root_radius_m": 0.00042,
-    "sand_bottom_z": -0.032,
+    "sand_bottom_z": -0.016,
     "min_bone_scale": 0.02,
     "fps": 30,
     "frame_hold": 900,

@@ -27,7 +27,7 @@ Seabed: the shared uneven bed. The early bare moment is that same bed before the
 
 Same meadow as the lesson video. One `Grow` clip, no camera, under 40,000 triangles.
 
-- `assets/models-3d/halophila_ovalis/halophila_ovalis.glb`
+- `assets/models-3d/halophila_ovalis/models/halophila_ovalis.glb`
 - `app/assets/models-3d/halophila_ovalis.glb`
 
 The opened view is a patch of paired ovals, close enough to see the cross veins. Not one distant line.

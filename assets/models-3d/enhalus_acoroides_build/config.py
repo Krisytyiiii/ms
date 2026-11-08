@@ -50,7 +50,7 @@ CONFIG = {
     "rhizome_sink_m": 0.008,
     # Display choice. The record says cord-like roots, with no diameter.
     "root_radius_m": 0.0044,
-    "sand_bottom_z": -0.072,
+    "sand_bottom_z": -0.020,
     "min_bone_scale": 0.02,
     "fps": 30,
     "frame_hold": 316,
@@ -58,9 +58,9 @@ CONFIG = {
     "seed": 43,
 }
 
-BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\enhalus_acoroides\enhalus_acoroides.blend"
+BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\enhalus_acoroides\blender\enhalus_acoroides.blend"
 GLB_PATH = r"d:\pepot\marinesee\app\assets\models-3d\enhalus_acoroides.glb"
-MIRROR_GLB = r"d:\pepot\marinesee\assets\models-3d\enhalus_acoroides\enhalus_acoroides.glb"
+MIRROR_GLB = r"d:\pepot\marinesee\assets\models-3d\enhalus_acoroides\models\enhalus_acoroides.glb"
 
 
 def how_to_text():

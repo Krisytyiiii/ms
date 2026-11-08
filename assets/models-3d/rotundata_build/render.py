@@ -71,7 +71,7 @@ def render_clip(out_path=RENDER_MP4, also_copy=True, frame_end=None, width=1280,
     return out_path
 
 
-LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\cymodocea_rotundata_lesson.mp4"
+LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\video\cymodocea_rotundata_lesson.mp4"
 SILENT_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\cymodocea_rotundata_lesson_silent.mp4"
 
 

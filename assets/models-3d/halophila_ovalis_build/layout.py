@@ -29,9 +29,26 @@ MEADOW_XY = (
 
 
 def node_xy(count, span, rng):
-    """The same patch for the phone file and the lesson film."""
+    from .config import CONFIG
+
     del count, span, rng
-    return list(MEADOW_XY)
+    if CONFIG.get("variant") == "lesson":
+        return list(MEADOW_XY)
+    return [
+        (-0.08, -0.012),
+        (0.00, -0.016),
+        (0.08, -0.008),
+        (-0.09, 0.03),
+        (-0.01, 0.045),
+        (0.07, 0.03),
+        (0.10, 0.07),
+        (-0.06, 0.08),
+        (0.03, 0.09),
+        (-0.10, 0.11),
+        (-0.02, 0.12),
+        (0.06, 0.105),
+        (0.01, 0.06),
+    ]
 
 
 def new_curve(name, points, col):
@@ -48,8 +65,13 @@ def new_curve(name, points, col):
 def shoot_frame(i, count):
     # Same pose on the phone and in the lesson. A small yaw keeps the pairs
     # from being copies. The pair axis stays across the front of the bed.
+    from .config import CONFIG
+
     del count
-    yaw = 0.10 * math.sin(i * 1.17 + 0.4)
+    if CONFIG.get("variant") == "lesson":
+        yaw = 0.10 * math.sin(i * 1.17 + 0.4)
+    else:
+        yaw = 0.9 * math.sin(i * 1.5 + 0.3) + 0.5 * math.cos(i * 0.8)
     lean_x = 0.025 * math.sin(i * 0.9)
     lean_y = 0.012 * math.cos(i * 0.7)
     right = Vector((math.cos(yaw), math.sin(yaw), 0.0))

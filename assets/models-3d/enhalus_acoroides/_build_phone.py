@@ -22,15 +22,18 @@ from enhalus_acoroides_build import checks, config, grow, layout, meshes, reef, 
 from enhalus_acoroides_build import publish as pub
 
 ROOT = r"d:\pepot\marinesee"
-BLEND = ROOT + r"\assets\models-3d\enhalus_acoroides\enhalus_acoroides.blend"
+BLEND = ROOT + r"\assets\models-3d\enhalus_acoroides\blender\enhalus_acoroides.blend"
 config.GLB_PATH = ROOT + r"\app\assets\models-3d\enhalus_acoroides.glb"
-config.MIRROR_GLB = ROOT + r"\assets\models-3d\enhalus_acoroides\enhalus_acoroides.glb"
+config.MIRROR_GLB = ROOT + r"\assets\models-3d\enhalus_acoroides\models\enhalus_acoroides.glb"
 
 
 def build():
     if bpy.context.object and bpy.context.object.mode != "OBJECT":
         bpy.ops.object.mode_set(mode="OBJECT")
     scene.setup_scene()
+    config.CONFIG["variant"] = "phone"
+    # Still inside the 30–150 cm record. Short enough that the bed stays visible.
+    config.CONFIG["leaf_length_m"] = (0.42, 0.70)
     scene.clear_plant()
     layout.create_plant()
     meshes.rebuild_meshes()

@@ -74,7 +74,7 @@ def render_clip(out_path=RENDER_MP4, also_copy=False, frame_end=None, width=1280
     return out_path
 
 
-LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\cymodocea_serrulata_lesson.mp4"
+LESSON_MP4 = r"d:\pepot\marinesee\assets\models-3d\cymodocea_serrulata\video\cymodocea_serrulata_lesson.mp4"
 
 
 def _eevee(scene):

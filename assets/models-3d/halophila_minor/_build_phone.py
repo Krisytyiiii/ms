@@ -36,6 +36,7 @@ def build():
     if bpy.context.object and bpy.context.object.mode != "OBJECT":
         bpy.ops.object.mode_set(mode="OBJECT")
     scene.setup_scene()
+    config.CONFIG["variant"] = "phone"
     scene.clear_plant()
     layout.create_plant()
     meshes.rebuild_meshes()

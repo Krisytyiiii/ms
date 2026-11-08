@@ -6,8 +6,8 @@ leaf_diameter_m and sheath_shape are display choices. They are not spoken as fac
 CONFIG = {
     "presentation": "phone",
     "shoot_count": 7,
-    "leaf_length_m": (0.09, 0.26),
-    "leaf_diameter_m": 0.0092,
+    "leaf_length_m": (0.075, 0.125),
+    "leaf_diameter_m": 0.0058,
     "sheath_shape": "round_collar",
     "stem_height_m": 0.024,
     "stem_radius_m": 0.00215,
@@ -17,7 +17,7 @@ CONFIG = {
     "rhizome_oval": 1.0,
     "rhizome_sink_m": 0.010,
     "root_radius_m": 0.00085,
-    "sand_bottom_z": -0.038,
+    "sand_bottom_z": -0.016,
     "min_bone_scale": 0.02,
     "fps": 30,
     "frame_hold": 240,
@@ -25,9 +25,9 @@ CONFIG = {
     "seed": 8,
 }
 
-BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\syringodium_isoetifolium\syringodium_isoetifolium.blend"
+BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\syringodium_isoetifolium\blender\syringodium_isoetifolium.blend"
 GLB_PATH = r"d:\pepot\marinesee\app\assets\models-3d\syringodium_isoetifolium.glb"
-SPECIES_GLB_PATH = r"d:\pepot\marinesee\assets\models-3d\syringodium_isoetifolium\syringodium_isoetifolium.glb"
+SPECIES_GLB_PATH = r"d:\pepot\marinesee\assets\models-3d\syringodium_isoetifolium\models\syringodium_isoetifolium.glb"
 
 HOW_TO = """Syringodium isoetifolium - how to edit
 

@@ -5,7 +5,7 @@ import struct
 
 PATHS = (
     r"d:\pepot\marinesee\app\assets\models-3d\halophila_minor.glb",
-    r"d:\pepot\marinesee\assets\models-3d\halophila_minor\halophila_minor.glb",
+    r"d:\pepot\marinesee\assets\models-3d\halophila_minor\models\halophila_minor.glb",
 )
 
 

@@ -13,13 +13,20 @@ UP = Vector((0.0, 0.0, 1.0))
 
 # Order is the buried stem's path. on_cut shoots sit in the front face.
 SHOOTS = (
-    {"xy": (-0.058, 0.036), "n": 3, "yaw": -0.45, "roots": 2},
-    {"xy": (-0.006, 0.046), "n": 3, "yaw": 0.15, "roots": 2},
-    {"xy": (0.046, 0.028), "n": 2, "yaw": 0.55, "roots": 2},
-    {"xy": (0.072, -0.006), "n": 3, "yaw": 0.25, "roots": 2, "hero": 2},
-    {"xy": (0.026, None), "n": 3, "yaw": 0.10, "roots": 3, "on_cut": True},
-    {"xy": (-0.036, None), "n": 3, "yaw": -0.20, "roots": 3, "on_cut": True},
-    {"xy": (-0.070, 0.004), "n": 2, "yaw": -0.70, "roots": 2},
+    {"xy": (-0.08, None), "n": 2, "yaw": -0.3, "roots": 2, "on_cut": True},
+    {"xy": (0.02, None), "n": 2, "yaw": 0.4, "roots": 2, "on_cut": True, "hero": 0},
+    {"xy": (0.10, None), "n": 2, "yaw": -0.6, "roots": 2, "on_cut": True},
+    {"xy": (-0.10, 0.03), "n": 2, "yaw": 1.1, "roots": 2},
+    {"xy": (0.00, 0.045), "n": 2, "yaw": -1.0, "roots": 2},
+    {"xy": (0.09, 0.03), "n": 2, "yaw": 0.7, "roots": 2},
+    {"xy": (-0.06, 0.07), "n": 2, "yaw": 1.8, "roots": 2},
+    {"xy": (0.05, 0.08), "n": 2, "yaw": -0.4, "roots": 2},
+    {"xy": (0.11, 0.07), "n": 2, "yaw": 2.2, "roots": 2},
+    {"xy": (-0.10, 0.10), "n": 2, "yaw": 0.2, "roots": 2},
+    {"xy": (-0.02, 0.11), "n": 2, "yaw": -1.6, "roots": 2},
+    {"xy": (0.07, 0.105), "n": 2, "yaw": 1.3, "roots": 2},
+    {"xy": (-0.07, 0.05), "n": 2, "yaw": 0.9, "roots": 2},
+    {"xy": (0.03, 0.06), "n": 2, "yaw": -0.8, "roots": 2},
 )
 
 

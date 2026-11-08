@@ -40,17 +40,17 @@ def front_cut_y(x, path):
         + 0.0042 * math.sin(x * 8.2 + 0.7)
         + 0.0024 * math.sin(x * 33.0 + 1.4)
     )
-    side = 0.016 * max(0.0, (abs(x) - 0.10) / 0.08) ** 1.35
+    side = 0.016 * max(0.0, (abs(x) - 0.20) / 0.10) ** 1.35
     return -0.024 + wobble + side
 
 
 def back_wall_y(x):
     """Uneven back edge. The plan is not an oval."""
     return (
-        0.086
-        + 0.011 * math.sin(x * 14.0 + 0.3)
-        + 0.006 * math.cos(x * 27.0 + 0.5)
-        - 0.010 * (x / 0.20) ** 2
+        0.16
+        + 0.012 * math.sin(x * 11.0 + 0.3)
+        + 0.008 * math.cos(x * 19.0 + 0.5)
+        - 0.02 * (x / 0.20) ** 2
     )
 
 
@@ -131,7 +131,7 @@ def build_sand(name, path, bottom, cols=40, rows=24, wall_steps=4):
     path = list(path)
     bm = bmesh.new()
     uv = bm.loops.layers.uv.new("UVMap")
-    x_half = 0.192
+    x_half = 0.18
     grid = []
     for j in range(rows + 1):
         v_frac = j / rows

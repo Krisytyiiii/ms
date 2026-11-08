@@ -7,7 +7,7 @@ import bpy
 from mathutils import Matrix, Vector
 
 from .config import CONFIG, HOW_TO, leaf_count
-from .sand import sand_height
+from .sand import back_wall_y, sand_height
 from .util import collection, layer_collection, link, set_bezier, tag
 
 UP = Vector((0.0, 0.0, 1.0))
@@ -30,8 +30,27 @@ LESSON_XY = (
 def node_xy(count, span, rng):
     from .config import CONFIG
 
-    if CONFIG.get("variant") in ("lesson", "phone"):
+    if CONFIG.get("variant") == "lesson":
         return list(LESSON_XY)
+    if CONFIG.get("variant") == "phone":
+        out = []
+        for x, y in (
+            (-0.09, -0.010),
+            (0.00, -0.016),
+            (0.09, -0.006),
+            (-0.10, 0.03),
+            (-0.02, 0.05),
+            (0.08, 0.03),
+            (0.11, 0.07),
+            (-0.07, 0.08),
+            (0.02, 0.09),
+            (0.10, 0.10),
+            (-0.11, 0.11),
+            (-0.03, 0.12),
+            (0.06, 0.105),
+        ):
+            out.append((x, min(y, back_wall_y(x) - 0.012)))
+        return out
     if CONFIG.get("variant") == "realistic":
         # Three tufts, not one row. The rhizome still connects them.
         spots = ((-0.10, 0.012), (-0.01, -0.028), (0.09, 0.018))
@@ -72,9 +91,13 @@ def new_curve(name, points, col):
 def shoot_frame(i, count):
     from .config import CONFIG
 
-    if CONFIG.get("variant") in ("lesson", "phone"):
+    if CONFIG.get("variant") == "lesson":
         # Face the front camera, with a small yaw so the shoots are not clones.
         yaw = 0.16 * math.sin(i * 1.3 + 0.4)
+        lean_x = 0.035 * math.sin(i * 0.9)
+        lean_y = 0.02
+    elif CONFIG.get("variant") == "phone":
+        yaw = 1.05 * math.sin(i * 1.7 + 0.2) + 0.65 * math.cos(i * 0.85)
         lean_x = 0.035 * math.sin(i * 0.9)
         lean_y = 0.02
     else:

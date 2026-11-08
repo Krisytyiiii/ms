@@ -46,18 +46,18 @@ def front_cut_y(x, path):
     lip = -0.0206
     lip += 0.0011 * math.sin(x * 47.0)
     lip += 0.0008 * math.sin(x * 19.0 + 0.8)
-    lip += 0.012 * max(0.0, (abs(x) - 0.10) / 0.05) ** 2
+    lip += 0.012 * max(0.0, (abs(x) - 0.20) / 0.08) ** 2
     return lip
 
 
 def back_wall_y(x):
     """Lobed back edge. Not a straight wall and not an oval."""
-    u = x / 0.17
+    u = x / 0.28
     return (
-        0.072
-        + 0.012 * math.sin(x * 22.0 + 0.4)
-        + 0.007 * math.cos(x * 9.5 + 1.2)
-        - 0.018 * (u ** 4)
+        0.15
+        + 0.012 * math.sin(x * 14.0 + 0.4)
+        + 0.008 * math.cos(x * 7.0 + 1.2)
+        - 0.02 * (u ** 4)
     )
 
 
@@ -136,7 +136,7 @@ def build_sand(name, path, bottom, cols=44, rows=24, wall_steps=4):
         v_frac = j / rows
         row = []
         center = 0.010 * math.sin(4.4 * v_frac) + 0.005 * math.cos(7.1 * v_frac + 0.4)
-        half = 0.158 + 0.012 * math.sin(2.6 * v_frac + 0.2) + 0.008 * math.sin(6.4 * v_frac + 1.3)
+        half = 0.16 + 0.012 * math.sin(2.6 * v_frac + 0.2) + 0.008 * math.sin(6.4 * v_frac + 1.3)
         for i in range(cols + 1):
             u_frac = i / cols
             x = center - half + 2.0 * half * u_frac

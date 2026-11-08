@@ -3,12 +3,12 @@ $ffmpeg = "C:\Users\reaga\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Mi
 $ffprobe = Join-Path (Split-Path $ffmpeg) "ffprobe.exe"
 $root = "d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata"
 $frames = "C:\Users\reaga\AppData\Local\Temp\cr_lesson_frames\f%04d.jpg"
-$wav = Join-Path $root "lesson_speech.wav"
-$ass = Join-Path $root "lesson.ass"
-$species = Join-Path $root "cymodocea_rotundata_lesson.mp4"
+$wav = Join-Path $root "speech\lesson_speech.wav"
+$ass = Join-Path $root "speech\lesson.ass"
+$species = Join-Path $root "video\cymodocea_rotundata_lesson.mp4"
 $app = "d:\pepot\marinesee\app\assets\models-3d\cymodocea_rotundata_lesson.mp4"
 $staged = Join-Path $root "cymodocea_rotundata_lesson.muxing.mp4"
-$speechJson = Get-Content (Join-Path $root "lesson_speech.json") -Raw -Encoding utf8 | ConvertFrom-Json
+$speechJson = Get-Content (Join-Path $root "speech\lesson_speech.json") -Raw -Encoding utf8 | ConvertFrom-Json
 $inv = [System.Globalization.CultureInfo]::InvariantCulture
 # These cuts are the camera beats already rendered into the 900 frames.
 $old = @(0.0, 6.274, 12.117, 20.923, 30.0)

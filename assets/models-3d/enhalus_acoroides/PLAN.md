@@ -30,7 +30,7 @@ This must not look like a short ribbon seagrass.
 
 Same meadow as the lesson video. One `Grow` clip, no camera, under 40,000 triangles.
 
-- `assets/models-3d/enhalus_acoroides/enhalus_acoroides.glb`
+- `assets/models-3d/enhalus_acoroides/models/enhalus_acoroides.glb`
 - `app/assets/models-3d/enhalus_acoroides.glb`
 
 The opened view shows long inrolled ribbons and the bristled rhizome, not one short line.

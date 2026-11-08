@@ -19,7 +19,7 @@ for _name in list(sys.modules):
 from enhalus_acoroides_build import captions, checks, config, grow, layout, meshes, realism, reef, scene  # noqa: E402
 from enhalus_acoroides_build.render import render_lesson  # noqa: E402
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\enhalus_acoroides\enhalus_acoroides_lesson.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\enhalus_acoroides\blender\enhalus_acoroides_lesson.blend"
 
 
 def _refuse(path):

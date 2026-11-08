@@ -22,8 +22,8 @@ from syringodium_isoetifolium_build.lesson import frame_camera
 from syringodium_isoetifolium_build.render import LESSON_MP4, _eevee, render_lesson
 from syringodium_isoetifolium_build.script import TIMINGS, WAV
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\syringodium_isoetifolium\syringodium_isoetifolium_lesson.blend"
-LESSON_OUT = r"d:\pepot\marinesee\assets\models-3d\syringodium_isoetifolium\syringodium_isoetifolium_lesson.mp4"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\syringodium_isoetifolium\blender\syringodium_isoetifolium_lesson.blend"
+LESSON_OUT = r"d:\pepot\marinesee\assets\models-3d\syringodium_isoetifolium\video\syringodium_isoetifolium_lesson.mp4"
 APP_OUT = r"d:\pepot\marinesee\app\assets\models-3d\syringodium_isoetifolium_lesson.mp4"
 STILLS = r"C:\Users\reaga\AppData\Local\Temp\si_isoetifolium_stills"
 FFMPEG = (

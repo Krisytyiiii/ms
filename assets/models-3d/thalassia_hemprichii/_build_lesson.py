@@ -20,7 +20,7 @@ from thalassia_hemprichii_build import captions, checks, config, grow, layout, m
 from thalassia_hemprichii_build.lesson import load_marks
 from thalassia_hemprichii_build.render import APP_MP4, LESSON_MP4, SILENT_MP4, _eevee, prepare_picture, render_lesson
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\thalassia_hemprichii\thalassia_hemprichii_lesson.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\thalassia_hemprichii\blender\thalassia_hemprichii_lesson.blend"
 STILLS = r"C:\Users\reaga\AppData\Local\Temp\th_hemprichii_stills"
 FFMPEG = (
     r"C:\Users\reaga\AppData\Local\Microsoft\WinGet\Packages"

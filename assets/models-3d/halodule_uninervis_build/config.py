@@ -35,7 +35,7 @@ _MEADOW = {
     "rhizome_span_m": 0.24,
     "rhizome_sink_m": 0.0055,
     "root_radius_m": 0.00042,
-    "sand_bottom_z": -0.032,
+    "sand_bottom_z": -0.016,
     "min_bone_scale": 0.02,
     "fps": 30,
     "seed": 17,
@@ -48,9 +48,9 @@ CONFIG = {
 }
 CONFIG.update(_MEADOW)
 
-BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\halodule_uninervis\halodule_uninervis.blend"
+BLEND_PATH = r"d:\pepot\marinesee\assets\models-3d\halodule_uninervis\blender\halodule_uninervis.blend"
 GLB_PATH = r"d:\pepot\marinesee\app\assets\models-3d\halodule_uninervis.glb"
-ASSETS_GLB_PATH = r"d:\pepot\marinesee\assets\models-3d\halodule_uninervis\halodule_uninervis.glb"
+ASSETS_GLB_PATH = r"d:\pepot\marinesee\assets\models-3d\halodule_uninervis\models\halodule_uninervis.glb"
 
 HOW_TO = """Halodule uninervis - how to edit
 

@@ -44,12 +44,12 @@ def front_cut_y(x, path):
 
 def back_wall_y(x):
     """Uneven back edge. Not a smooth oval."""
-    u = x / 0.20
+    u = x / 0.32
     return (
-        0.086
-        + 0.016 * math.sin(x * 14.0 + 0.4)
-        + 0.009 * math.sin(x * 6.5 + 1.3)
-        - 0.012 * (u ** 2)
+        0.16
+        + 0.012 * math.sin(x * 11.0 + 0.4)
+        + 0.008 * math.sin(x * 6.5 + 1.3)
+        - 0.02 * (u ** 2)
     )
 
 
@@ -131,7 +131,7 @@ def build_sand(name, path, bottom, cols=60, rows=36, wall_steps=5):
     path = path[::6] + [path[-1]] if len(path) > 12 else path
     bm = bmesh.new()
     uv = bm.loops.layers.uv.new("UVMap")
-    x_half = 0.192
+    x_half = 0.18
     grid = []
     for j in range(rows + 1):
         v_frac = j / rows

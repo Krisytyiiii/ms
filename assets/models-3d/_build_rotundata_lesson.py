@@ -21,7 +21,7 @@ for _name in [n for n in sys.modules if n == "rotundata_build" or n.startswith("
 
 import _build_rotundata as builder  # noqa: E402
 
-BLEND = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\cymodocea_rotundata_lesson.blend"
+BLEND = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\blender\cymodocea_rotundata_lesson.blend"
 STILLS = r"C:\Users\reaga\AppData\Local\Temp\cr_lesson_checks"
 PHASE = os.environ.get("CR_LESSON_PHASE", "stills")
 
@@ -75,7 +75,7 @@ def _look(cam, eye, aim):
 
 
 def _speech_frames():
-    path = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\lesson_speech.json"
+    path = r"d:\pepot\marinesee\assets\models-3d\cymodocea_rotundata\speech\lesson_speech.json"
     data = {"intro_end": 6.5, "tip_end": 13.5, "ring_end": 21.5}
     if os.path.isfile(path):
         import json

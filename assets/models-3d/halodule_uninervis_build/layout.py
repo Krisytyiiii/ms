@@ -7,17 +7,14 @@ import bpy
 from mathutils import Matrix, Vector
 
 from .config import CONFIG, HOW_TO, leaf_count
-from .sand import sand_height
+from .sand import back_wall_y, sand_height
 from .util import collection, layer_collection, link, set_bezier, tag
 
 UP = Vector((0.0, 0.0, 1.0))
 
 
-# One creeping cord for the phone and the lesson. Not one straight row.
-# Straight chords stay inside 1–4.5 cm. Depth is a display choice, not a field measurement.
-# Snake across the bed. Back rank faces away so a turn is not bare sand.
-# Steps stay inside 1–4.5 cm.
-SHARED_XY = (
+# Lesson cord. Straight chords stay inside 1–4.5 cm.
+LESSON_XY = (
     (-0.054, -0.008),
     (-0.018, -0.010),
     (0.018, -0.006),
@@ -30,8 +27,35 @@ SHARED_XY = (
 )
 
 
+# Phone clump. The front meets the cut so the roots show. The rest fills
+# this bed. Not three short rows with empty sand around them.
+_PHONE_PATCH = (
+    (-0.09, -0.008),
+    (0.01, -0.014),
+    (0.09, -0.006),
+    (-0.10, 0.03),
+    (-0.02, 0.045),
+    (0.07, 0.025),
+    (0.11, 0.06),
+    (-0.07, 0.08),
+    (0.02, 0.09),
+    (0.10, 0.085),
+    (-0.11, 0.11),
+    (-0.03, 0.115),
+    (0.06, 0.10),
+    (0.00, 0.06),
+)
+
+
 def node_xy(count, span, rng):
-    return list(SHARED_XY)
+    from .config import CONFIG
+
+    if CONFIG.get("variant") == "lesson":
+        return list(LESSON_XY)
+    out = []
+    for x, y in _PHONE_PATCH:
+        out.append((x, min(y, back_wall_y(x) - 0.012)))
+    return out
 
 
 def new_curve(name, points, col):
@@ -46,12 +70,17 @@ def new_curve(name, points, col):
 
 
 def shoot_frame(i, count):
-    if i < 3:
-        yaw = 0.16 * math.sin(i * 1.3 + 0.4)
-    elif i < 6:
-        yaw = 1.25 if i % 2 == 0 else -1.25
+    from .config import CONFIG
+
+    if CONFIG.get("variant") == "lesson":
+        if i < 3:
+            yaw = 0.16 * math.sin(i * 1.3 + 0.4)
+        elif i < 6:
+            yaw = 1.25 if i % 2 == 0 else -1.25
+        else:
+            yaw = math.pi + 0.14 * math.sin(i * 0.7)
     else:
-        yaw = math.pi + 0.14 * math.sin(i * 0.7)
+        yaw = 1.05 * math.sin(i * 1.8 + 0.4) + 0.75 * math.cos(i * 0.9)
     lean_x = 0.04 * math.sin(i * 0.9)
     lean_y = -0.045
     right = Vector((math.cos(yaw), math.sin(yaw), 0.0))

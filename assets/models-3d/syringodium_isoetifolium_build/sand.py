@@ -18,8 +18,8 @@ def front_lip_y(x):
 
 def _bounds_x(v):
     """Width along the bed. Not a sine oval: the two sides bulge in different places."""
-    left = 0.104 + 0.018 * math.sin(2.1 * v + 0.4) + 0.012 * math.sin(9.0 * v)
-    right = 0.118 + 0.022 * math.sin(3.3 * v + 1.1) + 0.009 * math.cos(7.4 * v)
+    left = 0.17 + 0.016 * math.sin(2.1 * v + 0.4) + 0.010 * math.sin(9.0 * v)
+    right = 0.17 + 0.018 * math.sin(3.3 * v + 1.1) + 0.010 * math.cos(7.4 * v)
     if v < 0.20:
         right *= 0.78 + 0.22 * (v / 0.20)
         left *= 0.90 + 0.10 * (v / 0.20)
@@ -31,10 +31,10 @@ def _bounds_x(v):
 
 def back_y(x):
     return (
-        0.082
-        + 0.014 * math.sin(x * 8.5 + 0.5)
-        + 0.009 * math.cos(x * 19.0)
-        + 0.014 * max(0.0, -x / 0.12)
+        0.16
+        + 0.012 * math.sin(x * 7.0 + 0.5)
+        + 0.008 * math.cos(x * 13.0)
+        + 0.01 * max(0.0, -x / 0.18)
     )
 
 
@@ -95,8 +95,8 @@ def build_sand(name, path, bottom, cols=40, rows=22, wall_steps=3):
         for i in range(cols):
             face = bm.faces.new((grid[j][i], grid[j][i + 1], grid[j + 1][i + 1], grid[j + 1][i]))
             for loop in face.loops:
-                u = (loop.vert.co.x + 0.16) / 0.32
-                v = 0.62 + 0.34 * max(0.0, min(1.0, (loop.vert.co.y + 0.06) / 0.16))
+                u = (loop.vert.co.x + 0.22) / 0.44
+                v = 0.62 + 0.34 * max(0.0, min(1.0, (loop.vert.co.y + 0.06) / 0.24))
                 loop[uv].uv = (u, v)
 
     rim = [grid[0][i] for i in range(cols + 1)]
