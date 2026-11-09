@@ -47,9 +47,9 @@ These paths may already exist. They stay `unmeasured` until a tester does the pa
 | ID | What a phone pass still has to show |
 |----|--------------------------------------|
 | FS-6 | Each profile field shows cited text for common name, botanical characteristics, ecological role, conservation status, and habitat. The text is in `species.json`. A tester has not opened a profile on a phone. |
-| FS-7 | Rotate and zoom a bundled patch. All nine species have a `.glb` (clip `Grow`) and a lesson `.mp4`. The viewer controls are in the app, including See roots and growth speed at 0.5×, 1×, 1.5×, and 2×. Play loops the growth from the bud. A tester has not done that on a phone. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. |
+| FS-7 | Rotate and zoom a bundled patch. All nine species have a `.glb` (clip `Grow`) and a lesson `.mp4`. The *Cymodocea rotundata* file is the new meadow: one rhizome with a few branches, 14 shoots across the sand, 34,542 triangles. The viewer controls are in the app, including See roots and growth speed at 0.5×, 1×, 1.5×, and 2×. Play loops the growth from the bud. A tester has not done that on a phone. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. |
 | US-3 | Camera, gallery, library, rotate/zoom, and See roots on all nine patch viewers are in the app. A tester has not scored them on a phone. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. |
-| PE-4 | Time rotate and zoom on a physical phone. All nine patch models are bundled. Lag has not been timed. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. |
+| PE-4 | Time rotate and zoom on a physical phone. All nine patch models are bundled. The *Cymodocea rotundata* meadow is 34,542 triangles. Lag has not been timed. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. |
 | US-1 | A first-time user can tell MarineSee identifies and teaches Mati seagrass. |
 | US-2 | After one short brief, the tester identifies a photo and opens the library with no step-by-step guide. |
 | US-5 | The tester agrees the text, colors, and layout are comfortable on a phone. |
