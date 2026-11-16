@@ -18,10 +18,12 @@ STUDY_SPECIES: tuple[str, ...] = (
     "thalassia_hemprichii",
 )
 
-# Paper still lists nine. Local dumps had Thalassia nested under other taxa
-# (fixed 19 Sep 2026). v1 still trains the eight Drive-root classes until
-# the relocated folder is audited for Enhalus mix-ins, then add it back.
-HELD_OUT_SPECIES: tuple[str, ...] = ("thalassia_hemprichii",)
+# Paper lists nine. Thalassia used to be held out because a local dump nested
+# it inside other taxa and nobody had audited those folders. `audit_thalassia.py`
+# ran on the 16 Nov 2026 Drive mirror and returned `clean` (996 usable frames,
+# 749 distinct plants, 1.2% cross-class near-duplicates), so it is trainable
+# again. The locked v1/v2 artifacts stay eight-class; they are not rebuilt.
+HELD_OUT_SPECIES: tuple[str, ...] = ()
 TRAINABLE_SPECIES: tuple[str, ...] = tuple(
     s for s in STUDY_SPECIES if s not in HELD_OUT_SPECIES
 )

@@ -69,23 +69,19 @@ You should see the phone. If you only see `windows` / `chrome`, the cable or dri
 
 From repo root, or from `app/`:
 
-Identify needs the SVM process on this PC (not inside Flutter):
-
-```bat
-cd ml\src
-python serve_identify.py
-```
+**Identify runs on the phone.** `app/lib/screens/shell.dart` wires `LocalClassifier`, which reads the bundled `app/assets/ml/svm_mobile.*` with no network. You do **not** need `serve_identify.py` or `adb reverse` for a normal run. `ApiClassifier` and `ml/src/serve_identify.py` stay in the repo as a fallback only.
 
 USB phone (recommended):
 
 ```bat
-adb reverse tcp:8765 tcp:8765
 cd app
 flutter pub get
 flutter run
 ```
 
-Same Wi-Fi instead of `adb reverse`:
+Use `flutter run -d <device-id>` when more than one device is listed. With only the phone plugged in, plain `flutter run` picks it.
+
+Same Wi-Fi build that still uses the laptop API (fallback, not the default):
 
 ```bat
 flutter run --dart-define=IDENTIFY_API_URL=http://<laptop-lan-ip>:8765

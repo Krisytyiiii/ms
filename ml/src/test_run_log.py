@@ -38,9 +38,46 @@ def test_two_runs_keep_a_history(tmp_path: Path) -> None:
     assert "0.400" in index or "0.40" in index
 
 
+def test_cv_tuning_rows_render_cv_columns(tmp_path: Path) -> None:
+    (tmp_path / "ml" / "artifacts").mkdir(parents=True)
+    record = _svm_record(0.25)
+    record["tuning_rows"] = [
+        {
+            "kernel": "rbf",
+            "C": 3.0,
+            "gamma": 0.003,
+            "cv_folds": 5,
+            "cv_macro_f1_mean": 0.231,
+            "cv_macro_f1_sd": 0.02,
+            "cv_macro_f1_se": 0.009,
+            "cv_accuracy_mean": 0.28,
+        },
+        {
+            "kernel": "linear",
+            "C": 1.0,
+            "gamma": "",
+            "cv_folds": 5,
+            "cv_macro_f1_mean": 0.19,
+            "cv_macro_f1_sd": 0.01,
+            "cv_macro_f1_se": 0.004,
+            "cv_accuracy_mean": 0.24,
+        },
+    ]
+    run = append_run(tmp_path, record)
+    text = (run / "record.md").read_text(encoding="utf-8")
+    assert "grouped CV" in text
+    assert "CV macro F1 mean" in text
+    assert "0.231" in text
+    csv_text = (run / "tuning.csv").read_text(encoding="utf-8")
+    assert "cv_macro_f1_mean" in csv_text
+    assert "0.231" in csv_text
+
+
 if __name__ == "__main__":
     import tempfile
 
     with tempfile.TemporaryDirectory() as raw:
         test_two_runs_keep_a_history(Path(raw))
+    with tempfile.TemporaryDirectory() as raw:
+        test_cv_tuning_rows_render_cv_columns(Path(raw))
     print("ok")

@@ -2,7 +2,7 @@
 
 **IMPLEMENTATION.** Read this before changing the MarineSee app. The user questionnaire is frozen at 29 statements in `MarineSee-Validation-Questions.txt`. Pass checks, statuses, and evidence live in `19-evaluation-question-spec.md`. This file is the open-work list so an app change does not skip a statement that is still `not-met` or `unmeasured`.
 
-Snapshot copied from the spec (checked 9 Oct 2026, after the Cymodocea model): **5 met, 4 not-met, 20 unmeasured.**
+Snapshot copied from the spec (checked 16 Nov 2026, after on-device inference): **5 met, 0 not-met, 24 unmeasured.**
 
 A high user-evaluation score is not available while any row is `not-met` or `unmeasured`.
 
@@ -27,18 +27,7 @@ A high user-evaluation score is not available while any row is `not-met` or `unm
 
 ## Not implemented (`not-met`)
 
-These four statements fail in the current app. A visual redesign does not close them.
-
-### Identification result a tester can finish
-
-| ID | What is still missing |
-|----|------------------------|
-| FS-3 | After a successful identify, the tester must open that species’ profile **and** an interactive 3D view. Profile and 3D buttons exist only after the laptop API returns a slug. All nine species have a bundled patch `.glb` and a lesson `.mp4`. A tester still cannot finish identify while the laptop API is down. |
-| FS-4 | A finished identify must show the scientific name and a percent. `ApiClassifier` can do that only while `serve_identify.py` is up. Server down shows an error and no score. |
-| FS-5 | A low-confidence result must tell the tester to take the photo again. The sentence is a notice in `result_screen.dart` and appears when the API sets `low_confidence`. The curated export uses threshold 0.44. A phone tester has not been shown that sentence. |
-| US-4 | Same blocker as FS-5. The retake sentence has not been shown to a tester on a phone. |
-
-Files: `app/lib/screens/result_screen.dart`, `app/lib/classify/api_classifier.dart`, `app/lib/screens/viewer_3d_screen.dart`, `app/lib/widgets/glb_viewer.dart`.
+None. The last four — FS-3, FS-4, FS-5, US-4 — were blocked on identify needing the laptop API. On-device inference removed that blocker on 16 Nov 2026, so they moved to `unmeasured`: the app can do them, no tester has done them on the phone yet.
 
 ## Not shown on a phone (`unmeasured`)
 
@@ -46,6 +35,10 @@ These paths may already exist. They stay `unmeasured` until a tester does the pa
 
 | ID | What a phone pass still has to show |
 |----|--------------------------------------|
+| FS-3 | After a successful identify, the tester must open that species’ profile **and** an interactive 3D view. Identify no longer needs the laptop: `LocalClassifier` returns a slug offline and the Profile / 3D buttons follow that local result, so all nine species and their bundled `.glb`/`.mp4` are reachable with the phone in airplane mode. Pass check not yet done on a phone. |
+| FS-4 | A finished identify must show the scientific name and a percent. `LocalClassifier` computes both from the bundled `assets/ml/svm_mobile.*` with no network. `app/test/local_parity_test.dart` runs decode → crop → 256px → 148 features → SVM on all nine bundled photos and asserts a slug plus a 0–100% confidence each time. Not yet seen on a phone. |
+| FS-5 | A low-confidence result must tell the tester to take the photo again. The sentence is a notice in `result_screen.dart`; `LocalClassifier` sets it when the on-device confidence is under the exported threshold, which is locked at the frozen 0.44. The copy now adds "this may not be one of the nine species", and the scanner says only the nine Mati species are supported, because the SVM has no way to refuse a photo. Six of the nine bundled photos fall below it in the test, so the branch is reachable. Not yet seen on a phone. |
+| US-4 | Same path as FS-5: the retake sentence is now reachable offline, but a tester has not read it on a phone and not said it was clear. The result screen also has "None of these" for a photo that is not one of the nine, which a tester has not tried. |
 | FS-6 | Each profile field shows cited text for common name, botanical characteristics, ecological role, conservation status, and habitat. The text is in `species.json`. A tester has not opened a profile on a phone. |
 | FS-7 | Rotate and zoom a bundled patch. All nine species have a `.glb` (clip `Grow`) and a lesson `.mp4`. The *Cymodocea rotundata* file is the new meadow: one rhizome with a few branches, 14 shoots across the sand, 34,542 triangles. The *Cymodocea serrulata* file is the same plot with serrated 9 mm straps, a triangular sheath, open scars, and 24,864 triangles. The *Halodule pinifolia* file is the same plot with fine leaves, a rounded tip where the dark vein splits in two, black scars on a pale rhizome, and 21,572 triangles. The *Halodule uninervis* file is the same plot with a wider leaf, one central vein, a trident tip, black scars on a pale ivory rhizome, and 20,804 triangles. The *Syringodium isoetifolium* file is the same plot with round leaves, pointed tips, no scars or veins, and 16,756 triangles. The *Thalassia hemprichii* file is the same plot with curved ribbons, nine short black tannin bars, a thick rhizome with scars between shoots, and 21,088 triangles. The *Halophila minor* file is the same plot with paired small ovals, smooth margins, a wedge sheath, 6 cross-vein pairs, and 19,878 triangles. The *Halophila ovalis* file is the same plot with larger paired ovals, no hairs, 10 cross-vein pairs, and 19,878 triangles. The *Enhalus acoroides* file is the same plot with long inrolled ribbons, a thick bristled rhizome, cord-like roots, 8 shoots, and 13,388 triangles. The viewer controls are in the app, including See roots and growth speed at 0.5×, 1×, 1.5×, and 2×. Play loops the growth from the bud. A tester has not done that on a phone. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. |
 | US-3 | Camera, gallery, library, rotate/zoom, and See roots on all nine patch viewers are in the app. A tester has not scored them on a phone. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. |
@@ -64,7 +57,7 @@ These paths may already exist. They stay `unmeasured` until a tester does the pa
 | CO-1 | Identify and library both work while other apps stay installed. |
 | CO-2 | MarineSee opens without uninstalling other apps. |
 | PO-1 | Identify, library, and profile are usable on two different Android screen sizes. |
-| PO-2 | The installed app opens on Android 8.0 or newer. `minSdk` is 26. No install is recorded here. |
+| PO-2 | The installed app opens on Android 8.0 or newer. `minSdk` is 26. A release APK installed and launched on a TECNO BG6 (16 Nov 2026), but that build still called the laptop API. The on-device build has not been installed yet. |
 | PO-3 | A second qualifying phone installs and opens the APK with no extra toolchain. |
 
 ## Counts

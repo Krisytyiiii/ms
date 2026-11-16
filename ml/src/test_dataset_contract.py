@@ -31,14 +31,16 @@ def test_copy_and_extra_taxon():
     assert classify_folder("Halophila spinulosa dataset (all)")[1] == "extra"
 
 
-def test_v1_drops_thalassia():
-    assert "thalassia_hemprichii" not in TRAINABLE_SPECIES
-    assert len(TRAINABLE_SPECIES) == 8
+def test_nine_classes_are_trainable():
+    # The 16 Nov 2026 audit returned `clean`, so the held-out class is trainable
+    # again. The locked v1/v2 artifacts stay eight-class and are not rebuilt.
+    assert "thalassia_hemprichii" in TRAINABLE_SPECIES
+    assert len(TRAINABLE_SPECIES) == 9
 
 
 if __name__ == "__main__":
     test_study_all_and_research_grade()
     test_rotundata_without_all_suffix()
     test_copy_and_extra_taxon()
-    test_v1_drops_thalassia()
+    test_nine_classes_are_trainable()
     print("ok")

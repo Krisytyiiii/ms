@@ -8,12 +8,13 @@
 2. App (or API) resizes and enhances using the **same** contract as training.
 3. Extract color, texture, and shape features.
 4. SVM returns a class among the nine species plus a decision-function / probability-style **confidence**.
-5. If confidence < threshold → show “retake” copy. Still **OPEN** whether we also show the top guess.
+5. If confidence < threshold → show “retake” copy that admits the photo may not be one of the nine. Still **OPEN** whether we also show the top guess.
 6. If confidence ≥ threshold → show species result and offer 3D + profile.
+7. Either way the result screen offers **“None of these”**. That is the user rejecting the app’s call, not the model abstaining: tapping it replaces the species panel with “Not one of the nine species”, a one-line explanation, Take another photo, and a way back to the result. No species percentage or profile is shown in that state.
 
 Do not invent extra classes (`unknown`, `not seagrass`) unless the team adds them to the study. The paper’s SVM always outputs one of the nine.
 
-**OPEN:** reject obviously non-seagrass images. The paper does not specify an out-of-domain detector.
+**OPEN:** reject obviously non-seagrass images automatically. The paper does not specify an out-of-domain detector, and `docs/22-accuracy-plan.md` records that the green-mask pre-check refuses 34% of real seagrass, so the app must not claim rejection. The “None of these” control (step 7, `app/lib/screens/result_screen.dart`) is the honest placeholder until 100–200 real negatives are audited.
 
 ## M2 Digital library
 

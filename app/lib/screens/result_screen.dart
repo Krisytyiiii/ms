@@ -11,7 +11,15 @@ import '../widgets/ocean_surface.dart';
 import 'species_screen.dart';
 import 'viewer_3d_screen.dart';
 
-class ResultScreen extends StatelessWidget {
+/// Identify result: species, confidence, profile and 3D, the retake notice, and
+/// the app's one abstention control.
+///
+/// The SVM has **no "none of the nine" class**, so a photo of sand, a hand, or a
+/// different plant still comes back with a species name. "None of these" lets
+/// the user correct that. It records the user's judgement, not a model
+/// rejection: no claim is made that the app detects non-seagrass.
+/// See `docs/22-accuracy-plan.md` and `docs/08-modules-and-business-logic.md`.
+class ResultScreen extends StatefulWidget {
   const ResultScreen({
     super.key,
     required this.imageBytes,
@@ -23,25 +31,60 @@ class ResultScreen extends StatelessWidget {
   final IdentifyResult result;
   final SpeciesCatalog? catalog;
 
-  static const retakeSentence =
-      'Low confidence — retake if you can get a closer leaf.';
+  static const retakeSentence = lowConfidenceRetakeSentence;
+
+  static const rejectedHeadline = 'Not one of the nine species';
+  static const rejectedMessage =
+      'You marked this photo as none of the nine Mati seagrasses. MarineSee '
+      'only names those nine, so it has no answer for this one. The model '
+      'cannot refuse a photo by itself — this call came from you.';
+  static const notSeagrassPrompt = 'Wrong species, or not a seagrass at all?';
+
+  @override
+  State<ResultScreen> createState() => _ResultScreenState();
+}
+
+class _ResultScreenState extends State<ResultScreen> {
+  bool _rejected = false;
 
   @override
   Widget build(BuildContext context) {
+    if (_rejected) {
+      return _ResultScaffold(
+        imageBytes: widget.imageBytes,
+        headline: ResultScreen.rejectedHeadline,
+        notice: ResultScreen.rejectedMessage,
+        actions: [
+          AuroraButton(
+            label: 'Take another photo',
+            icon: Icons.photo_camera_outlined,
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          const SizedBox(height: 12),
+          OutlinedButton.icon(
+            onPressed: () => setState(() => _rejected = false),
+            icon: const Icon(Icons.undo),
+            label: const Text('Show the result again'),
+          ),
+        ],
+      );
+    }
+
+    final result = widget.result;
     if (result.slug == null) {
       return _ResultScaffold(
-        imageBytes: imageBytes,
+        imageBytes: widget.imageBytes,
         error: result.message ?? 'Identification did not finish.',
       );
     }
 
     final slug = result.slug!;
     return FutureBuilder<Species?>(
-      future: (catalog ?? speciesCatalog).bySlug(slug),
+      future: (widget.catalog ?? speciesCatalog).bySlug(slug),
       builder: (context, snapshot) {
         if (!snapshot.hasData &&
             snapshot.connectionState != ConnectionState.done) {
-          return _ResultScaffold(imageBytes: imageBytes, loading: true);
+          return _ResultScaffold(imageBytes: widget.imageBytes, loading: true);
         }
         final species = snapshot.data;
         final low = result.status == IdentifyStatus.lowConfidence;
@@ -49,10 +92,11 @@ class ResultScreen extends StatelessWidget {
             ? null
             : '${(result.confidence! * 100).toStringAsFixed(0)}%';
         return _ResultScaffold(
-          imageBytes: imageBytes,
-          scientificName: species?.scientificName ?? slug.replaceAll('_', ' '),
+          imageBytes: widget.imageBytes,
+          headline: species?.scientificName ?? slug.replaceAll('_', ' '),
+          italicHeadline: true,
           percent: percent,
-          notice: low ? (result.message ?? retakeSentence) : null,
+          notice: low ? (result.message ?? ResultScreen.retakeSentence) : null,
           actions: [
             AuroraButton(
               label: 'Open species profile',
@@ -77,6 +121,17 @@ class ResultScreen extends StatelessWidget {
               icon: const Icon(Icons.view_in_ar_outlined),
               label: const Text('Open 3D'),
             ),
+            const SizedBox(height: 20),
+            Text(
+              ResultScreen.notSeagrassPrompt,
+              style: Theme.of(context).textTheme.labelMedium,
+            ),
+            const SizedBox(height: 6),
+            OutlinedButton.icon(
+              onPressed: () => setState(() => _rejected = true),
+              icon: const Icon(Icons.search_off),
+              label: const Text('None of these'),
+            ),
           ],
         );
       },
@@ -87,7 +142,8 @@ class ResultScreen extends StatelessWidget {
 class _ResultScaffold extends StatelessWidget {
   const _ResultScaffold({
     required this.imageBytes,
-    this.scientificName,
+    this.headline,
+    this.italicHeadline = false,
     this.percent,
     this.notice,
     this.error,
@@ -96,7 +152,8 @@ class _ResultScaffold extends StatelessWidget {
   });
 
   final Uint8List imageBytes;
-  final String? scientificName;
+  final String? headline;
+  final bool italicHeadline;
   final String? percent;
   final String? notice;
   final String? error;
@@ -132,11 +189,11 @@ class _ResultScaffold extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (scientificName != null) ...[
+                  if (headline != null) ...[
                     Text(
-                      scientificName!,
+                      headline!,
                       style: text.headlineSmall?.copyWith(
-                        fontStyle: FontStyle.italic,
+                        fontStyle: italicHeadline ? FontStyle.italic : null,
                       ),
                     ),
                     const SizedBox(height: 12),

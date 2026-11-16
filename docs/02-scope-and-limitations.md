@@ -45,6 +45,7 @@ Field collection of the dataset happens **before** the model is shipped. Users d
 | Limit | Meaning for the build |
 |-------|------------------------|
 | Only nine species | No algae, corals, seaweeds, or seagrass from other regions |
+| No out-of-scope rejection | The SVM always returns one of the nine, so a photo of sand, a hand, or another plant still gets a name. The result screen offers a user-driven “None of these”, and the retake copy says the photo may not be one of the nine. Automatic rejection is not implemented or measured (`22-accuracy-plan.md`) |
 | 3D fidelity | Models are only as good as reference photos/illustrations; no claim of microscopic accuracy |
 | No GIS | No live GPS tracking, navigation, or scientific mapping |
 | Education, not field science | No water quality, population density, or habitat-degradation sensors |

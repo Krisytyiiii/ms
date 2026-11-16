@@ -58,7 +58,7 @@ Do not introduce YOLO, CNN, or a second species list unless the paper and `00-st
 |-------|---------|------------------------|
 | App toolkit | Flutter (locked 30 Aug 2026). Android 8+ APK. No emulator on this laptop. | See `16-flutter-audit-and-scaffold.md` |
 | Content store | Firebase (Firestore + Storage), MySQL + small API, or bundled JSON in the APK | **Bundled JSON + Firebase Storage for 3D** only if we need remote assets; otherwise bundle profiles in the APK for v1 |
-| Inference | On-device (ONNX / similar) vs small Python API | **v1 = Python API** (`POST /api/v1/identify`). On-device later. |
+| Inference | On-device (ONNX / similar) vs small Python API | **Decision (16 Nov 2026): on-device.** The APK must identify with no network: `ml/src/export_mobile.py` exports the locked SVM to `svm_mobile.bin` + `svm_mobile.json`, and the app runs scaler + RBF + one-vs-one votes + Platt coupling in Dart. `serve_identify.py` stays as a laptop/LAN fallback and as the parity reference, not the shipping path. Features must match training exactly (`ml/src` first, then the app). |
 | Visitor accounts | Guest-only vs login | **Guest identify + library**; admin login only |
 
 When the team picks, update this file and `14-open-questions.md`.

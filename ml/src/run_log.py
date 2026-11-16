@@ -129,7 +129,8 @@ def to_markdown(record: dict) -> str:
         lines.extend(["", str(note)])
     tuning = record.get("tuning_rows")
     if isinstance(tuning, list) and tuning:
-        lines.extend(["", "## tuning (top 10 by validation macro F1)", "", _tuning_table(tuning)])
+        heading = "grouped CV" if _is_cv_rows(tuning) else "single validation split"
+        lines.extend(["", f"## tuning (top 10 by {heading})", "", _tuning_table(tuning)])
     for split in _REPORT_SPLITS:
         report = record.get(f"{split}_report")
         if isinstance(report, dict):
@@ -138,7 +139,13 @@ def to_markdown(record: dict) -> str:
     return "\n".join(lines)
 
 
+def _is_cv_rows(rows: list[dict]) -> bool:
+    return any("cv_macro_f1_mean" in row for row in rows)
+
+
 def _tuning_table(rows: list[dict]) -> str:
+    if _is_cv_rows(rows):
+        return _cv_tuning_table(rows)
     out = [
         "| kernel | C | gamma | train macro F1 | val macro F1 | val acc | gap |",
         "|---|---:|---:|---:|---:|---:|---:|",
@@ -159,6 +166,28 @@ def _tuning_table(rows: list[dict]) -> str:
     return "\n".join(out)
 
 
+def _cv_tuning_table(rows: list[dict]) -> str:
+    out = [
+        "| kernel | C | gamma | CV folds | CV macro F1 mean | SD | SE | CV acc |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    ranked = sorted(rows, key=lambda r: r.get("cv_macro_f1_mean", 0.0), reverse=True)
+    for row in ranked[:10]:
+        out.append(
+            "| {kernel} | {C} | {gamma} | {folds} | {mean:.3f} | {sd:.3f} | {se:.3f} | {acc:.3f} |".format(
+                kernel=row.get("kernel"),
+                C=row.get("C"),
+                gamma=row.get("gamma"),
+                folds=row.get("cv_folds", ""),
+                mean=float(row.get("cv_macro_f1_mean", 0.0)),
+                sd=float(row.get("cv_macro_f1_sd", 0.0)),
+                se=float(row.get("cv_macro_f1_se", 0.0)),
+                acc=float(row.get("cv_accuracy_mean", 0.0)),
+            )
+        )
+    return "\n".join(out)
+
+
 def _write_tuning_csv(path: Path, rows: list[dict]) -> None:
     fields = [
         "kernel",
@@ -171,6 +200,17 @@ def _write_tuning_csv(path: Path, rows: list[dict]) -> None:
         "f1_gap",
         "fit_seconds",
     ]
+    if _is_cv_rows(rows):
+        fields = [
+            "kernel",
+            "C",
+            "gamma",
+            "cv_folds",
+            "cv_macro_f1_mean",
+            "cv_macro_f1_sd",
+            "cv_macro_f1_se",
+            "cv_accuracy_mean",
+        ]
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
         writer.writeheader()

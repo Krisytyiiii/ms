@@ -7,6 +7,11 @@ import 'classifier.dart';
 import 'identify_config.dart';
 
 /// Calls the laptop SVM process. Not on-device.
+///
+/// The app wires `LocalClassifier` (see `shell.dart`); this stays as the
+/// laptop/LAN fallback and as the reference the on-device port is graded
+/// against (`ml/src/serve_identify.py`). Do not delete it while
+/// `06-architecture.md` keeps the API as fallback.
 class ApiClassifier implements Classifier {
   ApiClassifier({http.Client? client, IdentifyConfig? config})
     : _client = client ?? http.Client(),
@@ -89,7 +94,7 @@ class ApiClassifier implements Classifier {
       confidence: confidence,
       status: low ? IdentifyStatus.lowConfidence : IdentifyStatus.ok,
       message: low
-          ? 'Low confidence — retake if you can get a closer leaf.'
+          ? lowConfidenceRetakeSentence
           : null,
     );
   }

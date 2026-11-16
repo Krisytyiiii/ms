@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../classify/api_classifier.dart';
+import '../classify/local_classifier.dart';
 import '../theme/tokens.dart';
 import '../widgets/app_nav_bar.dart';
 import '../widgets/aurora_atmosphere.dart';
@@ -22,7 +22,7 @@ class AppShell extends StatefulWidget {
 
 class _AppShellState extends State<AppShell> {
   var _index = ShellTab.home;
-  final _classifier = ApiClassifier();
+  final _classifier = LocalClassifier();
 
   void _select(int index) => setState(() => _index = index);
 

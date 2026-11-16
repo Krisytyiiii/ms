@@ -107,10 +107,22 @@ class _IdentifyScreenState extends State<IdentifyScreen> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(14),
-                  child: Text(
-                    'Frame a seagrass leaf, then tap Identify.',
-                    textAlign: TextAlign.center,
-                    style: text.bodyMedium?.copyWith(color: onWash),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Frame a seagrass leaf, then tap Identify.',
+                        textAlign: TextAlign.center,
+                        style: text.bodyMedium?.copyWith(color: onWash),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Only the nine Mati species are supported.',
+                        textAlign: TextAlign.center,
+                        style: text.bodySmall?.copyWith(
+                          color: onWash.withValues(alpha: 0.75),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

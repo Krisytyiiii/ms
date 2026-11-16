@@ -54,12 +54,17 @@ def _frame_reason(path: Path) -> str | None:
 
 def select_leaf_frames(
     pairs: list[tuple[Path, str]],
+    reason_fn=None,
 ) -> tuple[list[tuple[Path, str]], dict]:
     """QC the pool, waive habitat for tiny classes, then drop exact duplicates.
 
     `too_small` and `low_contrast` always drop. Habitat drops unless applying it
     would leave that class under 15 photos.
+
+    `reason_fn(path)` replaces `qc_path` when the caller has a cache; the rules
+    are unchanged.
     """
+    reason_for = reason_fn or _frame_reason
     scored: list[dict] = []
     total = len(pairs)
     for index, (path, slug) in enumerate(pairs, start=1):
@@ -67,7 +72,7 @@ def select_leaf_frames(
             {
                 "path": path,
                 "slug": slug,
-                "reason": _frame_reason(path),
+                "reason": reason_for(path),
                 "waived": False,
             }
         )

@@ -16,15 +16,18 @@ def _green_leaf(size: int = 120) -> np.ndarray:
     return frame
 
 
-def test_nested_other_species_is_not_listed(tmp_path: Path) -> None:
+def test_nested_species_is_listed_under_its_own_class(tmp_path: Path) -> None:
+    """Each image is labelled by its innermost species folder, exactly once."""
     parent = tmp_path / "Enhalus acoroides dataset (all)"
     nested = parent / "Thalassia hemprichii dataset (all)"
     nested.mkdir(parents=True)
     Image.fromarray(_green_leaf()).save(parent / "enhalus.jpg")
     Image.fromarray(_green_leaf()).save(nested / "thalassia.jpg")
     pairs = list_labeled_images(tmp_path)
-    assert len(pairs) == 1
-    assert pairs[0][1] == "enhalus_acoroides"
+    assert sorted(slug for _path, slug in pairs) == [
+        "enhalus_acoroides",
+        "thalassia_hemprichii",
+    ]
 
 
 def test_qc_drops_blank_and_keeps_leaf() -> None:

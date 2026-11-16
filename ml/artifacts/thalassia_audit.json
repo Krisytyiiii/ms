@@ -1,0 +1,44 @@
+{
+  "kind": "thalassia-audit",
+  "generated_at": "2026-11-16T08:57:23Z",
+  "root": "C:\\Users\\Akiro\\MarineSeeData\\Seagrass",
+  "candidate": "thalassia_hemprichii",
+  "max_distance": 6,
+  "candidate_images": 1037,
+  "candidate_by_variant": {
+    "research-grade": 246,
+    "all": 791
+  },
+  "qc_pass": 996,
+  "qc_reasons": {
+    "pass": 996,
+    "habitat": 41
+  },
+  "hash_failures": 0,
+  "reference_images": 4135,
+  "near_duplicate_pairs_with_other_classes": 31,
+  "candidate_frames_matching_another_class": 12,
+  "mixin_share": 0.012,
+  "absorbed_by": {
+    "halophila_ovalis": 9,
+    "halodule_uninervis": 8,
+    "enhalus_acoroides": 6,
+    "syringodium_isoetifolium": 6,
+    "cymodocea_rotundata": 2
+  },
+  "candidate_internal_duplicate_pairs": 258,
+  "distinct_candidate_plants": 749,
+  "median_group_size": 1.0,
+  "provenance": {
+    "camera_models": {},
+    "dated_frames": 0,
+    "earliest": null,
+    "latest": null,
+    "gps_share": 0.0
+  },
+  "verdict": "clean",
+  "verdict_reasons": [
+    "no cross-class near-duplicates above the cutoff"
+  ],
+  "note": "Read-only. A 'review' verdict means the frames below the distance cutoff need a human pass before the class is trained; it is not a rejection of the class. This scan detects duplicate frames, not taxa: a Thalassia photo misfiled under Enhalus is only caught when a near-identical file also exists in a Thalassia folder. The sampled human pass is what covers the rest."
+}

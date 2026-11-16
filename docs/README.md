@@ -48,8 +48,9 @@ Then use the rest as needed per module.
 | [12-colab-and-training.md](12-colab-and-training.md) | How Cursor, this repo, Colab, and Google Drive fit |
 | [13-evaluation-iso25010.md](13-evaluation-iso25010.md) | How the study will evaluate the system |
 | [19-evaluation-question-spec.md](19-evaluation-question-spec.md) | The 29 user questions, the pass check for each, and whether the app meets it |
-| [20-evaluation-gaps.md](20-evaluation-gaps.md) | Open evaluation work: 8 `not-met`, 16 `unmeasured`. Read before changing the app |
+| [20-evaluation-gaps.md](20-evaluation-gaps.md) | Open evaluation work: 0 `not-met`, 24 `unmeasured`. Read before changing the app |
 | [21-3d-species-model-spec.md](21-3d-species-model-spec.md) | Contract for every species 3D model: solid geometry, rig and growth, phone `.glb`, reef pitch clip, per-species briefs |
+| [22-accuracy-plan.md](22-accuracy-plan.md) | Why accuracy is 0.406 macro F1, what is fixable, the honest ceiling, and the 85% decision |
 | [14-open-questions.md](14-open-questions.md) | Decisions still required |
 | [15-implementation-roadmap.md](15-implementation-roadmap.md) | Suggested build order |
 | [16-flutter-audit-and-scaffold.md](16-flutter-audit-and-scaffold.md) | Flutter lock, audit, scaffold spec |

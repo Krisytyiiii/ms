@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections import Counter
 from pathlib import Path
 
 import joblib
@@ -20,13 +21,32 @@ from .dataset_contract import SPLIT_SEED, TRAINABLE_SPECIES
 from .features import FEATURE_SPEC
 
 
+def balanced_weights(labels: list[str], alpha: float = 1.0) -> dict[str, float]:
+    """Inverse-frequency weights raised to `alpha`.
+
+    `alpha=1.0` is the same ratio sklearn's `class_weight="balanced"` uses;
+    `alpha=0` is no weighting. The plan (action 2.5) asks for alpha as the knob
+    that trades macro recall against plain accuracy instead of stacking every
+    imbalance correction at full strength.
+    """
+    counts = Counter(labels)
+    if not counts:
+        return {}
+    total = len(labels)
+    classes = len(counts)
+    return {
+        slug: float((total / (classes * count)) ** float(alpha))
+        for slug, count in counts.items()
+    }
+
+
 def make_pipeline(
     seed: int = SPLIT_SEED,
     *,
     kernel: str = "rbf",
     C: float = 10.0,
     gamma: str | float | None = "scale",
-    class_weight: str | None = "balanced",
+    class_weight: str | dict[str, float] | None = "balanced",
     probability: bool = True,
 ) -> Pipeline:
     svc_args = {

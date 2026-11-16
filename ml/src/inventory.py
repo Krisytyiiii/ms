@@ -62,6 +62,62 @@ def sample_images(folder: Path, limit: int = 4) -> list[Path]:
     return found
 
 
+def species_folders(root: Path) -> list[tuple[Path, str, str]]:
+    """Every study folder under `root`, including ones nested in another class.
+
+    The Drive layout keeps *Thalassia hemprichii* only inside five trainable
+    folders, so a top-level walk finds eight of the nine classes. Each image
+    still belongs to exactly one class: `iter_images` prunes a nested
+    different-species folder from its parent, so reading every folder in this
+    list loses nothing and double-counts nothing.
+
+    Byte-identical mirrors (the Drive has three copies of Thalassia `(all)`,
+    all with the same folder name) collapse to the largest one. Folder *names*
+    are part of the dedupe key, so two genuinely different batches of the same
+    class and variant are both kept.
+    """
+    found: list[tuple[Path, str, str]] = []
+
+    def walk(folder: Path) -> None:
+        try:
+            children = sorted(folder.iterdir(), key=lambda p: p.name.lower())
+        except OSError:
+            return
+        for child in children:
+            if not child.is_dir() or child.name.startswith("."):
+                continue
+            slug, scope, variant = classify_folder(child.name)
+            if scope == "study" and slug is not None:
+                found.append((child, slug, variant))
+            walk(child)
+
+    walk(root)
+
+    best: dict[tuple[str, str, str], tuple[Path, int]] = {}
+    mirrors = 0
+    for path, slug, variant in found:
+        key = (slug, variant, path.name.lower())
+        size = count_images(path)
+        if key not in best or size > best[key][1]:
+            if key in best:
+                mirrors += 1
+            best[key] = (path, size)
+        else:
+            mirrors += 1
+    if mirrors:
+        import sys
+
+        print(
+            f"note: skipped {mirrors} smaller mirror(s) of a folder already "
+            "listed (same class, variant, and folder name)",
+            file=sys.stderr,
+        )
+    return [
+        (path, slug, variant)
+        for (slug, variant, _name), (path, _size) in sorted(best.items())
+    ]
+
+
 def scan_root(root: Path) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     if not root.is_dir():

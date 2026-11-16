@@ -1,4 +1,4 @@
-"""List, QC, resize, and lightly augment RGB images."""
+﻿"""List, QC, resize, and lightly augment RGB images."""
 
 from __future__ import annotations
 
@@ -15,9 +15,8 @@ try:
         IMAGE_SUFFIXES,
         TRAIN_VARIANT,
         TRAINABLE_SPECIES,
-        classify_folder,
     )
-    from .inventory import iter_images
+    from .inventory import iter_images, species_folders
     from .leaf_focus import ANALYZE_MAX_SIDE, analyze_and_crop, crop_to_plant
 except ImportError:  # `python test_preprocess.py` from ml/src
     from dataset_contract import (
@@ -25,9 +24,8 @@ except ImportError:  # `python test_preprocess.py` from ml/src
         IMAGE_SUFFIXES,
         TRAIN_VARIANT,
         TRAINABLE_SPECIES,
-        classify_folder,
     )
-    from inventory import iter_images
+    from inventory import iter_images, species_folders
     from leaf_focus import ANALYZE_MAX_SIDE, analyze_and_crop, crop_to_plant
 
 PREPROCESS_SPEC = {
@@ -82,21 +80,19 @@ def list_labeled_images(
 ) -> list[tuple[Path, str]]:
     """Return (path, slug) for the given species and variant only.
 
-    Skips nested folders of a different class (Thalassia-under-Enhalus dumps).
+    Reads every study folder `species_folders` finds, including the held-out
+    class that only exists nested inside trainable folders. `iter_images`
+    prunes a nested different-species folder from its parent, so each image is
+    labelled by its innermost species folder exactly once.
     """
     pairs: list[tuple[Path, str]] = []
-    for child in sorted(root.iterdir(), key=lambda p: p.name.lower()):
-        if not child.is_dir() or child.name.startswith("."):
+    for folder, slug, folder_variant in species_folders(root):
+        if slug not in species or folder_variant != variant:
             continue
-        slug, scope, folder_variant = classify_folder(child.name)
-        if scope != "study" or slug not in species:
-            continue
-        if folder_variant != variant:
-            continue
-        for path in iter_images(child):
+        for path in iter_images(folder):
             if path.suffix.lower() in IMAGE_SUFFIXES:
                 pairs.append((path, slug))
-    return pairs
+    return sorted(pairs, key=lambda pair: (pair[1], str(pair[0]).lower()))
 
 
 def _pil_to_rgb(image: Image.Image) -> np.ndarray:
@@ -210,7 +206,7 @@ def qc_reason(rgb: np.ndarray) -> str | None:
 
 
 def process_rgb(rgb: np.ndarray, size: int = IMAGE_SIZE) -> tuple[np.ndarray, dict]:
-    """QC → optional plant crop → resize. Does not augment."""
+    """QC â†’ optional plant crop â†’ resize. Does not augment."""
     reason = qc_reason(rgb)
     cropped, frac, sky, did_crop = analyze_and_crop(rgb)
     base = {

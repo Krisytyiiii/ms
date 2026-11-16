@@ -118,6 +118,11 @@ void main() {
   testWidgets('low confidence shows the name, percent, and retake notice', (
     tester,
   ) async {
+    tester.view.physicalSize = const Size(400, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
     await tester.pumpWidget(
       MaterialApp(
         theme: buildMarineSeeTheme(AppTokens.sky),
@@ -139,9 +144,53 @@ void main() {
     expect(find.text('42%'), findsOneWidget);
     expect(find.text(ResultScreen.retakeSentence), findsOneWidget);
     expect(find.text('Open species profile'), findsOneWidget);
-    await tester.scrollUntilVisible(find.text('Try again'), 200);
     expect(find.text('Open 3D'), findsOneWidget);
+    expect(find.text('None of these'), findsOneWidget);
     expect(find.text('Try again'), findsOneWidget);
+  });
+
+  testWidgets('None of these replaces the species call with an abstention', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(400, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: buildMarineSeeTheme(AppTokens.sky),
+        home: ResultScreen(
+          imageBytes: _png,
+          result: const IdentifyResult(
+            slug: 'enhalus_acoroides',
+            confidence: 0.62,
+            status: IdentifyStatus.ok,
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+
+    expect(find.text('Enhalus acoroides'), findsOneWidget);
+    await tester.tap(find.text('None of these'));
+    await tester.pump();
+
+    expect(find.text(ResultScreen.rejectedHeadline), findsOneWidget);
+    expect(find.text(ResultScreen.rejectedMessage), findsOneWidget);
+    expect(find.text('Take another photo'), findsOneWidget);
+    expect(find.text('Enhalus acoroides'), findsNothing);
+    expect(find.text('62%'), findsNothing);
+    expect(find.text('Open species profile'), findsNothing);
+    expect(find.text('Open 3D'), findsNothing);
+
+    await tester.tap(find.text('Show the result again'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+
+    expect(find.text('Enhalus acoroides'), findsOneWidget);
+    expect(find.text(ResultScreen.rejectedHeadline), findsNothing);
   });
 }
 

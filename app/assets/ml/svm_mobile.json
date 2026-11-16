@@ -1,0 +1,126 @@
+{
+  "format": "marinesee-svm-mobile",
+  "format_version": 1,
+  "feature_spec": {
+    "version": "v2",
+    "input": "plant crop, then 256px RGB",
+    "color": "hsv_hist_16x3 frame + hsv_hist_16x3 plant pixels + hsv mean/std plant pixels",
+    "texture": "glcm_128px_32lv_d1_d2_d4_6props_angle_mean_and_range",
+    "shape": "plant_mask_blobs_and_blade_width_10",
+    "glcm_size": 128,
+    "length": 148,
+    "blade_width_index": 144,
+    "locked_svm": {
+      "kernel": "rbf",
+      "C": 3.0,
+      "gamma": 0.01
+    }
+  },
+  "classes": [
+    "cymodocea_rotundata",
+    "cymodocea_serrulata",
+    "enhalus_acoroides",
+    "halodule_pinifolia",
+    "halodule_uninervis",
+    "halophila_minor",
+    "halophila_ovalis",
+    "syringodium_isoetifolium"
+  ],
+  "label_map": {
+    "0": "cymodocea_rotundata",
+    "1": "cymodocea_serrulata",
+    "2": "enhalus_acoroides",
+    "3": "halodule_pinifolia",
+    "4": "halodule_uninervis",
+    "5": "halophila_minor",
+    "6": "halophila_ovalis",
+    "7": "syringodium_isoetifolium"
+  },
+  "retake_threshold": 0.44,
+  "scaler": {
+    "with_mean": true,
+    "with_std": true,
+    "n_features": 148
+  },
+  "svm": {
+    "kernel": "rbf",
+    "gamma": 0.01,
+    "C": 3.0,
+    "degree": 3,
+    "coef0": 0.0,
+    "n_classes": 8,
+    "n_pairs": 28,
+    "n_support": [
+      109,
+      72,
+      270,
+      67,
+      260,
+      34,
+      276,
+      112
+    ],
+    "n_support_vectors": 1200,
+    "probability": "platt + wu-lin-weng coupling"
+  },
+  "predict_rule": "slug = argmax of one-vs-one votes (sklearn predict); confidence = coupled probability of that slug (sklearn predict_proba). These can disagree; keep both, as ml/src/identify.py does.",
+  "layout": {
+    "dtype": "float32",
+    "order": "little-endian, C-contiguous",
+    "blocks": [
+      {
+        "name": "scaler_mean",
+        "shape": [
+          "n_features"
+        ]
+      },
+      {
+        "name": "scaler_scale",
+        "shape": [
+          "n_features"
+        ]
+      },
+      {
+        "name": "support_vectors",
+        "shape": [
+          "n_support_vectors",
+          "n_features"
+        ]
+      },
+      {
+        "name": "dual_coef",
+        "shape": [
+          "n_classes - 1",
+          "n_support_vectors"
+        ]
+      },
+      {
+        "name": "intercept",
+        "shape": [
+          "n_pairs"
+        ]
+      },
+      {
+        "name": "probA",
+        "shape": [
+          "n_pairs"
+        ]
+      },
+      {
+        "name": "probB",
+        "shape": [
+          "n_pairs"
+        ]
+      }
+    ]
+  },
+  "check": {
+    "samples": 64,
+    "max_proba_abs_diff": 1.5765166949677223e-14,
+    "label_mismatches": 0,
+    "tolerance": 1e-09,
+    "passed": true
+  },
+  "source": "ml\\artifacts\\v1\\svm_seagrass_v1.joblib",
+  "retake_threshold_source": "explicit --threshold"
+}

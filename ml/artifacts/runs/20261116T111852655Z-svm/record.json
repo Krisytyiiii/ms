@@ -1,0 +1,1807 @@
+{
+  "kind": "svm",
+  "runtime": "local",
+  "started_at": "2026-11-16T11:15:53Z",
+  "elapsed_seconds": 179.6,
+  "data_root": "C:\\Users\\Akiro\\MarineSeeData\\Seagrass",
+  "max_per_class": 400,
+  "split_seed": 42,
+  "image_size": 256,
+  "variant": "all",
+  "feature_version": "v2",
+  "feature_spec": {
+    "version": "v2",
+    "input": "plant crop, then 256px RGB",
+    "color": "hsv_hist_16x3 frame + hsv_hist_16x3 plant pixels + hsv mean/std plant pixels",
+    "texture": "glcm_128px_32lv_d1_d2_d4_6props_angle_mean_and_range",
+    "shape": "plant_mask_blobs_and_blade_width_10",
+    "glcm_size": 128,
+    "length": 148,
+    "blade_width_index": 144,
+    "locked_svm": {
+      "kernel": "rbf",
+      "C": 3.0,
+      "gamma": 0.01
+    }
+  },
+  "augment": {
+    "splits": "train only",
+    "copies_per_photo": 3,
+    "max_per_class": 200,
+    "kinds": [
+      "hflip",
+      "rot15",
+      "rot-15",
+      "rot25",
+      "rot-25",
+      "scale85",
+      "scale115",
+      "bright-12",
+      "bright+12"
+    ],
+    "rotation_deg": [
+      15,
+      25
+    ],
+    "scale": [
+      0.85,
+      1.15
+    ],
+    "brightness": 0.12,
+    "hue": "unchanged",
+    "stop": "median real-train count of classes above the overall median, capped at 200"
+  },
+  "protocol": {
+    "selection": "grouped 5-fold CV, one-standard-error rule",
+    "cv_folds": 5,
+    "tuning_rows": "real photos only",
+    "class_weight_alpha": 0.0,
+    "cache": {
+      "enabled": true,
+      "root": "C:\\Users\\Akiro\\.cache\\marinesee",
+      "hits": 13186,
+      "misses": 0,
+      "hit_rate": 1.0
+    }
+  },
+  "observation_grouping": {
+    "mode": "inaturalist",
+    "n_images": 2032,
+    "n_groups": 1395,
+    "largest_group": 18,
+    "singleton_groups": 1050,
+    "near_duplicate_pairs": 9,
+    "cross_class_near_duplicates": 17,
+    "cross_class_observations": 0,
+    "near_duplicate_max_distance": 6,
+    "observation_gap_seconds": 300,
+    "n_classes": 9,
+    "groups_per_class": 155.0
+  },
+  "selection": {
+    "habitat_sky_fraction": 0.5,
+    "habitat_max_plant_fraction": 0.02,
+    "min_kept_per_class": 15,
+    "classes_below_minimum": [],
+    "habitat_frames_kept_by_waiver": 0,
+    "skip_reasons": {
+      "habitat": 166,
+      "duplicate": 29
+    },
+    "by_slug_listed": {
+      "cymodocea_rotundata": 158,
+      "cymodocea_serrulata": 87,
+      "enhalus_acoroides": 666,
+      "halodule_pinifolia": 85,
+      "halodule_uninervis": 375,
+      "halophila_minor": 24,
+      "halophila_ovalis": 1549,
+      "syringodium_isoetifolium": 161,
+      "thalassia_hemprichii": 791
+    }
+  },
+  "classes": [
+    "cymodocea_rotundata",
+    "cymodocea_serrulata",
+    "enhalus_acoroides",
+    "halodule_pinifolia",
+    "halodule_uninervis",
+    "halophila_minor",
+    "halophila_ovalis",
+    "syringodium_isoetifolium",
+    "thalassia_hemprichii"
+  ],
+  "held_out": [],
+  "listed": 3896,
+  "kept": 3701,
+  "skipped": 195,
+  "duplicates_dropped": 29,
+  "habitat_waived": [],
+  "by_slug_kept": {
+    "cymodocea_rotundata": 149,
+    "cymodocea_serrulata": 84,
+    "enhalus_acoroides": 634,
+    "halodule_pinifolia": 75,
+    "halodule_uninervis": 347,
+    "halophila_minor": 23,
+    "halophila_ovalis": 1487,
+    "syringodium_isoetifolium": 154,
+    "thalassia_hemprichii": 748
+  },
+  "by_slug_dropped": {
+    "cymodocea_rotundata": 9,
+    "cymodocea_serrulata": 3,
+    "enhalus_acoroides": 32,
+    "halodule_pinifolia": 10,
+    "halodule_uninervis": 28,
+    "halophila_minor": 1,
+    "halophila_ovalis": 62,
+    "syringodium_isoetifolium": 7,
+    "thalassia_hemprichii": 43
+  },
+  "images_this_run": 2032,
+  "load_failed": {
+    "train": 0,
+    "val": 0,
+    "test": 0
+  },
+  "n_train": 1974,
+  "n_val": 290,
+  "n_test": 290,
+  "split_mode": "grouped",
+  "split_report": {
+    "mode": "grouped-stratified",
+    "n_splits": 7,
+    "n_items": 2032,
+    "n_groups": 1395,
+    "n_train": 1452,
+    "n_val": 290,
+    "n_test": 290,
+    "ratios": {
+      "train": 0.7146,
+      "val": 0.1427,
+      "test": 0.1427
+    },
+    "groups": {
+      "train": 996,
+      "val": 198,
+      "test": 201
+    },
+    "class_counts": {
+      "train": {
+        "cymodocea_rotundata": 106,
+        "cymodocea_serrulata": 60,
+        "enhalus_acoroides": 286,
+        "halodule_pinifolia": 53,
+        "halodule_uninervis": 248,
+        "halophila_minor": 17,
+        "halophila_ovalis": 286,
+        "syringodium_isoetifolium": 110,
+        "thalassia_hemprichii": 286
+      },
+      "val": {
+        "cymodocea_rotundata": 22,
+        "cymodocea_serrulata": 12,
+        "enhalus_acoroides": 57,
+        "halodule_pinifolia": 11,
+        "halodule_uninervis": 49,
+        "halophila_minor": 3,
+        "halophila_ovalis": 57,
+        "syringodium_isoetifolium": 22,
+        "thalassia_hemprichii": 57
+      },
+      "test": {
+        "cymodocea_rotundata": 21,
+        "cymodocea_serrulata": 12,
+        "enhalus_acoroides": 57,
+        "halodule_pinifolia": 11,
+        "halodule_uninervis": 50,
+        "halophila_minor": 3,
+        "halophila_ovalis": 57,
+        "syringodium_isoetifolium": 22,
+        "thalassia_hemprichii": 57
+      }
+    },
+    "classes_missing_from_test": [],
+    "classes_missing_from_val": [],
+    "degraded": false,
+    "classes_with_single_group": [],
+    "folds_used": {
+      "test": 2,
+      "val": 3
+    },
+    "group_leaks": 0,
+    "seed": 42
+  },
+  "group_report": {
+    "mode": "inaturalist",
+    "n_images": 2032,
+    "n_groups": 1395,
+    "largest_group": 18,
+    "singleton_groups": 1050,
+    "near_duplicate_pairs": 9,
+    "cross_class_near_duplicates": 17,
+    "cross_class_observations": 0,
+    "near_duplicate_max_distance": 6,
+    "observation_gap_seconds": 300,
+    "n_classes": 9,
+    "groups_per_class": 155.0
+  },
+  "train_real_counts": {
+    "cymodocea_rotundata": 106,
+    "cymodocea_serrulata": 60,
+    "enhalus_acoroides": 286,
+    "halodule_pinifolia": 53,
+    "halodule_uninervis": 248,
+    "halophila_minor": 17,
+    "halophila_ovalis": 286,
+    "syringodium_isoetifolium": 110,
+    "thalassia_hemprichii": 286
+  },
+  "train_class_counts": {
+    "cymodocea_rotundata": 200,
+    "cymodocea_serrulata": 200,
+    "enhalus_acoroides": 286,
+    "halodule_pinifolia": 200,
+    "halodule_uninervis": 248,
+    "halophila_minor": 68,
+    "halophila_ovalis": 286,
+    "syringodium_isoetifolium": 200,
+    "thalassia_hemprichii": 286
+  },
+  "v2_val_macro_f1": 0.23394128863595806,
+  "v3_val_macro_f1": 0.23127953067494894,
+  "shape_gate": 0.55,
+  "best_val_macro_f1": 0.21940745860639296,
+  "selection_scores": {
+    "v2": 0.23394128863595806,
+    "v3": 0.23127953067494894
+  },
+  "v1_val_macro_f1": 0.468,
+  "best_params": {
+    "kernel": "rbf",
+    "C": 3.0,
+    "gamma": 0.003
+  },
+  "tuning_rows": [
+    {
+      "kernel": "rbf",
+      "C": 0.1,
+      "gamma": "scale",
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.15950769955475208,
+      "cv_macro_f1_sd": 0.01128385413651795,
+      "cv_macro_f1_se": 0.005046292979489265,
+      "cv_accuracy_mean": 0.21554923569143267,
+      "cv_macro_f1_folds": [
+        0.1713,
+        0.167,
+        0.1424,
+        0.1555,
+        0.1614
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 0.1,
+      "gamma": 0.001,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.048146363069406964,
+      "cv_macro_f1_sd": 0.010721187820099736,
+      "cv_macro_f1_se": 0.004794660953057159,
+      "cv_accuracy_mean": 0.14536793458940633,
+      "cv_macro_f1_folds": [
+        0.0308,
+        0.048,
+        0.06,
+        0.0498,
+        0.0521
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 0.1,
+      "gamma": 0.003,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.14306379424330565,
+      "cv_macro_f1_sd": 0.008219347176034833,
+      "cv_macro_f1_se": 0.003675803803256963,
+      "cv_accuracy_mean": 0.20176561203934112,
+      "cv_macro_f1_folds": [
+        0.1548,
+        0.1464,
+        0.1363,
+        0.1344,
+        0.1434
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 0.1,
+      "gamma": 0.01,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.155243423172936,
+      "cv_macro_f1_sd": 0.017533682568325087,
+      "cv_macro_f1_se": 0.007841301223735598,
+      "cv_accuracy_mean": 0.21762531105581231,
+      "cv_macro_f1_folds": [
+        0.1726,
+        0.1742,
+        0.1343,
+        0.145,
+        0.1501
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 0.1,
+      "gamma": 0.03,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.03058319457529902,
+      "cv_macro_f1_sd": 0.00904676300302583,
+      "cv_macro_f1_se": 0.004045835410219178,
+      "cv_accuracy_mean": 0.152928072046451,
+      "cv_macro_f1_folds": [
+        0.0156,
+        0.0327,
+        0.0321,
+        0.0403,
+        0.0322
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 0.1,
+      "gamma": 0.1,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.029024865563139223,
+      "cv_macro_f1_sd": 0.007498287627497721,
+      "cv_macro_f1_se": 0.003353336169986105,
+      "cv_accuracy_mean": 0.15155350159971562,
+      "cv_macro_f1_folds": [
+        0.0156,
+        0.0327,
+        0.0321,
+        0.0326,
+        0.0321
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 0.3,
+      "gamma": "scale",
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.20534155796803155,
+      "cv_macro_f1_sd": 0.013689465215291682,
+      "cv_macro_f1_se": 0.006122114959402199,
+      "cv_accuracy_mean": 0.27132835644033654,
+      "cv_macro_f1_folds": [
+        0.2217,
+        0.1986,
+        0.1954,
+        0.1925,
+        0.2185
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 0.3,
+      "gamma": 0.001,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.15607733682032351,
+      "cv_macro_f1_sd": 0.017753070604036934,
+      "cv_macro_f1_se": 0.007939414535995967,
+      "cv_accuracy_mean": 0.22725915392819057,
+      "cv_macro_f1_folds": [
+        0.1338,
+        0.166,
+        0.1537,
+        0.1801,
+        0.1468
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 0.3,
+      "gamma": 0.003,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.19039911354720337,
+      "cv_macro_f1_sd": 0.01790072388416713,
+      "cv_macro_f1_se": 0.008005447090290354,
+      "cv_accuracy_mean": 0.2589453726744875,
+      "cv_macro_f1_folds": [
+        0.1876,
+        0.1687,
+        0.1992,
+        0.1809,
+        0.2156
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 0.3,
+      "gamma": 0.01,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.20272713232239298,
+      "cv_macro_f1_sd": 0.011447278881347417,
+      "cv_macro_f1_se": 0.005119378747218115,
+      "cv_accuracy_mean": 0.2644270648181064,
+      "cv_macro_f1_folds": [
+        0.2223,
+        0.1939,
+        0.1953,
+        0.201,
+        0.2011
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 0.3,
+      "gamma": 0.03,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.14274063984215754,
+      "cv_macro_f1_sd": 0.014473836452023289,
+      "cv_macro_f1_se": 0.0064728964403876895,
+      "cv_accuracy_mean": 0.22653157957103925,
+      "cv_macro_f1_folds": [
+        0.1531,
+        0.1251,
+        0.1516,
+        0.155,
+        0.1289
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 0.3,
+      "gamma": 0.1,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.026405360514214625,
+      "cv_macro_f1_sd": 0.008199149705968068,
+      "cv_macro_f1_se": 0.0036667712200484023,
+      "cv_accuracy_mean": 0.13299680056878777,
+      "cv_macro_f1_folds": [
+        0.0156,
+        0.0327,
+        0.0321,
+        0.0195,
+        0.0321
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 1.0,
+      "gamma": "scale",
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.22946017380414832,
+      "cv_macro_f1_sd": 0.022167377754920302,
+      "cv_macro_f1_se": 0.009913552708583693,
+      "cv_accuracy_mean": 0.31953312003791917,
+      "cv_macro_f1_folds": [
+        0.2578,
+        0.2003,
+        0.2293,
+        0.2174,
+        0.2425
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 1.0,
+      "gamma": 0.001,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.1961185369058334,
+      "cv_macro_f1_sd": 0.01353282834995752,
+      "cv_macro_f1_se": 0.006052064823668265,
+      "cv_accuracy_mean": 0.26514515937907335,
+      "cv_macro_f1_folds": [
+        0.2067,
+        0.1921,
+        0.1971,
+        0.1754,
+        0.2093
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 1.0,
+      "gamma": 0.003,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.22528714771825173,
+      "cv_macro_f1_sd": 0.024223909138421897,
+      "cv_macro_f1_se": 0.010833261502857945,
+      "cv_accuracy_mean": 0.30095271951653035,
+      "cv_macro_f1_folds": [
+        0.2532,
+        0.2109,
+        0.223,
+        0.1943,
+        0.2451
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 1.0,
+      "gamma": 0.01,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.2256897512834395,
+      "cv_macro_f1_sd": 0.018041034431036107,
+      "cv_macro_f1_se": 0.008068195874442194,
+      "cv_accuracy_mean": 0.3174665244697239,
+      "cv_macro_f1_folds": [
+        0.2449,
+        0.1959,
+        0.2294,
+        0.2268,
+        0.2314
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 1.0,
+      "gamma": 0.03,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.18113465779618615,
+      "cv_macro_f1_sd": 0.024078371187336012,
+      "cv_macro_f1_se": 0.010768174952471128,
+      "cv_accuracy_mean": 0.29886479440692026,
+      "cv_macro_f1_folds": [
+        0.2164,
+        0.1591,
+        0.1943,
+        0.1736,
+        0.1622
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 1.0,
+      "gamma": 0.1,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.07840243983938541,
+      "cv_macro_f1_sd": 0.012991234731145208,
+      "cv_macro_f1_se": 0.005809856794099378,
+      "cv_accuracy_mean": 0.22726152387723664,
+      "cv_macro_f1_folds": [
+        0.0796,
+        0.066,
+        0.0655,
+        0.0847,
+        0.0962
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 3.0,
+      "gamma": "scale",
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.2391925984679948,
+      "cv_macro_f1_sd": 0.020233605797659322,
+      "cv_macro_f1_se": 0.00904874359870002,
+      "cv_accuracy_mean": 0.3408911008413319,
+      "cv_macro_f1_folds": [
+        0.2424,
+        0.2253,
+        0.2277,
+        0.2273,
+        0.2733
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 3.0,
+      "gamma": 0.001,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.2171907044960122,
+      "cv_macro_f1_sd": 0.018671109963316227,
+      "cv_macro_f1_se": 0.008349974218669738,
+      "cv_accuracy_mean": 0.2878729707311293,
+      "cv_macro_f1_folds": [
+        0.2312,
+        0.204,
+        0.2227,
+        0.192,
+        0.236
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 3.0,
+      "gamma": 0.003,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.23394128863595806,
+      "cv_macro_f1_sd": 0.02534834583483221,
+      "cv_macro_f1_se": 0.011336124880771696,
+      "cv_accuracy_mean": 0.3195402298850575,
+      "cv_macro_f1_folds": [
+        0.2534,
+        0.202,
+        0.2294,
+        0.2201,
+        0.2649
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 3.0,
+      "gamma": 0.01,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.23211437844978916,
+      "cv_macro_f1_sd": 0.02898653387922825,
+      "cv_macro_f1_se": 0.012963172037211009,
+      "cv_accuracy_mean": 0.3408792510961014,
+      "cv_macro_f1_folds": [
+        0.246,
+        0.2118,
+        0.1969,
+        0.2348,
+        0.271
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 3.0,
+      "gamma": 0.03,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.19071135324615024,
+      "cv_macro_f1_sd": 0.02006718926317251,
+      "cv_macro_f1_se": 0.00897431986196153,
+      "cv_accuracy_mean": 0.3264178220168266,
+      "cv_macro_f1_folds": [
+        0.2032,
+        0.1718,
+        0.174,
+        0.1857,
+        0.2188
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 3.0,
+      "gamma": 0.1,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.12085427444576942,
+      "cv_macro_f1_sd": 0.014170644179930317,
+      "cv_macro_f1_se": 0.00633730473425719,
+      "cv_accuracy_mean": 0.2644531342576134,
+      "cv_macro_f1_folds": [
+        0.1363,
+        0.1074,
+        0.1162,
+        0.1088,
+        0.1356
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 10.0,
+      "gamma": "scale",
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.23025454098380704,
+      "cv_macro_f1_sd": 0.034444220383061296,
+      "cv_macro_f1_se": 0.01540392364170178,
+      "cv_accuracy_mean": 0.3402369949046095,
+      "cv_macro_f1_folds": [
+        0.221,
+        0.1991,
+        0.2403,
+        0.2059,
+        0.285
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 10.0,
+      "gamma": 0.001,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.2290586112964549,
+      "cv_macro_f1_sd": 0.03487733569448908,
+      "cv_macro_f1_se": 0.015597618697391484,
+      "cv_accuracy_mean": 0.30849626733025237,
+      "cv_macro_f1_folds": [
+        0.264,
+        0.1848,
+        0.2112,
+        0.2204,
+        0.2649
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 10.0,
+      "gamma": 0.003,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.2406317401795209,
+      "cv_macro_f1_sd": 0.028083569918965556,
+      "cv_macro_f1_se": 0.012559354277935048,
+      "cv_accuracy_mean": 0.3360729944306197,
+      "cv_macro_f1_folds": [
+        0.2434,
+        0.2017,
+        0.2453,
+        0.2329,
+        0.28
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 10.0,
+      "gamma": 0.01,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.22064620534577326,
+      "cv_macro_f1_sd": 0.028394453615373835,
+      "cv_macro_f1_se": 0.012698385693588112,
+      "cv_accuracy_mean": 0.33607536437966584,
+      "cv_macro_f1_folds": [
+        0.2339,
+        0.187,
+        0.2077,
+        0.2129,
+        0.2618
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 10.0,
+      "gamma": 0.03,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.18653432596448388,
+      "cv_macro_f1_sd": 0.017497608814143122,
+      "cv_macro_f1_se": 0.007825168550424701,
+      "cv_accuracy_mean": 0.3188410949164593,
+      "cv_macro_f1_folds": [
+        0.2011,
+        0.1647,
+        0.1783,
+        0.1811,
+        0.2075
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 10.0,
+      "gamma": 0.1,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.12086976656234202,
+      "cv_macro_f1_sd": 0.014191751687289691,
+      "cv_macro_f1_se": 0.006346744298515417,
+      "cv_accuracy_mean": 0.2644531342576134,
+      "cv_macro_f1_folds": [
+        0.1364,
+        0.1074,
+        0.1162,
+        0.1088,
+        0.1356
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 30.0,
+      "gamma": "scale",
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.22352546185681463,
+      "cv_macro_f1_sd": 0.02574466695303515,
+      "cv_macro_f1_se": 0.011513365073015796,
+      "cv_accuracy_mean": 0.32921199194217327,
+      "cv_macro_f1_folds": [
+        0.2173,
+        0.1999,
+        0.2286,
+        0.2066,
+        0.2653
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 30.0,
+      "gamma": 0.001,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.24072435059471098,
+      "cv_macro_f1_sd": 0.021628927492922986,
+      "cv_macro_f1_se": 0.00967275043091798,
+      "cv_accuracy_mean": 0.331935063396137,
+      "cv_macro_f1_folds": [
+        0.2433,
+        0.2039,
+        0.2575,
+        0.2433,
+        0.2556
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 30.0,
+      "gamma": 0.003,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.22579504312599163,
+      "cv_macro_f1_sd": 0.03441384253423346,
+      "cv_macro_f1_se": 0.015390338254703931,
+      "cv_accuracy_mean": 0.32645100130347193,
+      "cv_macro_f1_folds": [
+        0.2064,
+        0.1921,
+        0.2261,
+        0.222,
+        0.2824
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 30.0,
+      "gamma": 0.01,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.21471191313450136,
+      "cv_macro_f1_sd": 0.027775027324862724,
+      "cv_macro_f1_se": 0.012421369835061436,
+      "cv_accuracy_mean": 0.323002725441403,
+      "cv_macro_f1_folds": [
+        0.2194,
+        0.187,
+        0.207,
+        0.2004,
+        0.2598
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 30.0,
+      "gamma": 0.03,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.18720843169577667,
+      "cv_macro_f1_sd": 0.018121530801643315,
+      "cv_macro_f1_se": 0.008104194945766141,
+      "cv_accuracy_mean": 0.32022277521033293,
+      "cv_macro_f1_folds": [
+        0.1992,
+        0.1646,
+        0.1801,
+        0.1811,
+        0.2111
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 30.0,
+      "gamma": 0.1,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.12086976656234202,
+      "cv_macro_f1_sd": 0.014191751687289691,
+      "cv_macro_f1_se": 0.006346744298515417,
+      "cv_accuracy_mean": 0.2644531342576134,
+      "cv_macro_f1_folds": [
+        0.1364,
+        0.1074,
+        0.1162,
+        0.1088,
+        0.1356
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 100.0,
+      "gamma": "scale",
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.21681181299303262,
+      "cv_macro_f1_sd": 0.023192008389651433,
+      "cv_macro_f1_se": 0.010371781458801205,
+      "cv_accuracy_mean": 0.3133570328237943,
+      "cv_macro_f1_folds": [
+        0.214,
+        0.1913,
+        0.213,
+        0.2111,
+        0.2548
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 100.0,
+      "gamma": 0.001,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.23803704916705937,
+      "cv_macro_f1_sd": 0.038195425282855903,
+      "cv_macro_f1_se": 0.017081513472395986,
+      "cv_accuracy_mean": 0.3264367816091954,
+      "cv_macro_f1_folds": [
+        0.2217,
+        0.1861,
+        0.263,
+        0.2341,
+        0.2853
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 100.0,
+      "gamma": 0.003,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.22528414941279218,
+      "cv_macro_f1_sd": 0.047827145937796474,
+      "cv_macro_f1_se": 0.02138894989734317,
+      "cv_accuracy_mean": 0.32094086977129993,
+      "cv_macro_f1_folds": [
+        0.2023,
+        0.1721,
+        0.2248,
+        0.2259,
+        0.3014
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 100.0,
+      "gamma": 0.01,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.21403411588604362,
+      "cv_macro_f1_sd": 0.027747701874984213,
+      "cv_macro_f1_se": 0.012409149522372613,
+      "cv_accuracy_mean": 0.3216210451475293,
+      "cv_macro_f1_folds": [
+        0.2241,
+        0.1853,
+        0.2073,
+        0.1969,
+        0.2566
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 100.0,
+      "gamma": 0.03,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.18720843169577667,
+      "cv_macro_f1_sd": 0.018121530801643315,
+      "cv_macro_f1_se": 0.008104194945766141,
+      "cv_accuracy_mean": 0.32022277521033293,
+      "cv_macro_f1_folds": [
+        0.1992,
+        0.1646,
+        0.1801,
+        0.1811,
+        0.2111
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 100.0,
+      "gamma": 0.1,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.12086976656234202,
+      "cv_macro_f1_sd": 0.014191751687289691,
+      "cv_macro_f1_se": 0.006346744298515417,
+      "cv_accuracy_mean": 0.2644531342576134,
+      "cv_macro_f1_folds": [
+        0.1364,
+        0.1074,
+        0.1162,
+        0.1088,
+        0.1356
+      ]
+    },
+    {
+      "kernel": "linear",
+      "C": 0.01,
+      "gamma": null,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.23304242063142439,
+      "cv_macro_f1_sd": 0.02805631854898702,
+      "cv_macro_f1_se": 0.012547167094784647,
+      "cv_accuracy_mean": 0.29611565351344943,
+      "cv_macro_f1_folds": [
+        0.2639,
+        0.1932,
+        0.2344,
+        0.2198,
+        0.2539
+      ]
+    },
+    {
+      "kernel": "linear",
+      "C": 0.03,
+      "gamma": null,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.2334273401754988,
+      "cv_macro_f1_sd": 0.01795615042590203,
+      "cv_macro_f1_se": 0.008030234593305747,
+      "cv_accuracy_mean": 0.30231307026898924,
+      "cv_macro_f1_folds": [
+        0.2585,
+        0.2081,
+        0.2304,
+        0.2339,
+        0.2363
+      ]
+    },
+    {
+      "kernel": "linear",
+      "C": 0.1,
+      "gamma": null,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.23730183048623865,
+      "cv_macro_f1_sd": 0.017173279499585678,
+      "cv_macro_f1_se": 0.0076801240715354295,
+      "cv_accuracy_mean": 0.31196824268278234,
+      "cv_macro_f1_folds": [
+        0.2546,
+        0.2113,
+        0.2376,
+        0.2323,
+        0.2507
+      ]
+    },
+    {
+      "kernel": "linear",
+      "C": 0.3,
+      "gamma": null,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.23691340535650948,
+      "cv_macro_f1_sd": 0.02464201923870878,
+      "cv_macro_f1_se": 0.011020246024122089,
+      "cv_accuracy_mean": 0.3037184500533239,
+      "cv_macro_f1_folds": [
+        0.2663,
+        0.2119,
+        0.234,
+        0.2147,
+        0.2577
+      ]
+    },
+    {
+      "kernel": "linear",
+      "C": 1.0,
+      "gamma": null,
+      "cv_folds": 5,
+      "cv_macro_f1_mean": 0.2183353157684776,
+      "cv_macro_f1_sd": 0.04194054660013178,
+      "cv_macro_f1_se": 0.01875638264227847,
+      "cv_accuracy_mean": 0.28301931508472566,
+      "cv_macro_f1_folds": [
+        0.2846,
+        0.1807,
+        0.1847,
+        0.2142,
+        0.2275
+      ]
+    }
+  ],
+  "fit_seconds": 1.3,
+  "train_accuracy": 0.720871327254306,
+  "val_accuracy": 0.296551724137931,
+  "test_accuracy": 0.3448275862068966,
+  "train_report": {
+    "cymodocea_rotundata": {
+      "precision": 0.7988165680473372,
+      "recall": 0.675,
+      "f1-score": 0.7317073170731707,
+      "support": 200.0
+    },
+    "cymodocea_serrulata": {
+      "precision": 0.875,
+      "recall": 0.77,
+      "f1-score": 0.8191489361702128,
+      "support": 200.0
+    },
+    "enhalus_acoroides": {
+      "precision": 0.7058823529411765,
+      "recall": 0.7132867132867133,
+      "f1-score": 0.7095652173913043,
+      "support": 286.0
+    },
+    "halodule_pinifolia": {
+      "precision": 0.898936170212766,
+      "recall": 0.845,
+      "f1-score": 0.8711340206185567,
+      "support": 200.0
+    },
+    "halodule_uninervis": {
+      "precision": 0.7323232323232324,
+      "recall": 0.5846774193548387,
+      "f1-score": 0.6502242152466368,
+      "support": 248.0
+    },
+    "halophila_minor": {
+      "precision": 0.984375,
+      "recall": 0.9264705882352942,
+      "f1-score": 0.9545454545454546,
+      "support": 68.0
+    },
+    "halophila_ovalis": {
+      "precision": 0.748062015503876,
+      "recall": 0.6748251748251748,
+      "f1-score": 0.7095588235294118,
+      "support": 286.0
+    },
+    "syringodium_isoetifolium": {
+      "precision": 0.7425742574257426,
+      "recall": 0.75,
+      "f1-score": 0.746268656716418,
+      "support": 200.0
+    },
+    "thalassia_hemprichii": {
+      "precision": 0.4883720930232558,
+      "recall": 0.7342657342657343,
+      "f1-score": 0.5865921787709497,
+      "support": 286.0
+    },
+    "accuracy": 0.720871327254306,
+    "macro avg": {
+      "precision": 0.7749268543863762,
+      "recall": 0.741502847774195,
+      "f1-score": 0.7531938688957907,
+      "support": 1974.0
+    },
+    "weighted avg": {
+      "precision": 0.7432226791961839,
+      "recall": 0.720871327254306,
+      "f1-score": 0.7261658162298607,
+      "support": 1974.0
+    }
+  },
+  "val_report": {
+    "cymodocea_rotundata": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 22.0
+    },
+    "cymodocea_serrulata": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 12.0
+    },
+    "enhalus_acoroides": {
+      "precision": 0.3770491803278688,
+      "recall": 0.40350877192982454,
+      "f1-score": 0.3898305084745763,
+      "support": 57.0
+    },
+    "halodule_pinifolia": {
+      "precision": 0.4375,
+      "recall": 0.6363636363636364,
+      "f1-score": 0.5185185185185185,
+      "support": 11.0
+    },
+    "halodule_uninervis": {
+      "precision": 0.375,
+      "recall": 0.24489795918367346,
+      "f1-score": 0.2962962962962963,
+      "support": 49.0
+    },
+    "halophila_minor": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "halophila_ovalis": {
+      "precision": 0.2727272727272727,
+      "recall": 0.3157894736842105,
+      "f1-score": 0.2926829268292683,
+      "support": 57.0
+    },
+    "syringodium_isoetifolium": {
+      "precision": 0.13333333333333333,
+      "recall": 0.09090909090909091,
+      "f1-score": 0.10810810810810811,
+      "support": 22.0
+    },
+    "thalassia_hemprichii": {
+      "precision": 0.3287671232876712,
+      "recall": 0.42105263157894735,
+      "f1-score": 0.36923076923076925,
+      "support": 57.0
+    },
+    "accuracy": 0.296551724137931,
+    "macro avg": {
+      "precision": 0.2138196566306829,
+      "recall": 0.23472461818326482,
+      "f1-score": 0.21940745860639296,
+      "support": 290.0
+    },
+    "weighted avg": {
+      "precision": 0.28240626615473674,
+      "recall": 0.296551724137931,
+      "f1-score": 0.28465524227266753,
+      "support": 290.0
+    }
+  },
+  "test_report": {
+    "cymodocea_rotundata": {
+      "precision": 0.2727272727272727,
+      "recall": 0.2857142857142857,
+      "f1-score": 0.27906976744186046,
+      "support": 21.0
+    },
+    "cymodocea_serrulata": {
+      "precision": 0.18181818181818182,
+      "recall": 0.16666666666666666,
+      "f1-score": 0.17391304347826086,
+      "support": 12.0
+    },
+    "enhalus_acoroides": {
+      "precision": 0.45161290322580644,
+      "recall": 0.49122807017543857,
+      "f1-score": 0.47058823529411764,
+      "support": 57.0
+    },
+    "halodule_pinifolia": {
+      "precision": 0.35714285714285715,
+      "recall": 0.45454545454545453,
+      "f1-score": 0.4,
+      "support": 11.0
+    },
+    "halodule_uninervis": {
+      "precision": 0.2631578947368421,
+      "recall": 0.2,
+      "f1-score": 0.22727272727272727,
+      "support": 50.0
+    },
+    "halophila_minor": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "halophila_ovalis": {
+      "precision": 0.375,
+      "recall": 0.3684210526315789,
+      "f1-score": 0.37168141592920356,
+      "support": 57.0
+    },
+    "syringodium_isoetifolium": {
+      "precision": 0.15384615384615385,
+      "recall": 0.09090909090909091,
+      "f1-score": 0.11428571428571428,
+      "support": 22.0
+    },
+    "thalassia_hemprichii": {
+      "precision": 0.35135135135135137,
+      "recall": 0.45614035087719296,
+      "f1-score": 0.3969465648854962,
+      "support": 57.0
+    },
+    "accuracy": 0.3448275862068966,
+    "macro avg": {
+      "precision": 0.2674062905387184,
+      "recall": 0.2792916635021898,
+      "f1-score": 0.2704174965097089,
+      "support": 290.0
+    },
+    "weighted avg": {
+      "precision": 0.32939356886213045,
+      "recall": 0.3448275862068966,
+      "f1-score": 0.3340023035660099,
+      "support": 290.0
+    }
+  },
+  "confusion_matrix_test": [
+    [
+      6,
+      1,
+      2,
+      0,
+      1,
+      0,
+      2,
+      1,
+      8
+    ],
+    [
+      1,
+      2,
+      2,
+      0,
+      1,
+      0,
+      4,
+      0,
+      2
+    ],
+    [
+      2,
+      2,
+      28,
+      0,
+      8,
+      0,
+      8,
+      0,
+      9
+    ],
+    [
+      0,
+      0,
+      0,
+      5,
+      5,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      3,
+      1,
+      9,
+      5,
+      10,
+      0,
+      13,
+      4,
+      5
+    ],
+    [
+      2,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      4,
+      2,
+      7,
+      0,
+      3,
+      0,
+      21,
+      1,
+      19
+    ],
+    [
+      2,
+      0,
+      6,
+      2,
+      5,
+      0,
+      0,
+      2,
+      5
+    ],
+    [
+      2,
+      3,
+      7,
+      2,
+      5,
+      0,
+      7,
+      5,
+      26
+    ]
+  ],
+  "retake_threshold": 0.39,
+  "retake_rule": "best accepted accuracy with coverage >= 0.50",
+  "retake_study_line_met": false,
+  "val_accepted_accuracy": 0.3708609271523179,
+  "val_accepted_coverage": 0.5206896551724138,
+  "test_accepted_accuracy": 0.3916083916083916,
+  "test_accepted_coverage": 0.49310344827586206,
+  "class_thresholds": {
+    "cymodocea_rotundata": null,
+    "cymodocea_serrulata": null,
+    "enhalus_acoroides": 0.5965610648614358,
+    "halodule_pinifolia": 0.6133634745185808,
+    "halodule_uninervis": 0.5034220837748846,
+    "halophila_minor": null,
+    "halophila_ovalis": 0.6246899249087688,
+    "syringodium_isoetifolium": 0.4102814620242288,
+    "thalassia_hemprichii": 0.4991601499854792
+  },
+  "class_threshold_rule": "per predicted class on validation; >=5 photos and above chance, else abstain",
+  "val_accepted_class_thresholds": {
+    "accepted": 48,
+    "coverage": 0.16551724137931034,
+    "accuracy": 0.6458333333333334
+  },
+  "test_accepted_class_thresholds": {
+    "accepted": 40,
+    "coverage": 0.13793103448275862,
+    "accuracy": 0.475
+  },
+  "val_metrics": {
+    "decision_rule": "one_vs_one_vote",
+    "accuracy": 0.296551724137931,
+    "balanced_accuracy": 0.23472461818326482,
+    "macro_recall": 0.23472461818326482,
+    "top2_accuracy": 0.4896551724137931,
+    "top3_accuracy": 0.6413793103448275,
+    "per_class": [
+      {
+        "class": "cymodocea_rotundata",
+        "support": 22,
+        "predicted": 18,
+        "correct": 0,
+        "recall": 0.0,
+        "interpretable": true
+      },
+      {
+        "class": "cymodocea_serrulata",
+        "support": 12,
+        "predicted": 9,
+        "correct": 0,
+        "recall": 0.0,
+        "interpretable": false
+      },
+      {
+        "class": "enhalus_acoroides",
+        "support": 57,
+        "predicted": 61,
+        "correct": 23,
+        "recall": 0.40350877192982454,
+        "interpretable": true
+      },
+      {
+        "class": "halodule_pinifolia",
+        "support": 11,
+        "predicted": 16,
+        "correct": 7,
+        "recall": 0.6363636363636364,
+        "interpretable": false
+      },
+      {
+        "class": "halodule_uninervis",
+        "support": 49,
+        "predicted": 32,
+        "correct": 12,
+        "recall": 0.24489795918367346,
+        "interpretable": true
+      },
+      {
+        "class": "halophila_minor",
+        "support": 3,
+        "predicted": 0,
+        "correct": 0,
+        "recall": 0.0,
+        "interpretable": false
+      },
+      {
+        "class": "halophila_ovalis",
+        "support": 57,
+        "predicted": 66,
+        "correct": 18,
+        "recall": 0.3157894736842105,
+        "interpretable": true
+      },
+      {
+        "class": "syringodium_isoetifolium",
+        "support": 22,
+        "predicted": 15,
+        "correct": 2,
+        "recall": 0.09090909090909091,
+        "interpretable": true
+      },
+      {
+        "class": "thalassia_hemprichii",
+        "support": 57,
+        "predicted": 73,
+        "correct": 24,
+        "recall": 0.42105263157894735,
+        "interpretable": true
+      }
+    ],
+    "coverage_accuracy": [
+      {
+        "threshold": 0.3,
+        "accepted": 229,
+        "coverage": 0.7896551724137931,
+        "accuracy": 0.3318777292576419
+      },
+      {
+        "threshold": 0.4,
+        "accepted": 137,
+        "coverage": 0.4724137931034483,
+        "accuracy": 0.35766423357664234
+      },
+      {
+        "threshold": 0.44,
+        "accepted": 103,
+        "coverage": 0.35517241379310344,
+        "accuracy": 0.4077669902912621
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 71,
+        "coverage": 0.24482758620689654,
+        "accuracy": 0.4788732394366197
+      },
+      {
+        "threshold": 0.6,
+        "accepted": 34,
+        "coverage": 0.11724137931034483,
+        "accuracy": 0.6176470588235294
+      },
+      {
+        "threshold": 0.7,
+        "accepted": 18,
+        "coverage": 0.06206896551724138,
+        "accuracy": 0.6111111111111112
+      }
+    ],
+    "n": 290,
+    "accuracy_ci": {
+      "point": 0.296551724137931,
+      "low": 0.23296263954523663,
+      "high": 0.36519981152259173,
+      "n_boot": 2000,
+      "groups": 198
+    }
+  },
+  "test_metrics": {
+    "decision_rule": "one_vs_one_vote",
+    "accuracy": 0.3448275862068966,
+    "balanced_accuracy": 0.2792916635021898,
+    "macro_recall": 0.2792916635021898,
+    "top2_accuracy": 0.5413793103448276,
+    "top3_accuracy": 0.6793103448275862,
+    "per_class": [
+      {
+        "class": "cymodocea_rotundata",
+        "support": 21,
+        "predicted": 22,
+        "correct": 6,
+        "recall": 0.2857142857142857,
+        "interpretable": true
+      },
+      {
+        "class": "cymodocea_serrulata",
+        "support": 12,
+        "predicted": 11,
+        "correct": 2,
+        "recall": 0.16666666666666666,
+        "interpretable": false
+      },
+      {
+        "class": "enhalus_acoroides",
+        "support": 57,
+        "predicted": 62,
+        "correct": 28,
+        "recall": 0.49122807017543857,
+        "interpretable": true
+      },
+      {
+        "class": "halodule_pinifolia",
+        "support": 11,
+        "predicted": 14,
+        "correct": 5,
+        "recall": 0.45454545454545453,
+        "interpretable": false
+      },
+      {
+        "class": "halodule_uninervis",
+        "support": 50,
+        "predicted": 38,
+        "correct": 10,
+        "recall": 0.2,
+        "interpretable": true
+      },
+      {
+        "class": "halophila_minor",
+        "support": 3,
+        "predicted": 0,
+        "correct": 0,
+        "recall": 0.0,
+        "interpretable": false
+      },
+      {
+        "class": "halophila_ovalis",
+        "support": 57,
+        "predicted": 56,
+        "correct": 21,
+        "recall": 0.3684210526315789,
+        "interpretable": true
+      },
+      {
+        "class": "syringodium_isoetifolium",
+        "support": 22,
+        "predicted": 13,
+        "correct": 2,
+        "recall": 0.09090909090909091,
+        "interpretable": true
+      },
+      {
+        "class": "thalassia_hemprichii",
+        "support": 57,
+        "predicted": 74,
+        "correct": 26,
+        "recall": 0.45614035087719296,
+        "interpretable": true
+      }
+    ],
+    "coverage_accuracy": [
+      {
+        "threshold": 0.3,
+        "accepted": 229,
+        "coverage": 0.7896551724137931,
+        "accuracy": 0.35807860262008734
+      },
+      {
+        "threshold": 0.4,
+        "accepted": 137,
+        "coverage": 0.4724137931034483,
+        "accuracy": 0.40875912408759124
+      },
+      {
+        "threshold": 0.44,
+        "accepted": 112,
+        "coverage": 0.38620689655172413,
+        "accuracy": 0.42857142857142855
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 61,
+        "coverage": 0.2103448275862069,
+        "accuracy": 0.4426229508196721
+      },
+      {
+        "threshold": 0.6,
+        "accepted": 24,
+        "coverage": 0.08275862068965517,
+        "accuracy": 0.4583333333333333
+      },
+      {
+        "threshold": 0.7,
+        "accepted": 6,
+        "coverage": 0.020689655172413793,
+        "accuracy": 0.5
+      }
+    ],
+    "n": 290,
+    "accuracy_ci": {
+      "point": 0.3448275862068966,
+      "low": 0.27923878862455564,
+      "high": 0.40960660947303473,
+      "n_boot": 2000,
+      "groups": 201
+    }
+  },
+  "test_metrics_proba_argmax": {
+    "decision_rule": "probability_argmax",
+    "accuracy": 0.33793103448275863,
+    "balanced_accuracy": 0.2683559909875699,
+    "macro_recall": 0.2683559909875699,
+    "top2_accuracy": 0.5413793103448276,
+    "top3_accuracy": 0.6793103448275862,
+    "per_class": [
+      {
+        "class": "cymodocea_rotundata",
+        "support": 21,
+        "predicted": 23,
+        "correct": 6,
+        "recall": 0.2857142857142857,
+        "interpretable": true
+      },
+      {
+        "class": "cymodocea_serrulata",
+        "support": 12,
+        "predicted": 9,
+        "correct": 1,
+        "recall": 0.08333333333333333,
+        "interpretable": false
+      },
+      {
+        "class": "enhalus_acoroides",
+        "support": 57,
+        "predicted": 59,
+        "correct": 28,
+        "recall": 0.49122807017543857,
+        "interpretable": true
+      },
+      {
+        "class": "halodule_pinifolia",
+        "support": 11,
+        "predicted": 15,
+        "correct": 5,
+        "recall": 0.45454545454545453,
+        "interpretable": false
+      },
+      {
+        "class": "halodule_uninervis",
+        "support": 50,
+        "predicted": 45,
+        "correct": 11,
+        "recall": 0.22,
+        "interpretable": true
+      },
+      {
+        "class": "halophila_minor",
+        "support": 3,
+        "predicted": 1,
+        "correct": 0,
+        "recall": 0.0,
+        "interpretable": false
+      },
+      {
+        "class": "halophila_ovalis",
+        "support": 57,
+        "predicted": 59,
+        "correct": 21,
+        "recall": 0.3684210526315789,
+        "interpretable": true
+      },
+      {
+        "class": "syringodium_isoetifolium",
+        "support": 22,
+        "predicted": 13,
+        "correct": 2,
+        "recall": 0.09090909090909091,
+        "interpretable": true
+      },
+      {
+        "class": "thalassia_hemprichii",
+        "support": 57,
+        "predicted": 66,
+        "correct": 24,
+        "recall": 0.42105263157894735,
+        "interpretable": true
+      }
+    ],
+    "coverage_accuracy": [
+      {
+        "threshold": 0.3,
+        "accepted": 235,
+        "coverage": 0.8103448275862069,
+        "accuracy": 0.35319148936170214
+      },
+      {
+        "threshold": 0.4,
+        "accepted": 137,
+        "coverage": 0.4724137931034483,
+        "accuracy": 0.40875912408759124
+      },
+      {
+        "threshold": 0.44,
+        "accepted": 112,
+        "coverage": 0.38620689655172413,
+        "accuracy": 0.42857142857142855
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 61,
+        "coverage": 0.2103448275862069,
+        "accuracy": 0.4426229508196721
+      },
+      {
+        "threshold": 0.6,
+        "accepted": 24,
+        "coverage": 0.08275862068965517,
+        "accuracy": 0.4583333333333333
+      },
+      {
+        "threshold": 0.7,
+        "accepted": 6,
+        "coverage": 0.020689655172413793,
+        "accuracy": 0.5
+      }
+    ],
+    "n": 290,
+    "accuracy_ci": {
+      "point": 0.33793103448275863,
+      "low": 0.2733730037246799,
+      "high": 0.40515842592486634,
+      "n_boot": 2000,
+      "groups": 201
+    }
+  },
+  "decision_rule": "one_vs_one_vote for report/accuracy/balanced/per-class/acceptance; top-2/3 are the probability ranking; probability-argmax view is recorded separately as test_metrics_proba_argmax",
+  "study_target_accuracy": 0.85,
+  "study_line_met": false,
+  "prior_locked_test_accuracy": 0.421,
+  "loss_note": "Curated retrain on leaf-visible frames. Habitat drops when the top of the frame is sky-like (sky fraction >= 0.5) and the green mask is under 0.02. Habitat waived for: none. Exact duplicate files dropped: 29. Train-only augment, at most 3 copies per photo. Feature v2. Validation macro F1 0.219 against locked v1 0.468. Held-out test accuracy 0.345 is on this selected set. The locked run on the unfiltered set was test accuracy 0.421. Held-out test accuracy is below the study line of 0.85.",
+  "recorded_at": "2026-11-16T11:18:52Z",
+  "run_id": "20261116T111852655Z",
+  "environment": {
+    "python": "3.13.1",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "numpy": "2.5.5",
+    "sklearn": "1.9.1",
+    "skimage": "0.26.0"
+  },
+  "run_dir": "C:\\Users\\Akiro\\OneDrive\\Desktop\\Marine See\\ml\\artifacts\\runs\\20261116T111852655Z-svm"
+}
