@@ -21,7 +21,8 @@ class GlbModelHost extends StatefulWidget {
 
   /// The phone host runs scripts in its web view. The page script reaches this
   /// element by id, so the web host does not use the callback.
-  final void Function(Future<void> Function(String source) run) onWebViewCreated;
+  final void Function(Future<void> Function(String source) run)
+  onWebViewCreated;
 
   @override
   State<GlbModelHost> createState() => _GlbModelHostState();
@@ -35,7 +36,9 @@ class _GlbModelHostState extends State<GlbModelHost> {
 
   String get _src {
     final src = widget.src;
-    if (src.startsWith('/') || src.startsWith('http://') || src.startsWith('https://')) {
+    if (src.startsWith('/') ||
+        src.startsWith('http://') ||
+        src.startsWith('https://')) {
       return src;
     }
     return '/$src';
@@ -47,7 +50,7 @@ class _GlbModelHostState extends State<GlbModelHost> {
     style.setProperty('padding', '0');
     style.setProperty('border', '0');
     style.setProperty('overflow', 'hidden');
-    style.setProperty('background-color', '#1E8C98');
+    style.setProperty('background-color', '#EEF4FA');
     style.setProperty('pointer-events', 'none');
     if (_width > 0 && _height > 0) {
       style.setProperty('width', '${_width}px');
@@ -70,7 +73,8 @@ class _GlbModelHostState extends State<GlbModelHost> {
 
   void _mount(Object element) {
     final host = element as web.HTMLDivElement;
-    final viewer = web.document.createElement('model-viewer') as web.HTMLElement;
+    final viewer =
+        web.document.createElement('model-viewer') as web.HTMLElement;
     viewer.id = 'marinesee-model';
     viewer.setAttribute('src', _src);
     viewer.setAttribute('alt', widget.label);

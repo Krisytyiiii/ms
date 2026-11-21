@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/tokens.dart';
-import 'glb_control_tile.dart';
+import 'glb_controls.dart';
 import 'glb_model_host.dart';
 import 'glb_orbit.dart';
 import 'glb_orbit_surface.dart';
@@ -30,8 +30,9 @@ class GlbViewer extends StatefulWidget {
 class _GlbViewerState extends State<GlbViewer> {
   Future<void> Function(String source)? _run;
   var _playing = true;
+  var _spinning = false;
   var _sandClear = false;
-  var _speed = 0.5;
+  var _speed = 1.0;
   var _choseMotion = false;
   late final GlbWebOrbit _web = GlbWebOrbit(isActive: () => mounted);
 
@@ -69,6 +70,51 @@ class _GlbViewerState extends State<GlbViewer> {
           const phi = orbit.phi * 180 / Math.PI;
           const radius = Math.min(${GlbOrbit.maxRadius}, Math.max(${GlbOrbit.minRadius}, orbit.radius * $radiusScale));
           mv.cameraOrbit = theta.toFixed(2) + 'deg ' + phi.toFixed(2) + 'deg ' + radius.toFixed(3) + 'm';
+        })();
+      ''');
+    } on Object {
+      // The viewer may still be loading the model.
+    }
+  }
+
+  /// Writes one of the three canned camera angles.
+  Future<void> _setPreset(GlbCameraPreset preset) async {
+    if (_spinning) {
+      setState(() => _spinning = false);
+    }
+    if (kIsWeb) {
+      _web.forgetOrbit();
+    }
+    try {
+      await _runJs('''
+        (() => {
+          const mv = document.getElementById('marinesee-model');
+          if (!mv) return;
+          mv.autoRotate = false;
+          mv.cameraOrbit = '${preset.orbit}';
+        })();
+      ''');
+    } on Object {
+      // The viewer may still be loading the model.
+    }
+  }
+
+  Future<void> _resetView() async {
+    setState(() {
+      _spinning = false;
+      _speed = 1.0;
+    });
+    if (kIsWeb) {
+      _web.forgetOrbit();
+    }
+    try {
+      await _runJs('''
+        (() => {
+          const mv = document.getElementById('marinesee-model');
+          if (!mv) return;
+          mv.autoRotate = false;
+          mv.cameraOrbit = '0deg 75deg 105%';
+          mv.timeScale = 1;
         })();
       ''');
     } on Object {
@@ -130,6 +176,22 @@ class _GlbViewerState extends State<GlbViewer> {
             $call
           };
           start();
+        })();
+      ''');
+    } on Object {
+      // The viewer may still be loading the model.
+    }
+  }
+
+  Future<void> _setSpin(bool spinning) async {
+    setState(() => _spinning = spinning);
+    final value = spinning ? 'true' : 'false';
+    try {
+      await _runJs('''
+        (() => {
+          const mv = document.getElementById('marinesee-model');
+          if (!mv) return;
+          mv.autoRotate = $value;
         })();
       ''');
     } on Object {
@@ -201,34 +263,28 @@ class _GlbViewerState extends State<GlbViewer> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SizedBox(
-          height: 320,
+        _Stage(
+          ready: ready,
           child: Stack(
+            fit: StackFit.expand,
             children: [
-              Positioned.fill(
-                child: ColoredBox(
-                  color: const Color(0xFF1E8C98),
-                  child: GlbModelHost(
-                    src: _src,
-                    label: widget.label,
-                    onWebViewCreated: (run) {
-                      if (!mounted) {
-                        return;
-                      }
-                      _run = run;
-                      setState(() {});
-                      _setPlaying(_playing);
-                    },
-                  ),
-                ),
+              GlbModelHost(
+                src: _src,
+                label: widget.label,
+                onWebViewCreated: (run) {
+                  if (!mounted) {
+                    return;
+                  }
+                  _run = run;
+                  setState(() {});
+                  _setPlaying(_playing);
+                },
               ),
               if (kIsWeb)
-                Positioned.fill(
-                  child: GlbOrbitSurface(
-                    onDrag: _web.dragBy,
-                    onScroll: _web.scrollBy,
-                    onPinch: _web.pinchBy,
-                  ),
+                GlbOrbitSurface(
+                  onDrag: _web.dragBy,
+                  onScroll: _web.scrollBy,
+                  onPinch: _web.pinchBy,
                 ),
             ],
           ),
@@ -240,75 +296,93 @@ class _GlbViewerState extends State<GlbViewer> {
             textAlign: TextAlign.center,
             style: Theme.of(
               context,
-            ).textTheme.bodySmall?.copyWith(color: Colors.white70),
+            ).textTheme.bodySmall?.copyWith(color: context.tokens.inkSubtle),
           ),
         ],
-        const SizedBox(height: 12),
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: SkyPalette.scanner.withValues(alpha: 0.55),
-            borderRadius: AppRadius.card,
-            border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 14, 8, 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  '3D Controls',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleMedium?.copyWith(color: Colors.white),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    GlbControlTile(
-                      icon: _playing ? Icons.pause : Icons.play_arrow,
-                      label: _playing ? 'Pause' : 'Play',
-                      onPressed: ready ? () => _setPlaying(!_playing) : null,
-                    ),
-                    const SizedBox(width: 8),
-                    GlbControlTile(
-                      icon: Icons.rotate_right,
-                      label: 'Rotate',
-                      onPressed: ready ? () => _nudge(thetaDeg: 40) : null,
-                    ),
-                    const SizedBox(width: 8),
-                    GlbControlTile(
-                      icon: Icons.zoom_in,
-                      label: 'Zoom in',
-                      onPressed: ready ? () => _nudge(radiusScale: 0.82) : null,
-                    ),
-                    const SizedBox(width: 8),
-                    GlbControlTile(
-                      icon: Icons.zoom_out,
-                      label: 'Zoom out',
-                      onPressed: ready ? () => _nudge(radiusScale: 1.22) : null,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                GlbSpeedRow(
-                  speed: _speed,
-                  onSelected: ready ? _setSpeed : null,
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    GlbControlTile(
-                      icon: _sandClear ? Icons.visibility_off : Icons.visibility,
-                      label: _sandClear ? 'Hide roots' : 'See roots',
-                      onPressed: ready ? () => _setSandClear(!_sandClear) : null,
-                    ),
-                  ],
+        const SizedBox(height: 14),
+        GlbControlDock(
+          enabled: ready,
+          playing: _playing,
+          spinning: _spinning,
+          rootsClear: _sandClear,
+          speed: _speed,
+          onTogglePlay: () => _setPlaying(!_playing),
+          onToggleSpin: () => _setSpin(!_spinning),
+          onToggleRoots: () => _setSandClear(!_sandClear),
+          onSpeed: _setSpeed,
+          onZoomIn: () => _nudge(radiusScale: 0.82),
+          onZoomOut: () => _nudge(radiusScale: 1.22),
+          onPreset: _setPreset,
+          onReset: _resetView,
+        ),
+      ],
+    );
+  }
+}
+
+/// Rounded stage that gives the platform view a soft frame and a loading scrim.
+class _Stage extends StatelessWidget {
+  const _Stage({required this.child, required this.ready});
+
+  final Widget child;
+  final bool ready;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.tokens;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final height = (constraints.maxWidth * 0.96).clamp(280.0, 420.0);
+
+        return SizedBox(
+          height: height,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: AppRadius.sheet,
+              boxShadow: [
+                BoxShadow(
+                  color: tokens.shadow,
+                  blurRadius: 24,
+                  offset: const Offset(0, 12),
                 ),
               ],
             ),
+            child: ClipRRect(
+              borderRadius: AppRadius.sheet,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  const ColoredBox(color: Color(0xFFEEF4FA)),
+                  child,
+                  if (!ready)
+                    ColoredBox(
+                      color: const Color(0xCCEEF4FA),
+                      child: Center(
+                        child: SizedBox(
+                          width: 26,
+                          height: 26,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2.2,
+                            color: tokens.brand,
+                          ),
+                        ),
+                      ),
+                    ),
+                  IgnorePointer(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: AppRadius.sheet,
+                        border: Border.all(color: tokens.border),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

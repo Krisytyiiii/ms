@@ -50,6 +50,15 @@ ThemeData buildMarineSeeTheme(AppTokens tokens) {
     highlightColor: tokens.cyan.withValues(alpha: 0.06),
     materialTapTargetSize: MaterialTapTargetSize.padded,
     extensions: [tokens],
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: MarinePageTransitions(),
+        TargetPlatform.iOS: MarinePageTransitions(),
+        TargetPlatform.windows: MarinePageTransitions(),
+        TargetPlatform.macOS: MarinePageTransitions(),
+        TargetPlatform.linux: MarinePageTransitions(),
+      },
+    ),
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
       foregroundColor: tokens.ink,
@@ -64,9 +73,7 @@ ThemeData buildMarineSeeTheme(AppTokens tokens) {
       elevation: 0,
       height: 64,
       indicatorColor: tokens.brand.withValues(alpha: 0.16),
-      overlayColor: WidgetStatePropertyAll(
-        tokens.cyan.withValues(alpha: 0.08),
-      ),
+      overlayColor: WidgetStatePropertyAll(tokens.cyan.withValues(alpha: 0.08)),
       iconTheme: WidgetStateProperty.resolveWith((states) {
         final selected = states.contains(WidgetState.selected);
         return IconThemeData(
@@ -133,7 +140,9 @@ ThemeData buildMarineSeeTheme(AppTokens tokens) {
       ),
     ),
     cardTheme: CardThemeData(
-      color: tokens.isLight ? tokens.surfaceHigh : tokens.surface.withValues(alpha: 0.92),
+      color: tokens.isLight
+          ? tokens.surfaceHigh
+          : tokens.surface.withValues(alpha: 0.92),
       elevation: 0,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
@@ -280,4 +289,39 @@ TextTheme _textTheme(AppTokens tokens) {
       color: tokens.inkMuted,
     ),
   );
+}
+
+/// Route change: a short fade with a small rise. Slower or bouncier curves
+/// read as lag on a phone; this stays under 300 ms and moves only 3% of the
+/// screen. Reduce-motion swaps straight to the child.
+class MarinePageTransitions extends PageTransitionsBuilder {
+  const MarinePageTransitions();
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    if (MediaQuery.disableAnimationsOf(context)) {
+      return child;
+    }
+    final curved = CurvedAnimation(
+      parent: animation,
+      curve: Curves.easeOutCubic,
+      reverseCurve: Curves.easeInCubic,
+    );
+    return FadeTransition(
+      opacity: curved,
+      child: SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 0.03),
+          end: Offset.zero,
+        ).animate(curved),
+        child: child,
+      ),
+    );
+  }
 }

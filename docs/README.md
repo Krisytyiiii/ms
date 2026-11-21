@@ -51,6 +51,8 @@ Then use the rest as needed per module.
 | [20-evaluation-gaps.md](20-evaluation-gaps.md) | Open evaluation work: 0 `not-met`, 24 `unmeasured`. Read before changing the app |
 | [21-3d-species-model-spec.md](21-3d-species-model-spec.md) | Contract for every species 3D model: solid geometry, rig and growth, phone `.glb`, reef pitch clip, per-species briefs |
 | [22-accuracy-plan.md](22-accuracy-plan.md) | Why accuracy is 0.406 macro F1, what is fixable, the honest ceiling, and the 85% decision |
+| [23-ml-handover-report.md](23-ml-handover-report.md) | Review of the ML handover against the recorded artifacts: what is verified, what is `OPEN`, and how to quote the test accuracy |
+| [24-overfitting-solutions.md](24-overfitting-solutions.md) | Why train 1.000 / test 0.494 happens, and the fixes ordered by measured effect |
 | [14-open-questions.md](14-open-questions.md) | Decisions still required |
 | [15-implementation-roadmap.md](15-implementation-roadmap.md) | Suggested build order |
 | [16-flutter-audit-and-scaffold.md](16-flutter-audit-and-scaffold.md) | Flutter lock, audit, scaffold spec |

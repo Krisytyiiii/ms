@@ -3,51 +3,59 @@ import 'package:flutter/services.dart';
 
 enum AppStyle { night, frost }
 
-/// Bright shoreline. Widgets read [AppTokens]; these swatches are the roles.
+/// Ocean blue and bright yellow. Blue carries structure, yellow carries action.
+/// Widgets read [AppTokens]; these swatches are the roles.
 abstract final class SkyPalette {
-  static const primary = Color(0xFF1496C4);
+  static const primary = Color(0xFF0077B6);
   static const onPrimary = Color(0xFFFFFFFF);
-  static const primaryDark = Color(0xFF0E7EAB);
-  static const water = Color(0xFF3EC8EA);
-  static const waterDeep = Color(0xFF2EAADE);
-  static const primaryContainer = Color(0xFFC9F1F8);
+  static const primaryDark = Color(0xFF023E8A);
+  static const water = Color(0xFF48CAE4);
+  static const waterDeep = Color(0xFF00A6D6);
+  static const primaryContainer = Color(0xFFD6EEF9);
 
-  static const sky = Color(0xFF6EC6F5);
-  static const skyDeep = Color(0xFF4FB4F0);
-  static const onSky = Color(0xFF143A4A);
+  static const sky = Color(0xFF48CAE4);
+  static const skyDeep = Color(0xFF2FB8D9);
+  static const onSky = Color(0xFF04263F);
   static const onHeader = Color(0xFFFFFFFF);
-  static const headerTop = Color(0xFF2EC8E6);
-  static const headerMid = Color(0xFF14A8C8);
-  static const headerBottom = Color(0xFF0E9488);
+  static const headerTop = Color(0xFF0077B6);
+  static const headerMid = Color(0xFF00659D);
+  static const headerBottom = Color(0xFF023E8A);
 
-  static const sand = Color(0xFFEBD3A4);
-  static const sandDeep = Color(0xFFC49B62);
-  static const sandLight = Color(0xFFF7E8C8);
-  static const onSand = Color(0xFF3A2A10);
-  static const sandContainer = Color(0xFFF8EFDC);
+  static const sand = Color(0xFFFFE38A);
+  static const sandDeep = Color(0xFFFFC300);
+  static const sandLight = Color(0xFFFFF6D6);
+  static const onSand = Color(0xFF3A2A0E);
+  static const sandContainer = Color(0xFFFFF8E1);
 
-  static const mist = Color(0xFFF3FBFC);
-  static const mistDeep = Color(0xFFE6F5F7);
+  static const gold = Color(0xFFFFD60A);
+  static const goldBright = Color(0xFFFFE45C);
+  static const goldDeep = Color(0xFFFFC300);
+  static const goldSoft = Color(0xFFFFEB8F);
+  static const goldContainer = Color(0xFFFFF7C9);
+  static const onGold = Color(0xFF04263F);
+
+  static const mist = Color(0xFFF8FAFC);
+  static const mistDeep = Color(0xFFEEF4FA);
   static const foam = Color(0xFFFFFFFF);
-  static const seagrass = Color(0xFF3AAA40);
-  static const onSeagrass = Color(0xFFFFFFFF);
+  static const seagrass = Color(0xFFFFC300);
+  static const onSeagrass = Color(0xFF04263F);
 
   static const ink = onSky;
-  static const inkMuted = Color(0xFF3E5A62);
-  static const inkSubtle = Color(0xFF6D7D78);
-  static const lineOnSand = Color(0xFFD7E7EA);
+  static const inkMuted = Color(0xFF4F6475);
+  static const inkSubtle = Color(0xFF7A8B99);
+  static const lineOnSand = Color(0xFFE2E8F0);
   static const lineOnSky = Color(0x66FFFFFF);
-  static const shadow = Color(0x1A143A4A);
+  static const shadow = Color(0x1A023E8A);
 
-  static const inverse = Color(0xFF0C6E90);
-  static const inverseContainer = Color(0xFF1490B4);
+  static const inverse = Color(0xFF0077B6);
+  static const inverseContainer = Color(0xFF48CAE4);
   static const onInverse = Color(0xFFFFFFFF);
 
   static const danger = Color(0xFFB3261E);
   static const dangerFill = Color(0xFFFDECEA);
-  static const notice = Color(0xFF8A4B12);
-  static const noticeFill = Color(0xFFFFF6E8);
-  static const noticeBorder = Color(0xFFE4C48A);
+  static const notice = Color(0xFF8A5A0B);
+  static const noticeFill = Color(0xFFFFF7DE);
+  static const noticeBorder = Color(0xFFEBD08A);
 
   static const page = mist;
   static const pageDeep = mistDeep;
@@ -55,11 +63,11 @@ abstract final class SkyPalette {
   static const oceanDeep = primaryDark;
   static const card = foam;
   static const line = lineOnSand;
-  static const lineStrong = Color(0xFFC5DCE1);
+  static const lineStrong = Color(0xFFC9D6E2);
   static const tileBlue = primary;
   static const tileGreen = seagrass;
-  static const scanner = Color(0xFF125E68);
-  static const scannerDeep = Color(0xFF0A3E48);
+  static const scanner = Color(0xFF0077B6);
+  static const scannerDeep = Color(0xFF023E8A);
 
   static const darkStatusBar = SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -178,10 +186,10 @@ class AppTokens extends ThemeExtension<AppTokens> {
     inkMuted: SkyPalette.inkMuted,
     inkSubtle: SkyPalette.inkSubtle,
     cyan: SkyPalette.primary,
-    teal: SkyPalette.water,
+    teal: SkyPalette.gold,
     brand: SkyPalette.primary,
     brandDeep: SkyPalette.primaryDark,
-    violet: SkyPalette.sky,
+    violet: SkyPalette.skyDeep,
     onBrand: SkyPalette.onPrimary,
     danger: SkyPalette.danger,
     notice: SkyPalette.notice,
@@ -189,8 +197,8 @@ class AppTokens extends ThemeExtension<AppTokens> {
     noticeBorder: SkyPalette.noticeBorder,
     border: SkyPalette.lineOnSand,
     borderStrong: SkyPalette.lineOnSand,
-    glowCyan: Color(0x331496C4),
-    glowTeal: Color(0x291496C4),
+    glowCyan: Color(0x330077B6),
+    glowTeal: Color(0x33FFD60A),
     shadow: SkyPalette.shadow,
     depthGradient: LinearGradient(
       begin: Alignment.topCenter,
@@ -216,7 +224,7 @@ class AppTokens extends ThemeExtension<AppTokens> {
     surfaceSheen: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
-      colors: [SkyPalette.foam, SkyPalette.foam, SkyPalette.primaryContainer],
+      colors: [SkyPalette.foam, SkyPalette.foam, SkyPalette.goldContainer],
     ),
     systemUi: SkyPalette.darkStatusBar,
     auraCyan: 0.08,
@@ -257,7 +265,8 @@ class AppTokens extends ThemeExtension<AppTokens> {
 }
 
 extension MarineSeeThemeX on BuildContext {
-  AppTokens get tokens => Theme.of(this).extension<AppTokens>() ?? AppTokens.sky;
+  AppTokens get tokens =>
+      Theme.of(this).extension<AppTokens>() ?? AppTokens.sky;
 }
 
 abstract final class AppSpace {
@@ -271,10 +280,7 @@ abstract final class AppSpace {
 
   static const double navClearance = 24;
 
-  static EdgeInsets pageInsets(
-    BuildContext context, {
-    double extraBottom = 0,
-  }) {
+  static EdgeInsets pageInsets(BuildContext context, {double extraBottom = 0}) {
     final width = MediaQuery.sizeOf(context).width;
     final horizontal = width >= 768 ? 32.0 : 20.0;
     return EdgeInsets.fromLTRB(horizontal, 16, horizontal, 28 + extraBottom);

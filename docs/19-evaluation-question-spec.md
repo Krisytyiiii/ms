@@ -32,7 +32,7 @@ Rotate/zoom of a supplied `.glb` is app integration. It does not require authori
 
 | ID | Statement | Pass check | Status | Evidence |
 |----|-----------|------------|--------|----------|
-| US-1 | Easy to see what MarineSee is for | A first-time user can tell it identifies and teaches Mati seagrass. | unmeasured | Onboarding, Home, and Profile say MarineSee identifies and teaches Mati seagrass. No tester has scored it. |
+| US-1 | Easy to see what MarineSee is for | A first-time user can tell it identifies and teaches Mati seagrass. | unmeasured | Home has a photo hero banner that says "Identify a seagrass", names the nine Mati City species, and leads with a Scan Seagrass action, under the MarineSee app bar. Below it, three stacked species decks show real photos and names for all nine species under the heading "Seagrass species", with View all opening the library. Below the decks, a compact card shows the photo → features → SVM → match path with the low-match retake note. Onboarding and Profile also state that MarineSee identifies and teaches the nine Mati seagrass species. No tester has scored it. |
 | US-2 | Identify and library after a short explanation | After one short brief, the tester finishes both tasks with no step-by-step guide. | unmeasured | Not run with a tester. |
 | US-3 | Camera, upload, library, and 3D controls are easy | All four controls work and are obvious on a phone. | unmeasured | Camera, gallery, and library work. Rotate, zoom, See roots, and growth speed are on all nine patch viewers. A tester has not scored them on a phone. The web build turns with drag and zooms with the wheel, touchpad scroll, and pinch. |
 | US-4 | Retake message is clear | The tester understands they should take the photo again. | unmeasured | The retake sentence is reachable offline now that FS-5 is on-device, but a tester has not read it on a phone or said it was clear. The scanner also states "Only the nine Mati species are supported", and the result screen offers "None of these" for a photo that is not a target seagrass. No tester has seen either on a phone. |
@@ -55,7 +55,7 @@ Rotate/zoom of a supplied `.glb` is app integration. It does not require authori
 |----|-----------|------------|--------|----------|
 | RE-1 | Identify and open a profile without crashing | One full identify plus profile does not close the app. | unmeasured | Not run on a phone. |
 | RE-2 | A second photo does not crash the app | Identify again after the first result. The app stays open. | unmeasured | Not run on a phone. |
-| RE-3 | Library and identify are available on open | After onboarding, both are reachable. | met | After onboarding, Scan and Library are tabs in `app/lib/screens/shell.dart`. |
+| RE-3 | Library and identify are available on open | After onboarding, both are reachable. | met | After onboarding, the floating pill nav in `app/lib/screens/shell.dart` keeps Home, Library, the Conserve tab, and Profile one tap away, and Scan is its own round button beside the pill. |
 | RE-4 | A failed identify can be tried again | The app stays open and the tester can submit another photo. | unmeasured | `result_screen.dart` shows Try again, which returns to Identify. Not shown on a phone. |
 | RE-5 | Library remains after close and reopen | Force-close, open again, library is still there. | met | Library is the bundled asset. |
 | RE-6 | Leaving a profile and reopening shows the same text | The same field text is still there. | met | Same bundled asset. The text may still be `TBD`. |

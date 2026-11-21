@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/tokens.dart';
+import 'app_photo.dart';
 
 /// Lagoon tile for one library species.
 class SpeciesCard extends StatelessWidget {
@@ -72,9 +73,9 @@ class SpeciesCard extends StatelessWidget {
                               borderRadius: const BorderRadius.vertical(
                                 top: Radius.circular(AppRadius.lg),
                               ),
-                              child: Image.asset(
-                                imageAsset!,
-                                fit: BoxFit.cover,
+                              child: AppPhoto(
+                                asset: imageAsset!,
+                                errorIcon: icon,
                               ),
                             ),
                     ),

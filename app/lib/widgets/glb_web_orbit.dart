@@ -65,6 +65,20 @@ class GlbWebOrbit {
     _publish(orbit);
   }
 
+  /// Drops the cached camera after a preset or reset writes one directly.
+  ///
+  /// The next drag reads the real orbit again instead of publishing a jump
+  /// from the old angle.
+  void forgetOrbit() {
+    _orbit = null;
+    _loading = null;
+    _pendingDx = 0;
+    _pendingDy = 0;
+    _pendingScroll = 0;
+    _pendingScale = 1;
+    _scaleQueued = false;
+  }
+
   void releasePointer() {
     unawaited(
       _run('''

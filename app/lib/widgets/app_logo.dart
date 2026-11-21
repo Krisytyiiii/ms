@@ -1,44 +1,41 @@
 import 'package:flutter/material.dart';
 
 import '../theme/tokens.dart';
+import 'app_mark.dart';
 
-/// Swap [assetPath] when the real mark is ready.
+/// App mark. Vector, so it never needs a raster swap.
 class AppLogo extends StatelessWidget {
-  const AppLogo({super.key, this.size = 40});
-
-  static const assetPath = 'assets/images/logo.png';
+  const AppLogo({super.key, this.size = 40, this.shadow = true});
 
   final double size;
+  final bool shadow;
 
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
-    final radius = BorderRadius.circular(size * 0.28);
 
     return Semantics(
       label: 'MarineSee',
       image: true,
-      child: Container(
-        width: size,
-        height: size,
+      child: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: tokens.primaryGradient,
-          borderRadius: radius,
-          border: Border.all(color: tokens.borderStrong),
-          boxShadow: tokens.glowShadows,
+          borderRadius: BorderRadius.circular(size * 0.31),
+          boxShadow: shadow
+              ? [
+                  BoxShadow(
+                    color: SkyPalette.primaryDark.withValues(alpha: 0.28),
+                    blurRadius: size * 0.34,
+                    offset: Offset(0, size * 0.12),
+                  ),
+                  BoxShadow(
+                    color: tokens.shadow,
+                    blurRadius: size * 0.10,
+                    offset: Offset(0, size * 0.03),
+                  ),
+                ]
+              : null,
         ),
-        clipBehavior: Clip.antiAlias,
-        child: Image.asset(
-          assetPath,
-          fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
-            return Icon(
-              Icons.spa_outlined,
-              color: tokens.onBrand,
-              size: size * 0.5,
-            );
-          },
-        ),
+        child: MarineSeeMark(size: size),
       ),
     );
   }

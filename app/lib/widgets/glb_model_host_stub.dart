@@ -14,7 +14,8 @@ class GlbModelHost extends StatelessWidget {
 
   final String src;
   final String label;
-  final void Function(Future<void> Function(String source) run) onWebViewCreated;
+  final void Function(Future<void> Function(String source) run)
+  onWebViewCreated;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class GlbModelHost extends StatelessWidget {
       cameraOrbit: '0deg 75deg 105%',
       minCameraOrbit: 'auto auto ${GlbOrbit.minRadius}m',
       maxCameraOrbit: 'auto auto ${GlbOrbit.maxRadius}m',
-      backgroundColor: const Color(0xFF1E8C98),
+      backgroundColor: const Color(0xFFEEF4FA),
       debugLogging: false,
       onWebViewCreated: (controller) {
         onWebViewCreated(controller.runJavaScript);

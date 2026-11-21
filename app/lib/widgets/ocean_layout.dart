@@ -39,9 +39,9 @@ class OceanScaffold extends StatelessWidget {
             scrolledUnderElevation: 0,
             iconTheme: const IconThemeData(color: SkyPalette.onHeader),
             actionsIconTheme: const IconThemeData(color: SkyPalette.onHeader),
-            titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: SkyPalette.onHeader,
-            ),
+            titleTextStyle: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(color: SkyPalette.onHeader),
             flexibleSpace: ClipRRect(
               borderRadius: const BorderRadius.vertical(
                 bottom: Radius.circular(28),

@@ -15,6 +15,10 @@ class ShellScope extends InheritedWidget {
 
   final ValueChanged<int> select;
 
+  static ShellScope? maybeOf(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<ShellScope>();
+  }
+
   static ShellScope of(BuildContext context) {
     final scope = context.dependOnInheritedWidgetOfExactType<ShellScope>();
     assert(scope != null, 'ShellScope not found');
